@@ -1,0 +1,31 @@
+general:
+    welcome: Bienvenue !
+    home: Accueil
+    by: par
+    back: Retour
+    yes: oui
+    no: non
+    show: Afficher
+    hide: Masquer
+
+form:
+    add: Ajouter
+    edit: Modifier
+    delete: Supprimer
+    sort: Ordonner
+    login:
+        login: Identifiant
+        email: E-mail
+        password: Mot de passe
+        password_confirm: Confirmation
+        remember: Se souvenir de moi
+
+menu:
+    close: Fermer
+    close_menu: Fermer le menu
+
+user:
+    login: Connexion
+    logout: Déconnexion
+    logged_as: Vous êtes connecté en tant que
+    register: Inscription
