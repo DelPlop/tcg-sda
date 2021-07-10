@@ -16,6 +16,7 @@ class UserFixtures extends Fixture
     {
         $user = new RegisteredUser();
         $user->setLogin('Test1')
+            ->setEmail('test1@mail.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$DreOeq5kCOYMTpd8AtzkpQ$xyAdrrC2DAWwgLockGggUa3zImNwG/faGV6WXj2SkZY');   // test
         $manager->persist($user);
@@ -23,6 +24,7 @@ class UserFixtures extends Fixture
 
         $user2 = new RegisteredUser();
         $user2->setLogin('Test2')
+            ->setEmail('test2@mail.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$DreOeq5kCOYMTpd8AtzkpQ$xyAdrrC2DAWwgLockGggUa3zImNwG/faGV6WXj2SkZY');   // test
         $manager->persist($user2);
@@ -30,6 +32,7 @@ class UserFixtures extends Fixture
 
         $user3 = new RegisteredUser();
         $user3->setLogin('Test3')
+            ->setEmail('test3@mail.com')
             ->setRoles(['ROLE_USER'])
             ->setPassword('$argon2id$v=19$m=65536,t=4,p=1$DreOeq5kCOYMTpd8AtzkpQ$xyAdrrC2DAWwgLockGggUa3zImNwG/faGV6WXj2SkZY');   // test
         $manager->persist($user3);
