@@ -31,6 +31,6 @@ créer le fichier `.env`
 `git config user.email "gitlab@phpblocnote.net"`
 
 #### Github (default / global) :
-`git config user.name "Del Plop"`
+`git config user.name "DelPlop"`
 
 `git config user.email "github@phpblocnote.net"`
