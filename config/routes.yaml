@@ -1,19 +1,5 @@
-index:
-    path: /
-    controller: App\Controller\IndexController::index
-    methods: GET
+user_bundle_routes:
+    resource: '@DelPlopUserBundle/src/Resources/config/routes.yaml'
 
-login:
-    path: /connexion
-    controller: App\Controller\SecurityController::login
-    methods: [GET, POST]
-
-logout:
-    path: /deconnexion
-    controller: App\Controller\SecurityController::logout
-    methods: GET
-
-register:
-    path: /inscription
-    controller: App\Controller\RegistrationController::register
-    methods: [GET, POST]
+#wishlist_bundle_routes:
+#    resource: '@DelPlopWishListBundle/src/Resources/config/routes.yaml'
