@@ -1,31 +1,14 @@
-parameters:
-    router.request_context.scheme: 'https'
-    asset.request_context.secure: true
+#imports:
+#    - { resource: '../vendor/delplop/wishlistbundle/src/Resources/config/services.yaml' }
 
 services:
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-            - '../src/Tests/'
-
-    App\Controller\:
-        resource: '../src/Controller/'
-        tags: [ 'controller.service_arguments' ]
-
-    App\DataFixtures\UserFixtures:
-        tags:
-          [ 'doctrine.fixture.orm' ]
-
-    project.subscriber.table_prefix:
-        class: App\Subscriber\TablePrefixSubscriber
-        arguments:
-            $prefix: 'sf_'
-        tags:
-            - { name: doctrine.event_subscriber }
+#    DelPlop\WishListBundle\Controller\:
+#        resource: '../vendor/delplop/wishlistbundle/src/Controller/'
+#        tags: [ 'controller.service_arguments' ]
+#
+#    DelPlop\WishListBundle\Repository\ArticleRepository:
+#        tags: [ 'doctrine.repository_service' ]
