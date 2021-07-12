@@ -13,7 +13,4 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
-    DelPlop\DbBundle\DelPlopDbBundle::class => ['all' => true],
-    DelPlop\UserBundle\DelPlopUserBundle::class => ['all' => true],
-//    DelPlop\WishListBundle\DelPlopWishListBundle::class => ['all' => true],
 ];
