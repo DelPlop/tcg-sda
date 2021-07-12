@@ -1,13 +1,2 @@
 imports:
     - { resource: '../../vendor/delplop/userbundle/src/Resources/config/packages/security.yaml' }
-
-security:
-    access_control:
-        - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/connexion$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/inscription$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/envies/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/membres$, roles: ROLE_USER }
-#        - { path: ^/envie/nouvelle$, roles: ROLE_USER }
-#        - { path: ^/envies/(ordonner|sauver-ordre)$, roles: ROLE_USER }
-#        - { path: ^/envie/\d+/(modifier|supprimer)$, roles: ROLE_USER }
