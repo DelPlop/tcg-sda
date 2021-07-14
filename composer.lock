@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d38879023a8cde975f5146929d4600f",
+    "content-hash": "ec407c848299bfbe52dbe853843adab8",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -78,87 +78,6 @@
                 }
             ],
             "time": "2021-05-24T07:46:03+00:00"
-        },
-        {
-            "name": "delplop/dbbundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DelPlop/sf-db-prefix-bundle.git",
-                "reference": "d7ab2f110483f4696c7ac18b60cabccdc6ade9b6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DelPlop/sf-db-prefix-bundle/zipball/d7ab2f110483f4696c7ac18b60cabccdc6ade9b6",
-                "reference": "d7ab2f110483f4696c7ac18b60cabccdc6ade9b6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0"
-            },
-            "default-branch": true,
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "DelPlop\\DbBundle\\": "src/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Del Plop",
-                    "email": "plop@phpblocnote.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Symfony database bundle to configure table prefix",
-            "support": {
-                "source": "https://github.com/DelPlop/sf-db-prefix-bundle/tree/master",
-                "issues": "https://github.com/DelPlop/sf-db-prefix-bundle/issues"
-            },
-            "time": "2021-07-11T15:02:22+00:00"
-        },
-        {
-            "name": "delplop/userbundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DelPlop/sf-user-bundle.git",
-                "reference": "e8ee33fba5aec498003276f4ff1b2fe39f32739c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/e8ee33fba5aec498003276f4ff1b2fe39f32739c",
-                "reference": "e8ee33fba5aec498003276f4ff1b2fe39f32739c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.0"
-            },
-            "default-branch": true,
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "DelPlop\\UserBundle\\": "src/"
-                }
-            },
-            "license": [
-                "proprietary"
-            ],
-            "authors": [
-                {
-                    "name": "Del Plop",
-                    "email": "plop@phpblocnote.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Symfony user bundle to handle registration and authentication",
-            "support": {
-                "source": "https://github.com/DelPlop/sf-user-bundle/tree/master"
-            },
-            "time": "2021-07-11T17:44:48+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -10348,10 +10267,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "delplop/dbbundle": 20,
-        "delplop/userbundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -1,14 +1,7 @@
-#imports:
-#    - { resource: '../vendor/delplop/wishlistbundle/src/Resources/config/services.yaml' }
+imports:
+#    - { resource: '@DelPlopWishListBundle/config/services.yaml' }
 
 services:
     _defaults:
         autowire: true
         autoconfigure: true
-
-#    DelPlop\WishListBundle\Controller\:
-#        resource: '../vendor/delplop/wishlistbundle/src/Controller/'
-#        tags: [ 'controller.service_arguments' ]
-#
-#    DelPlop\WishListBundle\Repository\ArticleRepository:
-#        tags: [ 'doctrine.repository_service' ]
