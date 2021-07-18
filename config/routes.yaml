@@ -1,6 +1,19 @@
 user_bundle_routes:
     resource: '@DelPlopUserBundle/config/routes.yaml'
 
+login:
+    path: /communaute/connexion
+    controller: DelPlop\UserBundle\Controller\SecurityController::login
+
+logout:
+    path: /communaute/deconnexion
+    controller: DelPlop\UserBundle\Controller\SecurityController::logout
+    methods: GET
+
+register:
+    path: /communaute/rejoindre
+    controller: DelPlop\UserBundle\Controller\RegistrationController::register
+
 admin:
     path: /admin
     controller: App\Controller\Admin\DashboardController::index

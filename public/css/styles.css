@@ -99,7 +99,7 @@ a:hover{text-decoration:none;color:#666}
 .centre{text-align:center}
 textarea{width:100%}
 .margin-top{margin-top:5em}
-label.inline{display:inline-block;width:15vw}
+label.inline,.user-form label{display:inline-block;width:15vw}
 input{margin:0.3vh}
 .gauche{text-align:left}
 .tourne_page{border:1px solid #ccc;padding:5px;margin:0 15px;vertical-align:middle}
