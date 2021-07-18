@@ -1,0 +1,4 @@
+<h4 class="w3-bar-item"><b>Les éditions</b></h4>
+{% for edition in editions %}
+    <a class="w3-bar-item w3-button w3-hover-black" href="{{ path('edition_cards', {edition: edition.id}) }}">{{ edition.localName ?: edition.originalName }}</a>
+{% endfor %}
