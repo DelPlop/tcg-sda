@@ -40,15 +40,29 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class)
-     * @ORM\JoinTable(name="user_owned_card")
+     * @ORM\JoinTable(name="user_owned_card",
+     *         joinColumns = {@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *         inverseJoinColumns={@ORM\JoinColumn(name="card_id", referencedColumnName="id")})
      */
     private $ownedCards;
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class)
-     * @ORM\JoinTable(name="user_wanted_card")
+     * @ORM\JoinTable(name="user_wanted_card",
+     *         joinColumns = {@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *         inverseJoinColumns={@ORM\JoinColumn(name="card_id", referencedColumnName="id")})
      */
     private $wantedCards;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserOwnedCard::class, mappedBy="user")
+     */
+    private $userOwnedCards;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserWantedCard::class, mappedBy="user")
+     */
+    private $userWantedCards;
 
     public function __construct()
     {
@@ -56,6 +70,8 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
         $this->setUpdatedAt(new \DateTime());
         $this->ownedCards = new ArrayCollection();
         $this->wantedCards = new ArrayCollection();
+        $this->userOwnedCards = new ArrayCollection();
+        $this->userWantedCards = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,6 +135,66 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
     public function removeWantedCard(Card $wantedCard): self
     {
         $this->wantedCards->removeElement($wantedCard);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserOwnedCard[]
+     */
+    public function getUserOwnedCards(): Collection
+    {
+        return $this->userOwnedCards;
+    }
+
+    public function addUserOwnedCard(UserOwnedCard $userOwnedCard): self
+    {
+        if (!$this->userOwnedCards->contains($userOwnedCard)) {
+            $this->userOwnedCards[] = $userOwnedCard;
+            $userOwnedCard->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserOwnedCard(UserOwnedCard $userOwnedCard): self
+    {
+        if ($this->userOwnedCards->removeElement($userOwnedCard)) {
+            // set the owning side to null (unless already changed)
+            if ($userOwnedCard->getUser() === $this) {
+                $userOwnedCard->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserWantedCard[]
+     */
+    public function getUserWantedCards(): Collection
+    {
+        return $this->userWantedCards;
+    }
+
+    public function addUserWantedCard(UserWantedCard $userWantedCard): self
+    {
+        if (!$this->userWantedCards->contains($userWantedCard)) {
+            $this->userWantedCards[] = $userWantedCard;
+            $userWantedCard->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserWantedCard(UserWantedCard $userWantedCard): self
+    {
+        if ($this->userWantedCards->removeElement($userWantedCard)) {
+            // set the owning side to null (unless already changed)
+            if ($userWantedCard->getUser() === $this) {
+                $userWantedCard->setUser(null);
+            }
+        }
 
         return $this;
     }
