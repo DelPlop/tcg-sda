@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% block title %}Liste des éditions{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Liste des cartes par édition</h2>
+            <p>
+                Bienvenue dans la liste des cartes !<br /><br />
+
+                Ici la classification se fait par édition. Une fois dans la liste de l'édition, vous pourrez visualiser chaque carte en cliquant sur son nom.
+                <br /><br /><br />
+
+                <em>Les éditions :</em><br />
+
+                {% for edition in editions %}
+                    <li>
+                        {{ edition.editionNumber }} - <a href="{{ path('edition_cards', {edition: edition.id}) }}">{{ edition.localName ?: edition.originalName }}</a>
+                        {{ edition.isSpecial ? ' (spéciale)' : '' }}
+                    </li>
+                {% endfor %}
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}
