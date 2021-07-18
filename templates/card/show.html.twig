@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% set imgRoot = 'https://cdn.tcg-seigneur-des-anneaux.fr/' %}
+{% set edNumber = "%'02.2s"|format(card.edition.editionNumber) %}
+
+{% block title %}Détails de la carte "{{ card.localName ?: card.originalName }}" de l'édition "{{ card.edition.localName ?: card.edition.originalName }}"{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Détails de la carte "{{ card.localName ?: card.originalName }}"</h2>
+            <p>
+                <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" alt="{{ card.localName ?: card.originalName }}" />
+                <br /><br />
+
+                <strong>Code-carte :</strong> {{ card.code }}<br />
+
+                {% if card.localName is not same as(null) %}
+                    <strong>Nom français :</strong> {{ card.localName }}<br />
+                {% endif %}
+
+                <strong>Nom anglais :</strong> {{ card.originalName }}<br />
+
+                <strong>Edition :</strong> <a href="{{ path('edition_cards', {edition: card.edition.id}) }}">{{ card.edition.localName ?: card.edition.originalName }}</a><br />
+
+                {% if card.culture is not same as(null) %}
+                    <strong>Culture :</strong> {{ card.culture.localName ?: card.culture.originalName }}<br />
+                    {% set largeur = 360 %}
+                    {% set hauteur = 500 %}
+                {% else %}
+                    {% set largeur = 500 %}
+                    {% set hauteur = 360 %}
+                {% endif %}
+
+                <strong>Type :</strong> {{ card.type.localName ?: card.type.originalName }}<br />
+
+                {% if card.subtype is not same as(null) %}
+                    <strong>Sous-type :</strong> {{ card.subtype.localName ?: card.subtype.originalName }}<br />
+                {% endif %}
+
+                <strong>Rareté :</strong> {{ card.rarity.name }}<br />
+
+                <strong>Unique :</strong> {{ card.isUnique ? 'Oui' : 'Non' }}<br />
+
+                {% if card.isRingBearer %}
+                    Peut porter l'anneau<br />
+                {% endif %}
+
+                {% if card.cost is not same as(null) %}
+                    <strong>Coût :</strong> {{ card.cost }}<br />
+                {% endif %}
+
+                {% if card.strength is not same as(null) %}
+                    <strong>Force :</strong> {{ card.strength }}<br />
+                {% elseif card.strengthModifier is not same as(null) %}
+                    <strong>Force :</strong> {{ card.strengthModifier }}<br />
+                {% endif %}
+
+                {% if card.vitality is not same as(null) %}
+                    <strong>Vitalité :</strong> {{ card.vitality }}<br />
+                {% elseif card.vitalityModifier is not same as(null) %}
+                    <strong>Vitalité :</strong> {{ card.vitalityModifier }}<br />
+                {% endif %}
+
+                {% if card.resistance is not same as(null) %}
+                    <strong>Résistance :</strong> {{ card.resistance }}<br />
+                {% elseif card.resistanceModifier is not same as(null) %}
+                    <strong>Résistance :</strong> {{ card.resistanceModifier }}<br />
+                {% endif %}
+
+                {% if card.signet is not same as(null) %}
+                    <strong>Sceau :</strong> {{ card.signet }}<br />
+                {% endif %}
+
+                {% if card.siteNumber is not same as(null) %}
+                    <strong>N° de site :</strong> {{ card.siteNumber }}<br />
+                {% endif %}
+
+                {% if card.shadowNumber is not same as(null) %}
+                    <strong>N° d'ombre :</strong> {{ card.shadowNumber }}<br />
+                {% endif %}
+                <br />
+
+                {% if card.localText is not same as(null) or card.originalText is not same as(null) %}
+                    <strong>Texte de la carte :</strong> {{ (card.localText ?: card.originalText)|nl2br }}<br />
+                {% endif %}
+
+                {% if card.localQuote is not same as(null) or card.originalQuote is not same as(null) %}
+                    <strong>Citation de la carte :</strong> <em>{{ (card.localQuote ?: card.originalQuote)|nl2br }}</em><br /><br />
+                {% endif %}
+
+                {% if card.isTengwar %}
+                    <a href="{{ imgRoot }}tengwar/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" onclick="window.open(this.href, 'Carte en Tengwar', 'toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=no, status=no, width={{ largeur }}, height={{ hauteur }}'); return false;">Cette carte existe en version Tengwar</a><br />
+                {% endif %}
+
+                {% if card.isRf %}
+                    Cette carte existe en version Rare Foil<br />
+                {% endif %}
+
+                {% if card.isRfa %}
+                    <a href="{{ imgRoot }}rfa/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" onclick="window.open(this.href, 'Carte Rare Foil alternative', 'toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=no, status=no, width={{ largeur }}, height={{ hauteur }}'); return false;">Cette carte existe en version Rare Foil alternative</a><br />
+                {% endif %}
+
+                {% if card.getAlternativeCards()|length > 0 %}
+                    Cette carte existe aussi dans {% if card.getAlternativeCards()|length == 1 %}une autre édition{% else %}d'autres éditions{% endif %} :
+                    {% for otherCard in card.getAlternativeCards() %}{% if not(loop.first) %}, {% endif %}<a href="{{ path('card_show', { card: otherCard.id }) }}">{{ otherCard.code }}</a>{% endfor %}
+                    <br />
+                {% endif %}
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}

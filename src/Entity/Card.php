@@ -183,16 +183,23 @@ class Card
     private $tags;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Card::class)
+     * @ORM\ManyToMany(targetEntity=Card::class, inversedBy="reverseMultiCards")
      * @ORM\JoinTable(name="multi_card")
      */
     private $multiCards;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Card::class, mappedBy="multiCards")
+     * @ORM\JoinTable(name="multi_card")
+     */
+    private $reverseMultiCards;
 
     public function __construct()
     {
         $this->phases = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->multiCards = new ArrayCollection();
+        $this->reverseMultiCards = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -635,5 +642,23 @@ class Card
         $this->multiCards->removeElement($multiCard);
 
         return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getReverseMultiCards(): Collection
+    {
+        return $this->reverseMultiCards;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getAlternativeCards(): Collection
+    {
+        return new ArrayCollection(
+            array_merge($this->reverseMultiCards->toArray(), $this->getMultiCards()->toArray())
+        );
     }
 }
