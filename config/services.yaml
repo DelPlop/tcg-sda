@@ -21,5 +21,5 @@ services:
     delplop_db.subscriber.table_prefix:
         class: DelPlop\DbBundle\Subscriber\TablePrefixSubscriber
         arguments:
-            $prefix: 'sf_'
+            $prefix: 'tcg_'
         tags: [ 'doctrine.event_subscriber' ]
