@@ -1,13 +1,14 @@
 {
-    "name": "elialab/skeleton",
-    "description": "squelette Symfony",
+    "name": "delplop/tcgsda",
+    "description": "TCG SdA",
     "version": "2021",
     "type": "project",
-    "license": "proprietary",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
-            "name": "Elia",
-            "email": "contact@elianora-la-blanche.fr",
+            "name": "Del Plop",
+            "email": "contact@phpblocnote.net",
+            "homepage": "https://www.phpblocnote.net",
             "role": "Developer"
         }
     ],
