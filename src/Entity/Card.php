@@ -204,7 +204,7 @@ class Card
 
     public function __toString(): string
     {
-        return $this->getCode();
+        return $this->getLocalName() ?: $this->getOriginalName();
     }
 
     public function getId(): ?int
