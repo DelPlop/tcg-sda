@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use DelPlop\UserBundle\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @UniqueEntity(fields={"login"}, message="There is already an account with this login")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class RegisteredUser implements UserInterface, PasswordAuthenticatedUserInterface
+class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id

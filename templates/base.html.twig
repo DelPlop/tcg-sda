@@ -5,22 +5,22 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
         {% endblock %}
-
-        {% block javascripts %}
-        {% endblock %}
     </head>
     <body>
-    <nav id="menu">
-        <ul>
-            <li><a href="{{ path('index') }}">Accueil</a></li>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-            {% else %}
-                <li><a href="{{ path('register') }}">Inscription</a></li>
-                <li><a href="{{ path('login') }}">Connexion</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+        <nav id="menu">
+            <ul>
+                <li><a href="{{ path('index') }}">Accueil</a></li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                {% else %}
+                    <li><a href="{{ path('register') }}">Inscription</a></li>
+                    <li><a href="{{ path('login') }}">Connexion</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+
         {% block body %}{% endblock %}
+
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
