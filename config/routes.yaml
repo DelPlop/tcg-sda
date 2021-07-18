@@ -18,3 +18,68 @@ admin:
     path: /admin
     controller: App\Controller\Admin\DashboardController::index
     methods: [GET, POST]
+
+thanks:
+    path: /remerciements
+    controller: App\Controller\StaticController::thanks
+    methods: GET
+
+rules:
+    path: /regles
+    controller: App\Controller\StaticController::rules
+    methods: GET
+
+qa:
+    path: /faq
+    controller: App\Controller\StaticController::qa
+    methods: GET
+
+editions_list:
+    path: /cartes/editions
+    controller: App\Controller\EditionController::list
+    methods: GET
+
+edition_cards:
+    path: /edition/{edition}
+    controller: App\Controller\EditionController::cards
+    methods: GET
+
+card_show:
+    path: /carte/{card}
+    controller: App\Controller\CardController::show
+    methods: GET
+
+cards_search:
+    path: /cartes/recherche
+    controller: App\Controller\CardController::search
+    methods: [GET, POST]
+
+cards_advanced_search:
+    path: /cartes/recherche-avancee
+    controller: App\Controller\CardController::advancedSearch
+    methods: [GET, POST]
+
+users_list:
+    path: /communaute/compagnons
+    controller: App\Controller\UserController::list
+    methods: GET
+
+user_show:
+    path: /communaute/consulter/compagnon/{user}
+    controller: App\Controller\UserController::show
+    methods: GET
+
+user_contact:
+    path: /communaute/contacter/compagnon/{user}
+    controller: App\Controller\UserController::contact
+    methods: [GET, POST]
+
+user_owned_cards:
+    path: /communaute/compagnon/cartes-possedees/{user}
+    controller: App\Controller\UserController::ownedCards
+    methods: GET
+
+user_wanted_cards:
+    path: /communaute/compagnon/cartes-recherchees/{user}
+    controller: App\Controller\UserController::wantedCards
+    methods: GET

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% block title %}{{ ('general.thanks'|trans) }}{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Remerciements</h2>
+            <p>
+                <img src="/img/main.jpg" alt="" style="float: left;margin: 0 1em 0.8em 0" />
+
+                Je voudrais juste remercier ici tous ceux sans lesquels ce site ne serait pas là :<br /><br />
+
+                - un ex qui m'a incitée à jouer (il avait essayé de me mettre à Magic mais il n'a pas réussi ;) ),<br />
+                - Vinsou pour toutes les cartes (et les renseignements) qu'il m'a donnés,<br />
+                - mon frère pour s'être si bien fait battre pendant mon "apprentissage" du jeu,<br />
+                - Final Séraphin pour son aide sur le développement de la version 1 du site,<br />
+                - Peter Jackson pour avoir fait des films géniaux (avec de superbes images) qui ont permis d'illustrer ces magnifiques cartes,<br />
+                - et Sagurnama pour les <a href="{{ path('rules') }}">règles</a>.
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}

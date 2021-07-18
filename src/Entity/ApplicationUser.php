@@ -23,6 +23,8 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
     use UserTrait;
     use TimestampableEntity;
 
+    public const DEFAULT_USER_ID = 1;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
