@@ -25,7 +25,7 @@ class Card
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $localName;
 
@@ -95,11 +95,6 @@ class Card
     private $isAuthorized;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $keywords;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $localText;
@@ -162,7 +157,7 @@ class Card
     private $rarity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class)
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
@@ -200,6 +195,11 @@ class Card
         $this->multiCards = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getCode();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -222,7 +222,7 @@ class Card
         return $this->localName;
     }
 
-    public function setLocalName(string $localName): self
+    public function setLocalName(?string $localName): self
     {
         $this->localName = $localName;
 
@@ -381,18 +381,6 @@ class Card
     public function setIsAuthorized(bool $isAuthorized): self
     {
         $this->isAuthorized = $isAuthorized;
-
-        return $this;
-    }
-
-    public function getKeywords(): ?string
-    {
-        return $this->keywords;
-    }
-
-    public function setKeywords(?string $keywords): self
-    {
-        $this->keywords = $keywords;
 
         return $this;
     }

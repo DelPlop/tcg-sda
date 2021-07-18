@@ -1,0 +1,63 @@
+dashboard:
+    home: Dashboard
+    rarities: Raretés
+    editions: Editions
+    cultures: Cultures
+    phases: Phases
+    types: Types
+    subtypes: Sous-types
+    signets: Sceaux
+    tags: Mots-clé
+    cards: Cartes
+    users: Membres
+    global: Configuration générale
+    utiles: Utiles
+
+Rarity: Rareté
+Culture: Culture
+Edition: Edition
+Type: Type
+Subtype: Sous-type
+Phase: Phase
+Card: Carte
+Signet: Sceau
+ApplicationUser: Membre
+Tag: Mot-clé
+ID: ID
+Name: Nom
+Position: Ordre
+Edition Number: N° de l'édition
+Local Name: Nom (français)
+Original Name: Nom (anglais)
+Is Special: Spéciale ?
+Is Displayable: A afficher ?
+Is Unique: Unique ?
+Is Authorized: Autorisée ?
+Is Ring Bearer: Peut porter l'anneau ?
+Is Tengwar: Existe en Tengwar ?
+Is Rf: Existe en Rare Foil ?
+Is Rfa: Existe en Rare Foil Alternative ?
+Character Name: Personnage
+Code: Code
+Cost: Coût
+Strength: Force
+Strength Modifier: Modificateur de force
+Vitality: Vitalité
+Vitality Modifier: Modificateur de vitalité
+Resistance: Résistance
+Resistance Modifier: Modificateur de résistance
+Site Number: N° de site
+Shadow Number: N° d'ombre
+Login: Pseudonyme
+Email: E-mail
+Created At: Inscription le
+Updated At: Mise à jour le
+Anonymized At: Anonymisé le
+Phases: Phases
+Local Text: Texte (français)
+Local Quote: Citation (français)
+Original Text: Texte (anglais)
+Original Quote: Citation (anglais)
+Keywords: Mots-clé
+Tags: Mots-clé
+Multi Cards: Autres versions

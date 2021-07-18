@@ -25,7 +25,7 @@ class Edition
     private $editionNumber;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $localName;
 
@@ -54,6 +54,11 @@ class Edition
         $this->cards = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getLocalName() ?: $this->getOriginalName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,7 +81,7 @@ class Edition
         return $this->localName;
     }
 
-    public function setLocalName(string $localName): self
+    public function setLocalName(?string $localName): self
     {
         $this->localName = $localName;
 

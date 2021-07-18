@@ -39,6 +39,11 @@ class Phase
         $this->cards = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getLocalName() ?: $this->getOriginalName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

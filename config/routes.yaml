@@ -1,2 +1,7 @@
 user_bundle_routes:
     resource: '@DelPlopUserBundle/config/routes.yaml'
+
+admin:
+    path: /admin
+    controller: App\Controller\Admin\DashboardController::index
+    methods: [GET, POST]

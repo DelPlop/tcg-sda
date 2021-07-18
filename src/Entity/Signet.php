@@ -34,6 +34,11 @@ class Signet
         $this->cards = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->getCharacterName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

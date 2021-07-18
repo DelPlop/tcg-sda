@@ -1,3 +1,6 @@
 imports:
     - { resource: '@DelPlopUserBundle/config/packages/security.yaml' }
 
+security:
+    access_control:
+        - { path: ^/admin$, roles: ROLE_ADMIN }

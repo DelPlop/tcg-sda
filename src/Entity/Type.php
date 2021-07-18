@@ -34,9 +34,19 @@ class Type
      */
     private $cards;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
     public function __construct()
     {
         $this->cards = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getLocalName() ?: $this->getOriginalName();
     }
 
     public function getId(): ?int
@@ -94,6 +104,18 @@ class Type
                 $card->setSubtype(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

@@ -56,6 +56,11 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
         $this->wantedCards = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getAnonymizedAt(): ?\DateTimeImmutable
     {
         return $this->anonymizedAt;
