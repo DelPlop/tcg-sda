@@ -41,25 +41,19 @@
                         </td>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <td>
-    {#                    if(!isset($owned_cards[$card['id']]))#}
-    {#                    {#}
-    {#                    <a href="/communaute/compagnon/possede-carte/'.intval($card['id']).'">J\'ai</a>#}
-    {#                    }#}
-    {#                    else#}
-    {#                    {#}
-    {#                    echo "J'ai";#}
-    {#                    }#}
-                        </td>
+                                {% if app.user.ownedCards.contains(card) %}
+                                    J'ai
+                                {% else %}
+                                    <a href="{{ path('user_owns_card', {card: card.id}) }}">J'ai</a>
+                                {% endif %}
+                            </td>
 
-                        <td>
-    {#                        if(!isset($wanted_cards[$card['id']]))#}
-    {#                        {#}
-    {#                        <a href="/communaute/compagnon/recherche-carte/'.intval($card['id']).'">Je veux</a>#}
-    {#                        }#}
-    {#                        else#}
-    {#                        {#}
-    {#                        echo "Je veux";#}
-    {#                        }#}
+                            <td>
+                                {% if app.user.wantedCards.contains(card) %}
+                                    Je veux
+                                {% else %}
+                                    <a href="{{ path('user_wants_card', {card: card.id}) }}">Je veux</a>
+                                {% endif %}
                             </td>
                         {% endif %}
                     </tr>
