@@ -1,2 +1,3 @@
 imports:
-#    - { resource: '@DelPlopWishListBundle/config/packages/security.yaml' }
+    - { resource: '@DelPlopUserBundle/config/packages/security.yaml' }
+

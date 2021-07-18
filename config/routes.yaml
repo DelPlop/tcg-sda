@@ -1,2 +1,2 @@
-#wishlist_bundle_routes:
-#    resource: '@DelPlopWishListBundle/config/routes.yaml'
+user_bundle_routes:
+    resource: '@DelPlopUserBundle/config/routes.yaml'

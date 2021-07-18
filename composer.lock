@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec407c848299bfbe52dbe853843adab8",
+    "content-hash": "e41abd952e082de9fd91bd7f341ba008",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -80,6 +80,91 @@
             "time": "2021-05-24T07:46:03+00:00"
         },
         {
+            "name": "delplop/dbbundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DelPlop/sf-db-prefix-bundle.git",
+                "reference": "41c8e1adbc0942b18f093b1587db25ffed7c8dcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DelPlop/sf-db-prefix-bundle/zipball/41c8e1adbc0942b18f093b1587db25ffed7c8dcf",
+                "reference": "41c8e1adbc0942b18f093b1587db25ffed7c8dcf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "DelPlop\\DbBundle\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Del Plop",
+                    "email": "plop@phpblocnote.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony database bundle to configure table prefix",
+            "support": {
+                "source": "https://github.com/DelPlop/sf-db-prefix-bundle/tree/master",
+                "issues": "https://github.com/DelPlop/sf-db-prefix-bundle/issues"
+            },
+            "time": "2021-07-13T18:52:21+00:00"
+        },
+        {
+            "name": "delplop/userbundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DelPlop/sf-user-bundle.git",
+                "reference": "4c64cb131513c7b449b471e365dead9d3f08b822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/4c64cb131513c7b449b471e365dead9d3f08b822",
+                "reference": "4c64cb131513c7b449b471e365dead9d3f08b822",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "symfony/rate-limiter": "5.3.*",
+                "symfony/security-bundle": "5.3.*",
+                "symfony/twig-bundle": "^5.3",
+                "symfony/yaml": "5.3.*"
+            },
+            "default-branch": true,
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "DelPlop\\UserBundle\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Del Plop",
+                    "email": "plop@phpblocnote.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Symfony user bundle to handle registration and authentication",
+            "support": {
+                "source": "https://github.com/DelPlop/sf-user-bundle/tree/master"
+            },
+            "time": "2021-07-17T06:19:35+00:00"
+        },
+        {
             "name": "doctrine/annotations",
             "version": "1.13.1",
             "source": {
@@ -153,16 +238,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "ac77408b22cc6c4d0b4947d20a3889be3043566e"
+                "reference": "331b4d5dbaeab3827976273e9356b3b453c300ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/ac77408b22cc6c4d0b4947d20a3889be3043566e",
-                "reference": "ac77408b22cc6c4d0b4947d20a3889be3043566e",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/331b4d5dbaeab3827976273e9356b3b453c300ce",
+                "reference": "331b4d5dbaeab3827976273e9356b3b453c300ce",
                 "shasum": ""
             },
             "require": {
@@ -232,7 +317,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/cache/issues",
-                "source": "https://github.com/doctrine/cache/tree/2.1.0"
+                "source": "https://github.com/doctrine/cache/tree/2.1.1"
             },
             "funding": [
                 {
@@ -248,7 +333,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-14T11:22:57+00:00"
+            "time": "2021-07-17T14:49:29+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -10266,8 +10351,11 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "delplop/dbbundle": 20,
+        "delplop/userbundle": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use DelPlop\WishListBundle\Entity\Article;
 use DelPlop\UserBundle\Repository\UserRepository;
 use DelPlop\UserBundle\Trait\UserTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,49 +27,4 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\OneToMany(targetEntity="DelPlop\WishListBundle\Entity\Article", mappedBy="user")
-     * @ORM\OrderBy({"position" = "ASC"})
-     */
-    private $articles;
-
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): ?Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): self
-    {
-        if ($this->articles->removeElement($article)) {
-            if ($article->getUser() === $this) {
-                $article->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 }
