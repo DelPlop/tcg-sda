@@ -1,26 +1,104 @@
+{% trans_default_domain 'cards' %}
 <!DOCTYPE html>
 <html>
     <head>
+        <title>{% block title %}Welcome!{% endblock %} - Le TCG du Seigneur des Anneaux</title>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
         {% block stylesheets %}
+            <link rel="stylesheet" href="/css/styles.css">
+            <style>
+                html,body {font-family:Arial,Verdana,Helvetica,Georgia,sans-serif;}
+                h1,h2,h3,h4,h5,h6 {font-family: "Trebuchet MS",sans-serif;}
+                .w3-sidebar {
+                    z-index: 3;
+                    width: 250px;
+                    top: 43px;
+                    bottom: 0;
+                    height: inherit;
+                }
+            </style>
         {% endblock %}
     </head>
     <body>
-        <nav id="menu">
-            <ul>
-                <li><a href="{{ path('index') }}">Accueil</a></li>
+        <!-- Navbar -->
+        <div class="w3-top">
+            <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+                <a class="w3-bar-item w3-button w3-right w3-hide-large w3-large w3-theme-l1" href="javascript:void(0)" onclick="menu_open()"><img src="/img/bars.svg" alt="Menu" width="20" /></a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white {% if activePage == 'home' or activePage == 'register' or activePage == 'login' %}w3-theme-l1{% endif %}" href="{{ path('index') }}">Accueil</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white {% if activePage == 'editions' %}w3-theme-l1{% endif %}" href="{{ path('editions_list') }}">Liste des cartes</a>
+                <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'search' %}w3-theme-l1{% endif %}" href="{{ path('cards_advanced_search') }}" title="Recherche avancée">Recherche</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'rules' %}w3-theme-l1{% endif %}" href="{{ path('rules') }}">Règles</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'qa' %}w3-theme-l1{% endif %}" href="{{ path('qa') }}" title="Questions fréquentes">F.A.Q.</a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-                {% else %}
-                    <li><a href="{{ path('register') }}">Inscription</a></li>
-                    <li><a href="{{ path('login') }}">Connexion</a></li>
+                    <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'users' %}w3-theme-l1{% endif %}" href="{{ path('users_list') }}">Communauté</a>
+                    <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'lists' %}w3-theme-l1{% endif %}" href="{{ path('user_show', {user: app.user.id}) }}">Ma fiche</a>
                 {% endif %}
-            </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+            <a href="javascript:void(0)" onclick="menu_close()" class="w3-right w3-xlarge w3-padding-large w3-hide-large" title="Fermer le Menu">
+                <img src="/img/close.svg" alt="Fermer" width="20" />
+            </a>
+
+            {{ render(controller(
+                'App\\Controller\\EditionController::editions'
+            )) }}
         </nav>
 
-        {% block body %}{% endblock %}
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large" onclick="menu_close()" style="cursor:pointer" title="Fermer le menu" id="myOverlay"></div>
+
+        <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+        <div class="w3-main" style="margin-left:250px">
+            {% block body %}{% endblock %}
+
+            <footer id="myFooter">
+                <div class="w3-container w3-theme-l2 w3-padding-32">
+                    <h4>
+                        <img src="/img/logo_tolkien.png" alt="" /> &copy; Le TCG du Seigneur des Anneaux <span class="w3-hide-small w3-hide-medium">v7 (2004-{{ date()|date('Y') }})</span>
+                    </h4>
+                </div>
+
+                <div class="w3-container w3-theme-l1">
+                    <p>
+                        Réalisation par <a href="{{ path('user_contact', {user: constant('App\\Entity\\ApplicationUser::DEFAULT_USER_ID')}) }}">Elianora la blanche</a><br />
+                        <a href="{{ path('thanks') }}" class="w3-hide-small w3-hide-medium">Remerciements</a>
+                    </p>
+                </div>
+            </footer>
+
+            <!-- END MAIN -->
+        </div>
 
         {% block javascripts %}{% endblock %}
+
+        <script>
+            // Get the Sidebar
+            var mySidebar = document.getElementById("mySidebar");
+
+            // Get the DIV with overlay effect
+            var overlayBg = document.getElementById("myOverlay");
+
+            // Toggle between showing and hiding the sidebar, and add overlay effect
+            function menu_open() {
+                if (mySidebar.style.display === 'block') {
+                    mySidebar.style.display = 'none';
+                    overlayBg.style.display = "none";
+                } else {
+                    mySidebar.style.display = 'block';
+                    overlayBg.style.display = "block";
+                }
+            }
+
+            // Close the sidebar with the close button
+            function menu_close() {
+                mySidebar.style.display = "none";
+                overlayBg.style.display = "none";
+            }
+        </script>
     </body>
 </html>
