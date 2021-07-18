@@ -10,6 +10,23 @@
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
             <h2 class="w3-text-amber">Détails de la carte "{{ card.localName ?: card.originalName }}"</h2>
+
+            {% if first is not same as(null) %}
+                <a href="{{ path('card_show', {card: first.id}) }}" title="Première carte de l'édition" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
+            {% endif %}
+
+            {% if prev is not same as(null) %}
+                <a href="{{ path('card_show', {card: prev.id}) }}" title="Carte précédente de l'édition" class="w3-button w3-hover-black"><img src="/img/fleche_precedente.gif" alt="&lt;" /></a>
+            {% endif %}
+
+            {% if next is not same as(null) %}
+                <a href="{{ path('card_show', {card: next.id}) }}" title="Carte suivante de l'édition" class="w3-button w3-hover-black"><img src="/img/fleche_suivante.gif" alt="&gt;" /></a>
+            {% endif %}
+
+            {% if last is not same as(null) %}
+                <a href="{{ path('card_show', {card: last.id}) }}" title="Dernière carte de l'édition" class="w3-button w3-hover-black {% if last is same as(card) %}w3-black{% endif %}">&raquo;</a>
+            {% endif %}
+
             <p>
                 <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" alt="{{ card.localName ?: card.originalName }}" />
                 <br /><br />
@@ -23,6 +40,8 @@
                 <strong>Nom anglais :</strong> {{ card.originalName }}<br />
 
                 <strong>Edition :</strong> <a href="{{ path('edition_cards', {edition: card.edition.id}) }}">{{ card.edition.localName ?: card.edition.originalName }}</a><br />
+
+                <strong>Rareté :</strong> {{ card.rarity.name }}<br />
 
                 {% if card.culture is not same as(null) %}
                     <strong>Culture :</strong> {{ card.culture.localName ?: card.culture.originalName }}<br />
@@ -39,7 +58,13 @@
                     <strong>Sous-type :</strong> {{ card.subtype.localName ?: card.subtype.originalName }}<br />
                 {% endif %}
 
-                <strong>Rareté :</strong> {{ card.rarity.name }}<br />
+                {% if card.phases|length > 0 %}
+                    <strong>Phase(s) :</strong> {% for phase in card.phases %}{% if not(loop.first) %}, {% endif %}{{ phase.localName ?: phase.originalName }}{% endfor %}<br />
+                {% endif %}
+
+                {% if card.tags|length > 0 %}
+                    <strong>Mot(s)-clé :</strong> {% for tag in card.tags %}{% if not(loop.first) %}, {% endif %}{{ tag.localName ?: tag.originalName }}{% endfor %}<br />
+                {% endif %}
 
                 <strong>Unique :</strong> {{ card.isUnique ? 'Oui' : 'Non' }}<br />
 
@@ -122,6 +147,22 @@
                     {% endif %}
                 {% endif %}
             </p>
+
+            {% if first is not same as(null) %}
+                <a href="{{ path('card_show', {card: first.id}) }}" title="Première carte de l'édition" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
+            {% endif %}
+
+            {% if prev is not same as(null) %}
+                <a href="{{ path('card_show', {card: prev.id}) }}" title="Carte précédente de l'édition" class="w3-button w3-hover-black"><img src="/img/fleche_precedente.gif" alt="&lt;" /></a>
+            {% endif %}
+
+            {% if next is not same as(null) %}
+                <a href="{{ path('card_show', {card: next.id}) }}" title="Carte suivante de l'édition" class="w3-button w3-hover-black"><img src="/img/fleche_suivante.gif" alt="&gt;" /></a>
+            {% endif %}
+
+            {% if last is not same as(null) %}
+                <a href="{{ path('card_show', {card: last.id}) }}" title="Dernière carte de l'édition" class="w3-button w3-hover-black {% if last is same as(card) %}w3-black{% endif %}">&raquo;</a>
+            {% endif %}
         </div>
 
         {{ render(controller(

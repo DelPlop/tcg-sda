@@ -18,4 +18,70 @@ class CardRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Card::class);
     }
+
+    public function findFirstCard(Card $card): ?Card
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.edition = :edition')
+            ->setParameter('edition', $card->getEdition())
+            ->andWhere('c.isDisplayable = :active')
+            ->setParameter('active', true)
+            ->orderBy('c.position', 'asc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function findPreviousCard(Card $card): ?Card
+    {
+        $position = $card->getPosition() - 1;
+        if ($position <= 0) {
+            $position = $card->getPosition();
+        }
+
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.edition = :edition')
+            ->setParameter('edition', $card->getEdition())
+            ->andWhere('c.isDisplayable = :active')
+            ->setParameter('active', true)
+            ->andWhere('c.position = :position')
+            ->setParameter('position', $position)
+            ->orderBy('c.position', 'asc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function findNextCard(Card $card): ?Card
+    {
+        $position = $card->getPosition() + 1;
+        if ($position > 365) {
+            $position = $card->getPosition();
+        }
+
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.edition = :edition')
+            ->setParameter('edition', $card->getEdition())
+            ->andWhere('c.isDisplayable = :active')
+            ->setParameter('active', true)
+            ->andWhere('c.position = :position')
+            ->setParameter('position', $position)
+            ->orderBy('c.position', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+    public function findLastCard(Card $card): ?Card
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.edition = :edition')
+            ->setParameter('edition', $card->getEdition())
+            ->andWhere('c.isDisplayable = :active')
+            ->setParameter('active', true)
+            ->orderBy('c.position', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }
