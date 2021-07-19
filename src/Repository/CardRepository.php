@@ -29,7 +29,7 @@ class CardRepository extends ServiceEntityRepository
             ->orderBy('c.position', 'asc')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     public function findPreviousCard(Card $card): ?Card
@@ -49,7 +49,7 @@ class CardRepository extends ServiceEntityRepository
             ->orderBy('c.position', 'asc')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     public function findNextCard(Card $card): ?Card
@@ -69,7 +69,7 @@ class CardRepository extends ServiceEntityRepository
             ->orderBy('c.position', 'desc')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 
     public function findLastCard(Card $card): ?Card
@@ -82,6 +82,6 @@ class CardRepository extends ServiceEntityRepository
             ->orderBy('c.position', 'desc')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
     }
 }

@@ -16,8 +16,8 @@ class CardController extends AbstractController
             'activePage' => 'editions',
             'card' => $card,
             'first' => $cardRepository->findFirstCard($card),
-            'prev' => $cardRepository->findPreviousCard($card),
-            'next' => $cardRepository->findNextCard($card),
+            'prev' => $cardRepository->findPreviousCard($card) ?: $cardRepository->findFirstCard($card),
+            'next' => $cardRepository->findNextCard($card) ?: $cardRepository->findLastCard($card),
             'last' => $cardRepository->findLastCard($card)
         ]);
     }
