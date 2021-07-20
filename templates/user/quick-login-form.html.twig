@@ -1,0 +1,19 @@
+<form name="login_form" method="post" action="{{ path('login') }}" class="w3-show-inline-block">
+    <div>
+        <label class="required" for="inputLogin">{{ ('form.pseudo'|trans({}, 'cards')) }}</label>
+        <input type="text" value="" name="login" id="inputLogin" required />
+    </div>
+
+    <div>
+        <label class="required" for="inputPassword">{{ ('form.login.password'|trans) }}</label>
+        <input type="password" name="password" id="inputPassword" required />
+    </div>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    />
+
+    <button type="submit">
+        {{ ('user.login'|trans) }}
+    </button>
+</form>

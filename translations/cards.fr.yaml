@@ -11,7 +11,7 @@ form:
     errors:
         not_blank:
             login: Veuillez indiquer votre pseudo
-            password:
+            password: Veuillez indiquer votre mot de passe
 
 card_search:
     errors:
