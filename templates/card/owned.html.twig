@@ -33,7 +33,7 @@
 
                     <td class="centre">
                         {% if user is same as(app.user) %}
-                            <input type="text" size="10" class="card-count" name="number_input_{{ card.card.id }}" id="number_input_{{ card.card.id }}" value="{{ card.number }}" />
+                            <input type="text" size="10" class="card-count" name="number_input_{{ card.id }}" id="number_input_{{ card.id }}" value="{{ card.number }}" />
                         {% else %}
                             {{ card.number }}
                         {% endif %}
@@ -41,7 +41,7 @@
 
                     <td>
                         {% if user is same as(app.user) %}
-                            <input type="text" class="card-language" name="language_input_{{ card.card.id }}" id="language_input_{{ card.card.id }}" value="{{ card.language }}" />
+                            <input type="text" class="card-language" name="language_input_{{ card.id }}" id="language_input_{{ card.id }}" value="{{ card.language }}" />
                         {% else %}
                             {{ card.language }}
                         {% endif %}
@@ -49,7 +49,7 @@
 
                     <td class="centre">
                         {% if user is same as(app.user) %}
-                            <input type="checkbox" class="UsersOwnCard-for_trade" name="UsersOwnCard.{{ card.card.id }}.for_trade" id="UsersOwnCard.{{ card.card.id }}.for_trade" {{ card.isForTrade ? 'checked="checked"' : '' }} value="{{ card.id }}" />
+                            <input type="checkbox" class="UsersOwnCard-for_trade" name="UsersOwnCard.{{ card.id }}.for_trade" id="UsersOwnCard.{{ card.id }}.for_trade" {{ card.isForTrade ? 'checked="checked"' : '' }} value="{{ card.id }}" />
                         {% else %}
                             <img src="/img/{{ card.isForTrade|number_format }}.gif" alt="{{ card.isForTrade ? 'Oui' : 'Non' }}" title="{{ card.isForTrade ? 'Oui' : 'Non' }}" style="vertical-align: middle" />
                         {% endif %}
@@ -57,7 +57,7 @@
 
                     {% if user is same as(app.user) %}
                         <td class="centre">
-                            <a href="{{ path('user_stops_wanting_card', {card: card.card.id}) }}" title="Retirer de mes recherches" onclick="return confirm('Etes-vous sûr de vouloir retirer cette carte de vos recherches ?');"><img src="/img/trash.svg" alt="Retirer" width="20" /></a>
+                            <a href="{{ path('user_stops_owning_card', {card: card.card.id}) }}" title="Retirer de mes cartes" onclick="return confirm('Etes-vous sûr de vouloir retirer cette carte de votre liste ?');"><img src="/img/trash.svg" alt="Retirer" width="20" /></a>
                         </td>
                     {% endif %}
                     {% endfor %}
@@ -86,19 +86,17 @@
 
         function ajaxField(elmt, part) {
             var id_parts = elmt.getAttribute("id").split("_");
-            var id = id_parts[1];
+            var id = id_parts[2];
             var curVal = elmt.value;
-            console.log("curVal: "+curVal);
 
             // sauvegarde
             elmt.addEventListener("blur", (e) => {
                 var newVal = elmt.value;
-                console.log("newVal: "+newVal);
 
                 // sauvegarder la nouvelle valeur
                 if (newVal != "" && newVal != curVal) {
-                    const data = {cardId: id, noteValue: newVal, field: part, action: "<?= $action; ?>"};
-                    fetch("/save-member-card.php", {
+                    const data = {fieldValue: newVal, field: part};
+                    fetch("{{ path('owned_card_edit_ajax', {id: 'idJs'}) }}".replace('idJs', id), {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -123,8 +121,8 @@
                 }
 
                 // sauvegrde
-                const data = {cardId: id, noteValue: value, field: "for_trade", action: "possede"};
-                fetch("/save-member-card.php", {
+                const data = {fieldValue: value, field: "for_trade"};
+                fetch("{{ path('owned_card_edit_ajax', {id: 'idJs'}) }}".replace('idJs', id), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

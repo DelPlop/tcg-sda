@@ -32,7 +32,7 @@
         
                                 <td class="centre">
                                     {% if user is same as(app.user) %}
-                                        <input type="text" size="10" class="card-count" name="number_input_{{ card.card.id }}" id="number_input_{{ card.card.id }}" value="{{ card.number }}" />
+                                        <input type="text" size="10" class="card-count" name="number_input_{{ card.id }}" id="number_input_{{ card.id }}" value="{{ card.number }}" />
                                     {% else %}
                                         {{ card.number }}
                                     {% endif %}
@@ -40,7 +40,7 @@
         
                                 <td>
                                     {% if user is same as(app.user) %}
-                                        <input type="text" class="card-language" name="language_input_{{ card.card.id }}" id="language_input_{{ card.card.id }}" value="{{ card.language }}" />
+                                        <input type="text" class="card-language" name="language_input_{{ card.id }}" id="language_input_{{ card.id }}" value="{{ card.language }}" />
                                     {% else %}
                                         {{ card.language }}
                                     {% endif %}
@@ -77,19 +77,17 @@
 
         function ajaxField(elmt, part) {
             var id_parts = elmt.getAttribute("id").split("_");
-            var id = id_parts[1];
+            var id = id_parts[2];
             var curVal = elmt.value;
-            console.log("curVal: "+curVal);
 
             // sauvegarde
             elmt.addEventListener("blur", (e) => {
                 var newVal = elmt.value;
-                console.log("newVal: "+newVal);
 
                 // sauvegarder la nouvelle valeur
                 if (newVal != "" && newVal != curVal) {
-                    const data = {cardId: id, noteValue: newVal, field: part, action: "<?= $action; ?>"};
-                    fetch("/save-member-card.php", {
+                    const data = {fieldValue: newVal, field: part};
+                    fetch("{{ path('wanted_card_edit_ajax', {id: 'idJs'}) }}".replace('idJs', id), {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -99,31 +97,6 @@
                 }
             });
         }
-
-        // à l'échange ?
-        document.querySelectorAll(".UsersOwnCard-for_trade").forEach(function(elem) {
-            elem.addEventListener("click", (e) => {
-                var value = 0;
-
-                var id_parts = elem.getAttribute("id").split(".");
-                var id = id_parts[1];
-
-                // la case est-elle ACTUELLEMENT cochée ?
-                if (elem.checked) {
-                    value = 1;
-                }
-
-                // sauvegrde
-                const data = {cardId: id, noteValue: value, field: "for_trade", action: "possede"};
-                fetch("/save-member-card.php", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-            });
-        });
 
         // éditer langue
         document.querySelectorAll(".card-language").forEach(function(elem) {

@@ -96,10 +96,18 @@ user_wants_card:
 
 user_stops_owning_card:
     path: /communaute/compagnon/stop-possede-carte/{card}
-    controller: App\Controller\CardController::ownsCard
+    controller: App\Controller\CardController::deOwnsCard
     methods: [GET, POST]
 
 user_stops_wanting_card:
     path: /communaute/compagnon/stop-recherche-carte/{card}
-    controller: App\Controller\CardController::wantsCard
+    controller: App\Controller\CardController::deWantsCard
     methods: [GET, POST]
+
+wanted_card_edit_ajax:
+    path: /carte-recherchee/{id}/sauver
+    controller: App\Controller\CardController::saveWanted
+
+owned_card_edit_ajax:
+    path: /carte-possedee/{id}/sauver
+    controller: App\Controller\CardController::saveOwned

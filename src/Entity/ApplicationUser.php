@@ -110,7 +110,9 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
 
     public function removeOwnedCard(Card $ownedCard): self
     {
-        $this->ownedCards->removeElement($ownedCard);
+        if ($this->ownedCards->contains($ownedCard)) {
+            $this->ownedCards->removeElement($ownedCard);
+        }
 
         return $this;
     }
@@ -134,7 +136,9 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
 
     public function removeWantedCard(Card $wantedCard): self
     {
-        $this->wantedCards->removeElement($wantedCard);
+        if ($this->wantedCards->contains($wantedCard)) {
+            $this->wantedCards->removeElement($wantedCard);
+        }
 
         return $this;
     }
