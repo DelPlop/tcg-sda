@@ -1,0 +1,142 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% block title %}Les recherches de {{ user.login }}{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Les recherches de {{ user.login }} ({{ cards|length }})</h2>
+            <p>
+                {% if cards|length > 0 %}
+                    <table width="100%" border="1" class="gauche">
+                        <tr>
+                            <th width="40%">Nom</th>
+                            <th width="10%">Code</th>
+                            <th width="10%">Nombre d'exemplaire</th>
+                            <th>Version / langue</th>
+                            {% if user is same as(app.user) %}
+                                <th width="10%">Supprimer</th>
+                            {% endif %}
+                        </tr>
+        
+                        {% for card in cards %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('card_show', {card: card.card.id}) }}">{{ card.card.localName ?: card.card.originalName }}</a>
+                                </td>
+        
+                                <td>
+                                    {{ card.card.code }}
+                                </td>
+        
+                                <td class="centre">
+                                    {% if user is same as(app.user) %}
+                                        <input type="text" size="10" class="card-count" name="number_input_{{ card.card.id }}" id="number_input_{{ card.card.id }}" value="{{ card.number }}" />
+                                    {% else %}
+                                        {{ card.number }}
+                                    {% endif %}
+                                </td>
+        
+                                <td>
+                                    {% if user is same as(app.user) %}
+                                        <input type="text" class="card-language" name="language_input_{{ card.card.id }}" id="language_input_{{ card.card.id }}" value="{{ card.language }}" />
+                                    {% else %}
+                                        {{ card.language }}
+                                    {% endif %}
+                                </td>
+
+                                {% if user is same as(app.user) %}
+                                    <td class="centre">
+                                        <a href="{{ path('user_stops_wanting_card', {card: card.card.id}) }}" title="Retirer de mes recherches" onclick="return confirm('Etes-vous sûr de vouloir retirer cette carte de vos recherches ?');"><img src="/img/trash.svg" alt="Retirer" width="20" /></a>
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </table>
+                {% endif %}
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function nl2br (str, is_xhtml) {
+            var breakTag = (is_xhtml || typeof is_xhtml === "undefined") ? "<br />" : "<br>";
+            return (str + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1"+ breakTag +"$2");
+        }
+
+        function ajaxField(elmt, part) {
+            var id_parts = elmt.getAttribute("id").split("_");
+            var id = id_parts[1];
+            var curVal = elmt.value;
+            console.log("curVal: "+curVal);
+
+            // sauvegarde
+            elmt.addEventListener("blur", (e) => {
+                var newVal = elmt.value;
+                console.log("newVal: "+newVal);
+
+                // sauvegarder la nouvelle valeur
+                if (newVal != "" && newVal != curVal) {
+                    const data = {cardId: id, noteValue: newVal, field: part, action: "<?= $action; ?>"};
+                    fetch("/save-member-card.php", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(data),
+                    });
+                }
+            });
+        }
+
+        // à l'échange ?
+        document.querySelectorAll(".UsersOwnCard-for_trade").forEach(function(elem) {
+            elem.addEventListener("click", (e) => {
+                var value = 0;
+
+                var id_parts = elem.getAttribute("id").split(".");
+                var id = id_parts[1];
+
+                // la case est-elle ACTUELLEMENT cochée ?
+                if (elem.checked) {
+                    value = 1;
+                }
+
+                // sauvegrde
+                const data = {cardId: id, noteValue: value, field: "for_trade", action: "possede"};
+                fetch("/save-member-card.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+            });
+        });
+
+        // éditer langue
+        document.querySelectorAll(".card-language").forEach(function(elem) {
+            elem.addEventListener("click", (e) => {
+                ajaxField(elem, "language");
+            });
+        });
+
+        // éditer nombre
+        document.querySelectorAll(".card-count").forEach(function(elem) {
+            elem.addEventListener("click", (e) => {
+                ajaxField(elem, "number");
+            });
+        });
+    </script>
+{% endblock %}

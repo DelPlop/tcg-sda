@@ -93,3 +93,13 @@ user_wants_card:
     path: /communaute/compagnon/recherche-carte/{card}
     controller: App\Controller\CardController::wantsCard
     methods: GET
+
+user_stops_owning_card:
+    path: /communaute/compagnon/stop-possede-carte/{card}
+    controller: App\Controller\CardController::ownsCard
+    methods: [GET, POST]
+
+user_stops_wanting_card:
+    path: /communaute/compagnon/stop-recherche-carte/{card}
+    controller: App\Controller\CardController::wantsCard
+    methods: [GET, POST]

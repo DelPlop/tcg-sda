@@ -19,7 +19,28 @@ class UserController extends AbstractController
 
     public function show(ApplicationUser $user): Response
     {
-        return new Response();
+        return $this->render('user/show.html.twig', [
+            'activePage' => 'lists',
+            'user' => $user
+        ]);
+    }
+
+    public function ownedCards(ApplicationUser $user): Response
+    {
+        return $this->render('card/owned.html.twig', [
+            'activePage' => 'lists',
+            'user' => $user,
+            'cards' => $user->getUserOwnedCards()
+        ]);
+    }
+
+    public function wantedCards(ApplicationUser $user): Response
+    {
+        return $this->render('card/wanted.html.twig', [
+            'activePage' => 'lists',
+            'user' => $user,
+            'cards' => $user->getUserWantedCards()
+        ]);
     }
 
     public function contact(ApplicationUser $user): Response

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% block title %}Ma fiche{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Ma fiche</h2>
+            <p>
+                Pour montrer vos listes à vos amis, n'hésitez pas à leur donner directement les liens suivants :
+                <br /><br />
+                <a href="{{ path('user_owned_cards', {user: user.id}) }}">Voir mes cartes</a><br />
+                <a href="{{ path('user_wanted_cards', {user: user.id}) }}">Voir mes recherches</a><br />
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Mes informations</h2>
+            <p>
+                Vous pouvez modifier vos informations ci-dessous :<br />
+                <form action="" name="form_register" id="form_register" method="post">
+                    <label class="inline" for="mdp">Mot de passe</label>
+                    <input class="big-input" type="password" name="mdp" id="mdp" /><br />
+
+                    <label class="inline" for="password_confirm">Confirmation du mot de passe</label>
+                    <input class="big-input" type="password" name="password_confirm" id="password_confirm" /><br />
+
+                    <label class="inline" for="email">Email</label>
+                    <input class="big-input" type="text" name="email" id="email" value="" /><br />
+
+                    <label class="inline" for="email_confirm">Confirmation de l'email</label>
+                    <input class="big-input" type="text" name="email_confirm" id="email_confirm" /><br />
+
+                    <input type="submit" name="valid_login" id="valid_login" value="Modifier" />
+                </form>
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}
