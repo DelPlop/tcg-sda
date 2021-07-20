@@ -51,6 +51,8 @@ class CardController extends AbstractController
 
     public function advancedSearch(): Response
     {
-        return new Response();
+        return $this->render('card/advancedSearch.html.twig', [
+            'activePage' => 'search'
+        ]);
     }
 }
