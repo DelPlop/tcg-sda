@@ -84,7 +84,7 @@ class UserController extends AbstractController
 
             $content = "Bonjour ".$user->getLogin().",\n";
             $content .= $security->getUser()->getLogin()." vous a envoyé un message depuis <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">Le TCG du Seigneur des Anneaux</a>.\n\n";
-            $content .= "Voici son message :\n<pre>" . $data['message'] . "</pre>\n\n";
+            $content .= "Voici son message :\n<pre>" . $this->cleanEntry($data['message']) . "</pre>\n\n";
             $content .= "Pour lui répondre, vous pouvez écrire à <a href=\"mailto:".$security->getUser()->getEmail()."\">".$security->getUser()->getEmail()."</a>.\n\n";
             $content .= "Bonne journée et à bientôt sur <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">Le TCG du Seigneur des Anneaux</a> !";
 
@@ -107,5 +107,89 @@ class UserController extends AbstractController
             'user' => $user,
             'activePage' => 'users'
         ]));
+    }
+
+    public function exportOwnedCards(ApplicationUser $user)
+    {
+        $filename = 'cartes_'.$this->cleanEntry($user->getLogin(), true).'.csv';
+
+        $head = [
+            'Nom',
+            'Code',
+            'Nombre d\'exemplaire',
+            'Version / langue',
+            'A l\'échange'
+        ];
+
+        $cards = [];
+        foreach ($user->getUserOwnedCards() as $card) {
+            $cards[] = [
+                $card->getCard()->getLocalName() ?: $card->getCard()->getOriginalName(),
+                $card->getCard()->getCode(),
+                $card->getNumber(),
+                $card->getLanguage(),
+                $card->getIsForTrade() ? 'oui' : 'non'
+            ];
+        }
+
+        $this->exportFile($filename, $head, $cards);
+    }
+
+    public function exportWantedCards(ApplicationUser $user)
+    {
+        $filename = 'recherches_'.$this->cleanEntry($user->getLogin(), true).'.csv';
+
+        $head = [
+            'Nom',
+            'Code',
+            'Nombre d\'exemplaire',
+            'Version / langue'
+        ];
+
+        $cards = [];
+        foreach ($user->getUserWantedCards() as $card) {
+            $cards[] = [
+                $card->getCard()->getLocalName() ?: $card->getCard()->getOriginalName(),
+                $card->getCard()->getCode(),
+                $card->getNumber(),
+                $card->getLanguage()
+            ];
+        }
+
+        $this->exportFile($filename, $head, $cards);
+    }
+
+    protected function exportFile(string $filename, array $head, array $cards)
+    {
+        $filepath = './exports/'.$filename;
+        $handle = fopen($filepath, 'w');
+
+        fputcsv($handle, $head, ';');
+
+        foreach ($cards as $card) {
+            fputcsv($handle, $card, ';');
+        }
+        fclose($handle);
+
+        header('Content-Description: File Transfer');
+        header("Content-Type: application/csv") ;
+        header("Content-Disposition: attachment; filename=".$filename);
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        readfile($filepath);
+    }
+
+    protected function cleanEntry(string $text = '', bool $replaceSpace = false): string
+    {
+        $text = strtolower(trim($text));
+        $text = strip_tags($text);
+        $text = htmlentities($text);
+
+        if ($replaceSpace) {
+            $text = str_replace(' ', '_', $text);
+        }
+
+        return $text;
     }
 }

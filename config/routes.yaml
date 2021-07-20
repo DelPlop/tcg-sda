@@ -111,3 +111,13 @@ wanted_card_edit_ajax:
 owned_card_edit_ajax:
     path: /carte-possedee/{id}/sauver
     controller: App\Controller\CardController::saveOwned
+
+export_owned_cards:
+    path: /communaute/compagnon/export-cartes-possedees/{id}
+    controller: App\Controller\UserController::exportOwnedCards
+    methods: GET
+
+export_wanted_cards:
+    path: /communaute/compagnon/export-cartes-recherchees/{id}
+    controller: App\Controller\UserController::exportWantedCards
+    methods: GET
