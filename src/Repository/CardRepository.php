@@ -94,6 +94,10 @@ class CardRepository extends ServiceEntityRepository
             $qb->orWhere('c.code like :code')
                 ->orWhere('c.localName like :term')
                 ->orWhere('c.originalName like :term')
+                ->orWhere('c.localText like :term')
+                ->orWhere('c.originalText like :term')
+                ->orWhere('c.localQuote like :term')
+                ->orWhere('c.originalQuote like :term')
                 ->setParameter('code', $term)
                 ->setParameter('term', '%'.$term.'%');
         }
