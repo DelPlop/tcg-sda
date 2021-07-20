@@ -3,10 +3,10 @@
         <h5>Vous cherchez une carte précise ?</h5>
 
         Entrez son nom (ou une partie) ou son code-carte :
-        <form action="{{ path('cards_search') }}" method="POST" class="w3-show-inline-block">
-            <input type="text" name="search_text" size="10" /><input type="submit" value="OK">
-        </form>
-        <br />
+        {{ render(controller(
+            'App\\Controller\\CardController::quickSearchForm'
+        )) }}
+
         <em class="w3-small">Le code-carte se trouve en bas &agrave; droite des cartes (Ex : 4R19)</em>
         {% if withSearch %}
             <br /><br /><a href="{{ path('cards_advanced_search') }}">Recherche avancée</a>

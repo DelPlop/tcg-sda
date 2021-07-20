@@ -5,3 +5,14 @@ general:
 
 form:
     pseudo: Pseudo
+    password: Mot de passe
+    login: Connexion
+    ok: OK
+    errors:
+        not_blank:
+            login: Veuillez indiquer votre pseudo
+            password:
+
+card_search:
+    errors:
+        not_blank: Veuillez indiquer votre recherche

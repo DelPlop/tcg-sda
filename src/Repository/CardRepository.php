@@ -84,4 +84,23 @@ class CardRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function searchCards(string $searchTerm): array
+    {
+        $terms = explode(' ', $searchTerm);
+        $qb = $this
+            ->createQueryBuilder('c');
+        foreach ($terms as $term) {
+            $qb->orWhere('c.code like :code')
+                ->orWhere('c.localName like :term')
+                ->orWhere('c.originalName like :term')
+                ->setParameter('code', $term)
+                ->setParameter('term', '%'.$term.'%');
+        }
+        $qb
+            ->addOrderBy('c.edition', 'ASC')
+            ->addOrderBy('c.position', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

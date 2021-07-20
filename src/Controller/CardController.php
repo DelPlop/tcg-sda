@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Card;
+use App\Form\CardQuickSearchFormType;
 use App\Repository\CardRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Security;
+use Twig\Environment;
 
 class CardController extends AbstractController
 {
@@ -44,9 +47,47 @@ class CardController extends AbstractController
         return $this->redirectToRoute('card_show', ['card' => $card->getId()]);
     }
 
-    public function search(): Response
+    public function quickSearchForm(Environment $twig): Response
     {
-        return new Response();
+        $form = $this->createForm(CardQuickSearchFormType::class, [], [
+            'action' => $this->generateUrl('cards_search'),
+            'attr' => [
+                'id' => 'cards_search',
+                'class' => 'w3-show-inline-block'
+            ]
+        ]);
+
+        return new Response($twig->render('card/quick-search-form.html.twig', [
+            'form' => $form->createView()
+        ]));
+    }
+
+    public function search(Request $request, CardRepository $cardRepository): Response
+    {
+        $form = $this->createForm(CardQuickSearchFormType::class, [], [
+            'action' => $this->generateUrl('cards_search'),
+            'attr' => [
+                'id' => 'cards_search',
+                'class' => 'w3-show-inline-block'
+            ]
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $cards = $cardRepository->searchCards($data['search']);
+
+            if (count($cards) == 1) {
+                return $this->redirectToRoute('card_show', ['card' => $cards[0]->getId()]);
+            } else {
+                return $this->render('card/list.html.twig', [
+                    'activePage' => 'search',
+                    'cards' => $cards
+                ]);
+            }
+        } else {
+            return $this->redirectToRoute('index');
+        }
     }
 
     public function advancedSearch(): Response
