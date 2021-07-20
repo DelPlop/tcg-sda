@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\ApplicationUser;
+use App\Repository\UserOwnedCardRepository;
+use App\Repository\UserWantedCardRepository;
 use DelPlop\UserBundle\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,21 +27,21 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function ownedCards(ApplicationUser $user): Response
+    public function ownedCards(ApplicationUser $user, UserOwnedCardRepository $repository): Response
     {
         return $this->render('card/owned.html.twig', [
             'activePage' => 'lists',
             'user' => $user,
-            'cards' => $user->getUserOwnedCards()
+            'cards' => $repository->findCards($user)
         ]);
     }
 
-    public function wantedCards(ApplicationUser $user): Response
+    public function wantedCards(ApplicationUser $user, UserWantedCardRepository $repository): Response
     {
         return $this->render('card/wanted.html.twig', [
             'activePage' => 'lists',
             'user' => $user,
-            'cards' => $user->getUserWantedCards()
+            'cards' => $repository->findCards($user)
         ]);
     }
 
