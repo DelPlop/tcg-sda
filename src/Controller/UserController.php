@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\ApplicationUser;
+use App\Form\UserContactFormType;
 use App\Form\UserQuickLoginFormType;
 use App\Repository\UserOwnedCardRepository;
 use App\Repository\UserWantedCardRepository;
 use DelPlop\UserBundle\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
 class UserController extends AbstractController
@@ -62,8 +65,47 @@ class UserController extends AbstractController
         ]));
     }
 
-    public function contact(ApplicationUser $user): Response
+    public function contact(ApplicationUser $user, Environment $twig, Request $request, Security $security): Response
     {
-        return new Response();
+        $form = $this->createForm(UserContactFormType::class, [], [
+            'action' => $this->generateUrl('user_contact', ['user' => $user->getId()]),
+            'attr' => [
+                'id' => 'contact_form',
+            ]
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $subject = "Quelqu'un vous contacte depuis Le TCG du Seigneur des Anneaux";
+            $dest = $user->getLogin().' <'.$user->getEmail().'>';
+            $from = $security->getUser()->getLogin().' <'.$security->getUser()->getEmail().'>';
+
+            $content = "Bonjour ".$user->getLogin().",\n";
+            $content .= $security->getUser()->getLogin()." vous a envoyé un message depuis <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">Le TCG du Seigneur des Anneaux</a>.\n\n";
+            $content .= "Voici son message :\n<pre>" . $data['message'] . "</pre>\n\n";
+            $content .= "Pour lui répondre, vous pouvez écrire à <a href=\"mailto:".$security->getUser()->getEmail()."\">".$security->getUser()->getEmail()."</a>.\n\n";
+            $content .= "Bonne journée et à bientôt sur <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">Le TCG du Seigneur des Anneaux</a> !";
+
+            $headers = array(
+                'From'         => $from,
+                'Reply-To'     => $from,
+                'Content-type' => 'text/html; charset=utf-8'
+            );
+
+            mail($dest, $subject, nl2br($content), $headers);
+
+            return new Response($twig->render('user/contact.html.twig', [
+                'sent' => true,
+                'activePage' => 'users'
+            ]));
+        }
+
+        return new Response($twig->render('user/contact.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user,
+            'activePage' => 'users'
+        ]));
     }
 }

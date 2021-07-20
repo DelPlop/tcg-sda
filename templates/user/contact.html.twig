@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Contacter un membre de la communauté</h2>
+            <p>
+                {% if sent %}
+                    Votre message a bien été envoyé.
+                {% else %}
+                    {% if user.id is not same as(app.user.id) %}
+                        Bonjour {{ app.user.login }} !<br /><br />
+                        Vous souhaitez contacter <label for="message">{{ user.login }}</label> ?<br />
+                        Ce membre recevra votre message par email et votre propre email lui sera communiqué.
+                        <br /><br />
+
+                        {{ form_start(form) }}
+                        Saisissez votre message ci-dessous :<br />
+                        {{ form_widget(form.message) }}<br />
+                        {{ form_widget(form.valid_form) }}
+                        {{ form_end(form) }}
+                    {% else %}
+                        Bonjour {{ app.user.login }} !<br /><br />
+                        Vous souhaitez vous contacter vous-même ?<br />
+                        L'anneau unique semble vous avoir corrompu ;)
+                    {% endif %}
+                {% endif %}
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}

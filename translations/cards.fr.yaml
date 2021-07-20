@@ -8,10 +8,12 @@ form:
     password: Mot de passe
     login: Connexion
     ok: OK
+    send: Envoyer
     errors:
         not_blank:
             login: Veuillez indiquer votre pseudo
             password: Veuillez indiquer votre mot de passe
+            message: Veuillez indiquer votre message
 
 card_search:
     errors:
