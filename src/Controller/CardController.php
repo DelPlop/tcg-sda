@@ -6,6 +6,7 @@ use App\Entity\Card;
 use App\Entity\UserOwnedCard;
 use App\Entity\UserWantedCard;
 use App\Form\CardQuickSearchFormType;
+use App\Form\CardSearchFormType;
 use App\Repository\CardRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -119,10 +120,24 @@ class CardController extends AbstractController
         }
     }
 
-    public function advancedSearch(): Response
+    public function advancedSearch(Request $request): Response
     {
-        return $this->render('card/advancedSearch.html.twig', [
-            'activePage' => 'search'
+        $card = new Card();
+        $form = $this->createForm(CardSearchFormType::class, $card, [
+            'action' => $this->generateUrl('cards_advanced_search'),
+            'attr' => [
+                'id' => 'cards_advanced_search'
+            ]
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+        }
+
+        return $this->render('card/advanced-search.html.twig', [
+            'activePage' => 'search',
+            'form' => $form->createView()
         ]);
     }
 

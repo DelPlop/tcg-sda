@@ -10,6 +10,7 @@ form:
     ok: OK
     send: Envoyer
     edit: Modifier
+    search: Lancer la recherche
     errors:
         not_blank:
             login: Veuillez indiquer votre pseudo
@@ -20,3 +21,33 @@ form:
 card_search:
     errors:
         not_blank: Veuillez indiquer votre recherche
+
+card:
+    name: Nom de la carte
+    code: Code-carte
+    rarity: Rareté
+    culture: Culture
+    edition: Edition
+    type: Type
+    subtype: Sous-type
+    phase: Phase
+    signet: Sceau
+    cost: Coût
+    strength: Force
+    vitality: Vitalité
+    resistance: Résistance
+    site_number: N° de site
+    shadow_number: N° d'ombre
+    text: Texte de la carte
+    quote: Citation de la carte
+    tag: Mot-clé
+    unique: Unique ?
+    ring_bearer: Peut porter l'anneau ?
+    tengwar: Existe en Tengwar ?
+    rf: Existe en Rare Foil ?
+    rfa: Existe en Rare Foil Alternative ?
+    options:
+        yes: oui
+        no: non
+
+None: indifférent

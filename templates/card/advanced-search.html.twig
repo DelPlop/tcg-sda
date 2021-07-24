@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'cards' %}
+
+{% block title %}Recherche avancée{% endblock %}
+
+{% block body %}
+    <div class="w3-row w3-padding-64">
+        <div class="w3-twothird w3-container">
+            <h2 class="w3-text-amber">Recherche avancée</h2>
+            <p>
+                Bienvenue dans la recherche avancée de cartes !<br /><br />
+                Vous pouvez sélectionner ici les différents critères selon lesquels vous souhaitez chercher vos cartes.<br />
+
+                {{ form_start(form) }}
+                <label class="inline w3-right-align" for="card_search_form_name">{{ ('card.name')|trans }}</label> {{ form_widget(form.name) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_code">{{ ('card.code')|trans }}</label> {{ form_widget(form.code) }}<br />
+                <label class="inline w3-right-align">{{ ('card.edition')|trans }}</label> {{ form_widget(form.edition) }}<br />
+                <label class="inline w3-right-align">{{ ('card.rarity')|trans }}</label> {{ form_widget(form.rarity) }}<br />
+                <label class="inline w3-right-align">{{ ('card.culture')|trans }}</label> {{ form_widget(form.culture) }}<br />
+                <label class="inline w3-right-align">{{ ('card.type')|trans }}</label> {{ form_widget(form.type) }}<br />
+                <label class="inline w3-right-align">{{ ('card.subtype')|trans }}</label> {{ form_widget(form.subtype) }}<br />
+                <label class="inline w3-right-align">{{ ('card.phase')|trans }}</label> {{ form_widget(form.phases) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_cost">{{ ('card.cost')|trans }}</label> {{ form_widget(form.cost) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_strength">{{ ('card.strength')|trans }}</label> {{ form_widget(form.strength) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_vitality">{{ ('card.vitality')|trans }}</label> {{ form_widget(form.vitality) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_resistance">{{ ('card.resistance')|trans }}</label> {{ form_widget(form.resistance) }}<br />
+                <label class="inline w3-right-align">{{ ('card.signet')|trans }}</label> {{ form_widget(form.signet) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_site_number">{{ ('card.site_number')|trans }}</label> {{ form_widget(form.site_number) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_shadow_number">{{ ('card.shadow_number')|trans }}</label> {{ form_widget(form.shadow_number) }}<br />
+                <label class="inline w3-right-align">{{ ('card.unique')|trans }}</label> {{ form_widget(form.isUnique) }}<br />
+                <label class="inline w3-right-align">{{ ('card.ring_bearer')|trans }}</label> {{ form_widget(form.isRingBearer) }}<br />
+                <label class="inline w3-right-align">{{ ('card.tengwar')|trans }}</label> {{ form_widget(form.isTengwar) }}<br />
+                <label class="inline w3-right-align">{{ ('card.rf')|trans }}</label> {{ form_widget(form.isRf) }}<br />
+                <label class="inline w3-right-align">{{ ('card.rfa')|trans }}</label> {{ form_widget(form.isRfa) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_text">{{ ('card.text')|trans }}</label> {{ form_widget(form.text) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_quote">{{ ('card.quote')|trans }}</label> {{ form_widget(form.quote) }}<br />
+                <label class="inline w3-right-align" for="card_search_form_tag">{{ ('card.tag')|trans }}</label> {{ form_widget(form.tag) }}<br />
+                {{ form_row(form.valid_search) }}
+                {{ form_end(form) }}
+            </p>
+        </div>
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
+        )) }}
+    </div>
+{% endblock %}
