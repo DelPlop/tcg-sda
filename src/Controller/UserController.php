@@ -8,9 +8,11 @@ use App\Form\UserQuickLoginFormType;
 use App\Repository\UserOwnedCardRepository;
 use App\Repository\UserWantedCardRepository;
 use DelPlop\UserBundle\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Security\Core\Security;
 use Twig\Environment;
 
@@ -109,7 +111,7 @@ class UserController extends AbstractController
         ]));
     }
 
-    public function exportOwnedCards(ApplicationUser $user)
+    public function exportOwnedCards(ApplicationUser $user): Response
     {
         $filename = 'cartes_'.$this->cleanEntry($user->getLogin(), true).'.csv';
 
@@ -132,10 +134,10 @@ class UserController extends AbstractController
             ];
         }
 
-        $this->exportFile($filename, $head, $cards);
+        return $this->exportFile($filename, $head, $cards);
     }
 
-    public function exportWantedCards(ApplicationUser $user)
+    public function exportWantedCards(ApplicationUser $user): Response
     {
         $filename = 'recherches_'.$this->cleanEntry($user->getLogin(), true).'.csv';
 
@@ -156,28 +158,31 @@ class UserController extends AbstractController
             ];
         }
 
-        $this->exportFile($filename, $head, $cards);
+        return $this->exportFile($filename, $head, $cards);
     }
 
-    protected function exportFile(string $filename, array $head, array $cards)
+    protected function exportFile(string $filename, array $head, array $cards): StreamedResponse
     {
-        $filepath = './exports/'.$filename;
-        $handle = fopen($filepath, 'w');
+        $response = new StreamedResponse();
 
-        fputcsv($handle, $head, ';');
+        $response->setCallback(function () use ($cards, $head, $filename) {
+            $handle = fopen('php://output', 'w+');
 
-        foreach ($cards as $card) {
-            fputcsv($handle, $card, ';');
-        }
-        fclose($handle);
+            fputcsv($handle, $head, ';');
+            foreach ($cards as $card) {
+                fputcsv($handle, $card, ';');
+            }
+            fclose($handle);
+        });
 
-        header('Content-Description: File Transfer');
-        header("Content-Type: application/csv") ;
-        header("Content-Disposition: attachment; filename=".$filename);
-        header("Pragma: no-cache");
-        header("Expires: 0");
+        $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            $filename,
+        );
+        $response->headers->set('Content-Disposition', $disposition);
 
-        readfile($filepath);
+        return $response;
     }
 
     protected function cleanEntry(string $text = '', bool $replaceSpace = false): string
