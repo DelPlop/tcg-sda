@@ -145,7 +145,8 @@ class UserController extends AbstractController
         return new Response($twig->render('user/contact.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
-            'activePage' => 'users'
+            'activePage' => 'users',
+            'sent' => false
         ]));
     }
 
