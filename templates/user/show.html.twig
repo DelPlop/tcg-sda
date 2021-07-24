@@ -24,8 +24,8 @@
             <p>
                 Vous pouvez modifier vos informations ci-dessous :<br />
                 {{ form_start(form) }}
-                    <label class="inline" for="password">Mot de passe</label> {{ form_widget(form.plainPassword) }}<br />
-                    <label class="inline" for="email">E-mail</label> {{ form_widget(form.email) }}<br />
+                    <label class="inline" for="user_edit_form_plainPassword">Mot de passe</label> {{ form_widget(form.plainPassword) }}<br />
+                    <label class="inline" for="user_edit_form_email">E-mail</label> {{ form_widget(form.email) }}<br />
                     {{ form_widget(form.valid_form) }}
                 {{ form_end(form) }}
             </p>
