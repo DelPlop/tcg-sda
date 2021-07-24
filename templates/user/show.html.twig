@@ -23,21 +23,11 @@
             <h2 class="w3-text-amber">Mes informations</h2>
             <p>
                 Vous pouvez modifier vos informations ci-dessous :<br />
-                <form action="" name="form_register" id="form_register" method="post">
-                    <label class="inline" for="mdp">Mot de passe</label>
-                    <input class="big-input" type="password" name="mdp" id="mdp" /><br />
-
-                    <label class="inline" for="password_confirm">Confirmation du mot de passe</label>
-                    <input class="big-input" type="password" name="password_confirm" id="password_confirm" /><br />
-
-                    <label class="inline" for="email">Email</label>
-                    <input class="big-input" type="text" name="email" id="email" value="" /><br />
-
-                    <label class="inline" for="email_confirm">Confirmation de l'email</label>
-                    <input class="big-input" type="text" name="email_confirm" id="email_confirm" /><br />
-
-                    <input type="submit" name="valid_login" id="valid_login" value="Modifier" />
-                </form>
+                {{ form_start(form) }}
+                    <label class="inline" for="password">Mot de passe</label> {{ form_widget(form.plainPassword) }}<br />
+                    <label class="inline" for="email">E-mail</label> {{ form_widget(form.email) }}<br />
+                    {{ form_widget(form.valid_form) }}
+                {{ form_end(form) }}
             </p>
         </div>
 

@@ -9,10 +9,12 @@ form:
     login: Connexion
     ok: OK
     send: Envoyer
+    edit: Modifier
     errors:
         not_blank:
             login: Veuillez indiquer votre pseudo
             password: Veuillez indiquer votre mot de passe
+            email: Veuillez indiquer votre e-mail
             message: Veuillez indiquer votre message
 
 card_search:

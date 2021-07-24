@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ApplicationUser;
 use App\Form\UserContactFormType;
+use App\Form\UserEditFormType;
 use App\Form\UserQuickLoginFormType;
 use App\Repository\UserOwnedCardRepository;
 use App\Repository\UserWantedCardRepository;
@@ -13,7 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 class UserController extends AbstractController
@@ -28,10 +31,45 @@ class UserController extends AbstractController
 
     public function show(ApplicationUser $user): Response
     {
+        $form = $this->createForm(UserEditFormType::class, $user, [
+            'action' => $this->generateUrl('user_edit', ['user' => $user->getId()])
+        ]);
+
         return $this->render('user/show.html.twig', [
             'activePage' => 'lists',
+            'form' => $form->createView(),
             'user' => $user
         ]);
+    }
+
+    public function edit(ApplicationUser $user, Request $request, Security $security, UserPasswordHasherInterface $passwordEncoder): Response
+    {
+        $form = $this->createForm(UserEditFormType::class, $user, [
+            'action' => $this->generateUrl('user_edit', ['user' => $user->getId()])
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            if ($security->isGranted('IS_AUTHENTICATED_FULLY')
+                && $security->getUser() instanceof UserInterface
+                && $security->getUser() === $user
+            ) {
+                $user->setPassword(
+                    $passwordEncoder->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+        }
+
+        return $this->redirectToRoute('user_show', ['user' => $user->getId()]);
     }
 
     public function ownedCards(ApplicationUser $user, UserOwnedCardRepository $repository): Response
