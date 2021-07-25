@@ -12,7 +12,7 @@ class EditionController extends AbstractController
     public function editions(EditionRepository $editionRepository, bool $onlyVisible = true): Response
     {
         return $this->render('edition/left.html.twig', [
-            'editions' => $editionRepository->findBy([], ['editionNumber' => 'asc'])
+            'editions' => $editionRepository->findBy(['isDisplayable' => true], ['editionNumber' => 'asc'])
         ]);
     }
 
@@ -29,7 +29,7 @@ class EditionController extends AbstractController
     {
         return $this->render('edition/list.html.twig', [
             'activePage' => 'editions',
-            'editions' => $editionRepository->findBy([], ['editionNumber' => 'asc'])
+            'editions' => $editionRepository->findBy(['isDisplayable' => true], ['editionNumber' => 'asc'])
         ]);
     }
 }
