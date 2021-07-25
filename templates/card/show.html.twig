@@ -29,6 +29,9 @@
 
             <p>
                 <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" alt="{{ card.localName ?: card.originalName }}" />
+                {% if card.hasLocalImage %}
+                    <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" alt="{{ card.localName ?: card.originalName }}" />
+                {% endif %}
                 <br /><br />
 
                 <strong>Code-carte :</strong> {{ card.code }}<br />

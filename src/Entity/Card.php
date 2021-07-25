@@ -95,7 +95,7 @@ class Card
     private $isAuthorized;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $localText;
 
@@ -105,7 +105,7 @@ class Card
     private $localQuote;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $originalText;
 
@@ -128,6 +128,11 @@ class Card
      * @ORM\Column(type="boolean")
      */
     private $isRfa;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $hasLocalImage;
 
     /**
      * @ORM\Column(type="integer")
@@ -660,5 +665,17 @@ class Card
         return new ArrayCollection(
             array_merge($this->reverseMultiCards->toArray(), $this->getMultiCards()->toArray())
         );
+    }
+
+    public function getHasLocalImage(): ?bool
+    {
+        return $this->hasLocalImage;
+    }
+
+    public function setHasLocalImage(bool $hasLocalImage): self
+    {
+        $this->hasLocalImage = $hasLocalImage;
+
+        return $this;
     }
 }
