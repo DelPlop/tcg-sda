@@ -59,6 +59,7 @@ fellowship:
     are_your_sure:
         remove_from_owned: Are you sure you want to remove this card from your list ?
         remove_from_wanted: Are you sure you want to remove this card from your searches ?
+    join_explanation: To use lists, you must register.<br />Then you'll be able to manage the cards you own or search, show them to your friends. You'll even be able to export your lists as CSV to bring them everywhere whith you!
 
 form:
     pseudo: Login

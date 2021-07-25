@@ -8,9 +8,7 @@
         <div class="w3-twothird w3-container">
             <h2 class="w3-text-amber">{{ ('general.join_fellowship'|trans({}, 'cards')) }}</h2>
             <p>
-                Pour utiliser les fonctionnalités de liste de cartes personnalisées, vous devez vous inscrire.<br />
-                Vous pourrez ainsi créer vos listes de cartes possédées et/ou recherchées, les présenter à vos amis.
-                Vous pourrez même les exporter en CSV pour les emporter avec vous !
+                {{ ('fellowship.join_explanation'|trans({}, 'cards'))|raw }}
 
                 {% for flashError in app.flashes('verify_email_error') %}
                     <div class="alert alert-danger" role="alert">{{ flashError }}</div>
@@ -44,6 +42,10 @@
 
         {{ render(controller(
             'App\\Controller\\StaticController::topRight'
+        )) }}
+
+        {{ render(controller(
+            'App\\Controller\\StaticController::bottomRight'
         )) }}
     </div>
 {% endblock %}

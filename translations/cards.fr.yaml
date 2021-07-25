@@ -59,6 +59,7 @@ fellowship:
     are_your_sure:
         remove_from_owned: Etes-vous sûr de vouloir retirer cette carte de votre liste ?
         remove_from_wanted: Etes-vous sûr de vouloir retirer cette carte de vos recherches ?
+    join_explanation: Pour utiliser les fonctionnalités de liste de cartes personnalisées, vous devez vous inscrire.<br />Vous pourrez ainsi créer vos listes de cartes possédées et/ou recherchées, les présenter à vos amis. Vous pourrez même les exporter en CSV pour les emporter avec vous !
 
 form:
     pseudo: Pseudonyme
