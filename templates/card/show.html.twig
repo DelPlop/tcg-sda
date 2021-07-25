@@ -4,12 +4,12 @@
 {% set imgRoot = 'https://cdn.tcg-seigneur-des-anneaux.fr/' %}
 {% set edNumber = "%'02.2s"|format(card.edition.editionNumber) %}
 
-{% block title %}{{ ('card.details'|trans({'%cardName%': card.localName ?: card.originalName})) }} {{ ('card.from_edition'|trans({'%editionName%': card.edition.localName ?: card.edition.originalName})) }}{% endblock %}
+{% block title %}{{ ('card.details'|trans({'%cardName%': card.name})) }} {{ ('card.from_edition'|trans({'%editionName%': card.edition.name})) }}{% endblock %}
 
 {% block body %}
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('card.details'|trans({'%cardName%': card.localName ?: card.originalName})) }}</h2>
+            <h2 class="w3-text-amber">{{ ('card.details'|trans({'%cardName%': card.name})) }}</h2>
 
             {% if first is not same as(null) %}
                 <a href="{{ path('card_show', {card: first.id}) }}" title="{{ ('edition.first_card'|trans) }}" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
@@ -28,40 +28,36 @@
             {% endif %}
 
             <p>
-                <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_english'|trans) }}" alt="{{ card.localName ?: card.originalName }}" />
-                {% if card.hasLocalImage %}
-                    <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_french'|trans) }}" alt="{{ card.localName ?: card.originalName }}" />
+                <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_english'|trans) }}" alt="{{ card.name }}" />
+                {% if card.hasLocalImage and locale is same as ('fr') %}
+                    <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_french'|trans) }}" alt="{{ card.name }}" />
                 {% endif %}
                 <br /><br />
 
                 <strong>{{ ('card.code'|trans) }} :</strong> {{ card.code }}<br />
 
-                <strong>{{ ('card.original_name'|trans) }} :</strong> {{ card.originalName }}<br />
+                <strong>{{ ('card.name'|trans) }} :</strong> {{ card.name }}<br />
 
-                {% if card.localName is not same as(null) %}
-                    <strong>{{ ('card.local_name'|trans) }} :</strong> {{ card.localName }}<br />
-                {% endif %}
-
-                <strong>{{ ('card.edition'|trans) }} :</strong> <a href="{{ path('edition_cards', {edition: card.edition.id}) }}">{{ card.edition.localName ?: card.edition.originalName }}</a><br />
+                <strong>{{ ('card.edition'|trans) }} :</strong> <a href="{{ path('edition_cards', {edition: card.edition.id}) }}">{{ card.edition.name }}</a><br />
 
                 <strong>{{ ('card.rarity'|trans) }} :</strong> {{ card.rarity.name }}<br />
 
                 {% if card.culture is not same as(null) %}
-                    <strong>{{ ('card.culture'|trans) }} :</strong> {{ card.culture.localName ?: card.culture.originalName }}<br />
+                    <strong>{{ ('card.culture'|trans) }} :</strong> {{ card.culture.name }}<br />
                 {% endif %}
 
-                <strong>{{ ('card.type'|trans) }} :</strong> {{ card.type.localName ?: card.type.originalName }}<br />
+                <strong>{{ ('card.type'|trans) }} :</strong> {{ card.type.name }}<br />
 
                 {% if card.subtype is not same as(null) %}
-                    <strong>{{ ('card.subtype'|trans) }} :</strong> {{ card.subtype.localName ?: card.subtype.originalName }}<br />
+                    <strong>{{ ('card.subtype'|trans) }} :</strong> {{ card.subtype.name }}<br />
                 {% endif %}
 
                 {% if card.phases|length > 0 %}
-                    <strong>{{ ('card.phases'|trans) }} :</strong> {% for phase in card.phases %}{% if not(loop.first) %}, {% endif %}{{ phase.localName ?: phase.originalName }}{% endfor %}<br />
+                    <strong>{{ ('card.phases'|trans) }} :</strong> {% for phase in card.phases %}{% if not(loop.first) %}, {% endif %}{{ phase.name }}{% endfor %}<br />
                 {% endif %}
 
                 {% if card.tags|length > 0 %}
-                    <strong>{{ ('card.tags'|trans) }} :</strong> {% for tag in card.tags %}{% if not(loop.first) %}, {% endif %}{{ tag.localName ?: tag.originalName }}{% endfor %}<br />
+                    <strong>{{ ('card.tags'|trans) }} :</strong> {% for tag in card.tags %}{% if not(loop.first) %}, {% endif %}{{ tag.name }}{% endfor %}<br />
                 {% endif %}
 
                 <br />
@@ -106,15 +102,14 @@
                 {% endif %}
                 <br />
 
-                {% if card.localText is not same as(null) or card.originalText is not same as(null) %}
-                    <strong>{{ ('card.text'|trans) }} :</strong> {{ (card.localText ?: card.originalText)|nl2br }}<br />
+                {% if card.text is not same as(null) %}
+                    <strong>{{ ('card.text'|trans) }} :</strong> {{ (card.text)|nl2br }}<br />
                 {% endif %}
 
-                {% if card.localQuote is not same as(null) or card.originalQuote is not same as(null) %}
-                    <strong>{{ ('card.quote'|trans) }} :</strong> <em>"{{ (card.localQuote ?: card.originalQuote)|nl2br }}"</em><br />
+                {% if card.quote is not same as(null) %}
+                    <strong>{{ ('card.quote'|trans) }} :</strong> <em>"{{ (card.quote)|nl2br }}"</em><br />
                 {% endif %}
-                {% if card.localText is not same as(null) or card.originalText is not same as(null)
-                or card.localQuote is not same as(null) or card.originalQuote is not same as(null) %}
+                {% if card.text is not same as(null) or card.quote is not same as(null) %}
                     <br />
                 {% endif %}
 
@@ -135,7 +130,6 @@
 
                 {% if card.getAlternativeCards()|length > 0 %}
                     {{ ('card.num_of_editions'|trans({editions: card.getAlternativeCards()|length})) }}
-{#                    Cette carte existe aussi dans {% if card.getAlternativeCards()|length == 1 %}une autre édition{% else %}d'autres éditions{% endif %} :#}
                     {% for otherCard in card.getAlternativeCards() %}{% if not(loop.first) %}, {% endif %}<a href="{{ path('card_show', { card: otherCard.id }) }}">{{ otherCard.code }}</a>{% endfor %}
                     <br /><br />
                 {% endif %}

@@ -17,7 +17,7 @@ use Twig\Environment;
 
 class CardController extends AbstractController
 {
-    public function show(Card $card, CardRepository $cardRepository): Response
+    public function show(Card $card, CardRepository $cardRepository, Request $request): Response
     {
         return $this->render('card/show.html.twig', [
             'activePage' => 'editions',
@@ -25,7 +25,8 @@ class CardController extends AbstractController
             'first' => $cardRepository->findFirstCard($card),
             'prev' => $cardRepository->findPreviousCard($card) ?: $cardRepository->findFirstCard($card),
             'next' => $cardRepository->findNextCard($card) ?: $cardRepository->findLastCard($card),
-            'last' => $cardRepository->findLastCard($card)
+            'last' => $cardRepository->findLastCard($card),
+            'locale' => $request->getLocale()
         ]);
     }
 
