@@ -34,13 +34,19 @@ class CardCrudController extends AbstractCrudController
         yield AssociationField::new('rarity');
         yield IntegerField::new('position');
         yield TextField::new('code');
-        yield TextField::new('localName');
         yield TextField::new('originalName');
+        yield TextField::new('localName');
         yield AssociationField::new('culture');
         yield AssociationField::new('type');
-        if (Crud::PAGE_DETAIL === $pageName) {
+        if (Crud::PAGE_DETAIL === $pageName || Crud::PAGE_EDIT === $pageName) {
             yield AssociationField::new('subtype');
+        }
+        if (Crud::PAGE_DETAIL === $pageName) {
             yield ArrayField::new('phases');
+        } elseif (Crud::PAGE_EDIT === $pageName) {
+            yield AssociationField::new('phases');
+        }
+        if (Crud::PAGE_DETAIL === $pageName || Crud::PAGE_EDIT === $pageName) {
             yield IntegerField::new('cost');
             yield IntegerField::new('strength');
             yield TextField::new('strengthModifier');
@@ -51,17 +57,30 @@ class CardCrudController extends AbstractCrudController
             yield AssociationField::new('signet');
             yield IntegerField::new('siteNumber');
             yield IntegerField::new('shadowNumber');
-            yield TextField::new('localText');
-            yield TextField::new('localQuote');
             yield TextField::new('originalText');
             yield TextField::new('originalQuote');
+            yield TextField::new('localText');
+            yield TextField::new('localQuote');
+        }
+        if (Crud::PAGE_DETAIL === $pageName) {
             yield ArrayField::new('tags');
+        } elseif (Crud::PAGE_EDIT === $pageName) {
+            yield AssociationField::new('tags');
+        }
+        if (Crud::PAGE_DETAIL === $pageName || Crud::PAGE_EDIT === $pageName) {
             yield BooleanField::new('isUnique');
             yield BooleanField::new('isRingBearer');
             yield BooleanField::new('isTengwar');
             yield BooleanField::new('isRf');
             yield BooleanField::new('isRfa');
+            yield BooleanField::new('hasLocalImage');
+        }
+        if (Crud::PAGE_DETAIL === $pageName) {
             yield ArrayField::new('multiCards');
+        } elseif (Crud::PAGE_EDIT === $pageName) {
+            yield AssociationField::new('multiCards');
+        }
+        if (Crud::PAGE_DETAIL === $pageName || Crud::PAGE_EDIT === $pageName) {
             yield BooleanField::new('isAuthorized');
             yield BooleanField::new('isDisplayable');
         }
