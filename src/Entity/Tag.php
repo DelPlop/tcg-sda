@@ -6,11 +6,13 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass=TagRepository::class)
  */
-class Tag
+class Tag implements Translatable
 {
     /**
      * @ORM\Id
@@ -20,14 +22,15 @@ class Tag
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $localName;
-
-    /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
-    private $originalName;
+    private $name;
+
+    /**
+     * @Gedmo\Locale
+     */
+    private $locale;
 
     /**
      * @ORM\ManyToMany(targetEntity=Card::class, mappedBy="tags")
@@ -39,9 +42,14 @@ class Tag
         $this->cards = new ArrayCollection();
     }
 
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
     public function __toString(): string
     {
-        return $this->getLocalName() ?: $this->getOriginalName();
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -49,26 +57,14 @@ class Tag
         return $this->id;
     }
 
-    public function getLocalName(): ?string
+    public function getName(): ?string
     {
-        return $this->localName;
+        return $this->name;
     }
 
-    public function setLocalName(?string $localName): self
+    public function setName(string $name): self
     {
-        $this->localName = $localName;
-
-        return $this;
-    }
-
-    public function getOriginalName(): ?string
-    {
-        return $this->originalName;
-    }
-
-    public function setOriginalName(string $originalName): self
-    {
-        $this->originalName = $originalName;
+        $this->name = $name;
 
         return $this;
     }

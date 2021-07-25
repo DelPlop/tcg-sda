@@ -6,11 +6,13 @@ use App\Repository\RarityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass=RarityRepository::class)
  */
-class Rarity
+class Rarity implements Translatable
 {
     /**
      * @ORM\Id
@@ -19,9 +21,15 @@ class Rarity
     private $id;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @Gedmo\Locale
+     */
+    private $locale;
 
     /**
      * @ORM\Column(type="integer")
@@ -36,6 +44,11 @@ class Rarity
     public function __construct()
     {
         $this->cards = new ArrayCollection();
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 
     public function __toString(): string

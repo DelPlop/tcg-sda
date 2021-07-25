@@ -92,12 +92,9 @@ class CardRepository extends ServiceEntityRepository
             ->createQueryBuilder('c');
         foreach ($terms as $term) {
             $qb->orWhere('c.code like :code')
-                ->orWhere('c.localName like :term')
-                ->orWhere('c.originalName like :term')
-                ->orWhere('c.localText like :term')
-                ->orWhere('c.originalText like :term')
-                ->orWhere('c.localQuote like :term')
-                ->orWhere('c.originalQuote like :term')
+                ->orWhere('c.name like :term')
+                ->orWhere('c.text like :term')
+                ->orWhere('c.quote like :term')
                 ->setParameter('code', $term)
                 ->setParameter('term', '%'.$term.'%');
         }
@@ -207,15 +204,15 @@ class CardRepository extends ServiceEntityRepository
                 ->setParameter('code', '%'.$criteria['code'].'%');
         }
         if (!empty($criteria['name'])) {
-            $qb->andWhere('c.localName like :name OR c.originalName like :name')
+            $qb->andWhere('c.name like :name')
                 ->setParameter('name', '%'.$criteria['name'].'%');
         }
         if (!empty($criteria['text'])) {
-            $qb->andWhere('c.localText like :text OR c.originalText like :text')
+            $qb->andWhere('c.text like :text')
                 ->setParameter('text', '%'.$criteria['text'].'%');
         }
         if (!empty($criteria['quote'])) {
-            $qb->andWhere('c.localQuote like :quote OR c.originalQuote like :quote')
+            $qb->andWhere('c.quote like :quote')
                 ->setParameter('quote', '%'.$criteria['quote'].'%');
         }
 

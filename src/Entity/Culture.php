@@ -6,11 +6,13 @@ use App\Repository\CultureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass=CultureRepository::class)
  */
-class Culture
+class Culture implements Translatable
 {
     /**
      * @ORM\Id
@@ -20,14 +22,15 @@ class Culture
     private $id;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
-    private $localName;
+    private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Gedmo\Locale
      */
-    private $originalName;
+    private $locale;
 
     /**
      * @ORM\Column(type="integer")
@@ -44,9 +47,14 @@ class Culture
         $this->cards = new ArrayCollection();
     }
 
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
     public function __toString(): string
     {
-        return $this->getLocalName() ?: $this->getOriginalName();
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -54,26 +62,14 @@ class Culture
         return $this->id;
     }
 
-    public function getLocalName(): ?string
+    public function getName(): ?string
     {
-        return $this->localName;
+        return $this->name;
     }
 
-    public function setLocalName(string $localName): self
+    public function setName(string $name): self
     {
-        $this->localName = $localName;
-
-        return $this;
-    }
-
-    public function getOriginalName(): ?string
-    {
-        return $this->originalName;
-    }
-
-    public function setOriginalName(?string $originalName): self
-    {
-        $this->originalName = $originalName;
+        $this->name = $name;
 
         return $this;
     }

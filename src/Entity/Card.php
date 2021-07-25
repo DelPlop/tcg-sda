@@ -6,11 +6,13 @@ use App\Repository\CardRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
 
 /**
  * @ORM\Entity(repositoryClass=CardRepository::class)
  */
-class Card
+class Card implements Translatable
 {
     /**
      * @ORM\Id
@@ -25,14 +27,15 @@ class Card
     private $code;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $localName;
-
-    /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255)
      */
-    private $originalName;
+    private $name;
+
+    /**
+     * @Gedmo\Locale
+     */
+    private $locale;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -95,24 +98,16 @@ class Card
     private $isAuthorized;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="text", nullable=true)
      */
-    private $localText;
+    private $text;
 
     /**
+     * @Gedmo\Translatable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $localQuote;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $originalText;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $originalQuote;
+    private $quote;
 
     /**
      * @ORM\Column(type="boolean")
@@ -207,9 +202,14 @@ class Card
         $this->reverseMultiCards = new ArrayCollection();
     }
 
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
+
     public function __toString(): string
     {
-        return $this->getLocalName() ?: $this->getOriginalName();
+        return $this->getName();
     }
 
     public function getId(): ?int
@@ -241,14 +241,14 @@ class Card
         return $this;
     }
 
-    public function getOriginalName(): ?string
+    public function getName(): ?string
     {
-        return $this->originalName;
+        return $this->name;
     }
 
-    public function setOriginalName(string $originalName): self
+    public function setName(string $name): self
     {
-        $this->originalName = $originalName;
+        $this->name = $name;
 
         return $this;
     }
@@ -421,26 +421,26 @@ class Card
         return $this;
     }
 
-    public function getOriginalText(): ?string
+    public function getText(): ?string
     {
-        return $this->originalText;
+        return $this->text;
     }
 
-    public function setOriginalText(?string $originalText): self
+    public function setText(?string $text): self
     {
-        $this->originalText = $originalText;
+        $this->text = $text;
 
         return $this;
     }
 
-    public function getOriginalQuote(): ?string
+    public function getQuote(): ?string
     {
-        return $this->originalQuote;
+        return $this->quote;
     }
 
-    public function setOriginalQuote(?string $originalQuote): self
+    public function setQuote(?string $quote): self
     {
-        $this->originalQuote = $originalQuote;
+        $this->quote = $quote;
 
         return $this;
     }

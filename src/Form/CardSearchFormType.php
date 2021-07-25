@@ -93,7 +93,7 @@ class CardSearchFormType extends AbstractType
                 'class' => Subtype::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('s')
-                        ->orderBy('s.localName', 'ASC');
+                        ->orderBy('s.name', 'ASC');
                 },
                 'required' => false,
                 'multiple' => true,
@@ -104,7 +104,7 @@ class CardSearchFormType extends AbstractType
                 'class' => Phase::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('p')
-                        ->orderBy('p.localName', 'ASC');
+                        ->orderBy('p.name', 'ASC');
                 },
                 'required' => false,
                 'multiple' => true,
@@ -218,7 +218,7 @@ class CardSearchFormType extends AbstractType
                 'class' => Tag::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('t')
-                        ->orderBy('t.originalName', 'ASC');
+                        ->orderBy('t.name', 'ASC');
                 },
                 'required' => false,
                 'multiple' => true,

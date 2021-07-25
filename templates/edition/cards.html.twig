@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'cards' %}
 
-{% block title %}{{ ('edition.edition_cards'|trans({'%edition%': edition.localName ?: edition.originalName})) }}{% endblock %}
+{% block title %}{{ ('edition.edition_cards'|trans({'%edition%': edition.name})) }}{% endblock %}
 
 {% block body %}
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('edition.edition_cards'|trans({'%edition%': edition.localName ?: edition.originalName})) }} ({{ cards|length }})</h2>
+            <h2 class="w3-text-amber">{{ ('edition.edition_cards'|trans({'%edition%': edition.name})) }} ({{ cards|length }})</h2>
             <p>
                 <table width="100%" border="1">
                     <tr>
                         <th>{{ ('card.code'|trans) }}</th>
-                        <th>{{ ('card.local_name'|trans) }}</th>
-                        <th>{{ ('card.original_name'|trans) }}</th>
+                        <th>{{ ('card.name'|trans) }}</th>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <th colspan="2">{{ ('fellowship.lists'|trans) }}</th>
                         {% endif %}
@@ -22,22 +21,9 @@
                     <tr>
                         <td>{{ card.code }}</td>
                         <td>
-                            {% if card.localName is not same as(null) %}
-                                <a href="{{ path('card_show', {card: card.id}) }}">
-                            {% endif %}
-                            {{ card.localName }}
-                            {% if card.localName is not same as(null) %}
-                                </a>
-                            {% endif %}
-                        </td>
-                        <td>
-                            {% if card.localName is same as(null) %}
-                                <a href="{{ path('card_show', {card: card.id}) }}">
-                            {% endif %}
-                            {{ card.originalName }}
-                            {% if card.localName is same as(null) %}
-                                </a>
-                            {% endif %}
+                            <a href="{{ path('card_show', {card: card.id}) }}">
+                                {{ card.name }}
+                            </a>
                         </td>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <td>
