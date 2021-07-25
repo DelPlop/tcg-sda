@@ -163,7 +163,7 @@ class UserController extends AbstractController
         ];
 
         $cards = [];
-        foreach ($user->getUserOwnedCards() as $card) {
+        foreach ($repository->findCards($user) as $card) {
             $cards[] = [
                 $card->getCard()->getLocalName() ?: $card->getCard()->getOriginalName(),
                 $card->getCard()->getCode(),
@@ -188,7 +188,7 @@ class UserController extends AbstractController
         ];
 
         $cards = [];
-        foreach ($user->getUserWantedCards() as $card) {
+        foreach ($repository->findCards($user) as $card) {
             $cards[] = [
                 $card->getCard()->getLocalName() ?: $card->getCard()->getOriginalName(),
                 $card->getCard()->getCode(),
