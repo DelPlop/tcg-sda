@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class TagCrudController extends AbstractCrudController
@@ -12,14 +13,10 @@ class TagCrudController extends AbstractCrudController
         return Tag::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud->setDefaultSort([
+            'name' => 'ASC'
+        ]);
     }
-    */
 }
