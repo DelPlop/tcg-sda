@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Environment;
 
 class UserController extends AbstractController
@@ -105,7 +106,7 @@ class UserController extends AbstractController
         ]));
     }
 
-    public function contact(ApplicationUser $user, Environment $twig, Request $request, Security $security): Response
+    public function contact(ApplicationUser $user, Environment $twig, Request $request, Security $security, TranslatorInterface $translator): Response
     {
         $form = $this->createForm(UserContactFormType::class, [], [
             'action' => $this->generateUrl('user_contact', ['user' => $user->getId()]),
@@ -118,15 +119,20 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $subject = "Quelqu'un vous contacte depuis Le TCG du Seigneur des Anneaux";
+            $subject = $translator->trans('contact.object', [], 'cards') . ' ' . $translator->trans('general.site_name', [], 'cards');
             $dest = $user->getLogin().' <'.$user->getEmail().'>';
             $from = $security->getUser()->getLogin().' <'.$security->getUser()->getEmail().'>';
 
-            $content = "Bonjour ".$user->getLogin().",\n";
-            $content .= $security->getUser()->getLogin()." vous a envoyé un message depuis <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">Le TCG du Seigneur des Anneaux</a>.\n\n";
-            $content .= "Voici son message :\n<pre>" . $this->cleanEntry($data['message']) . "</pre>\n\n";
-            $content .= "Pour lui répondre, vous pouvez écrire à <a href=\"mailto:".$security->getUser()->getEmail()."\">".$security->getUser()->getEmail()."</a>.\n\n";
-            $content .= "Bonne journée et à bientôt sur <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">Le TCG du Seigneur des Anneaux</a> !";
+            $content = $translator->trans('general.hello_user', ['%username%' => $user->getLogin()], 'cards') . "\n";
+            $content .= $translator->trans('contact.user_sent_you_from', ['%username%' => $security->getUser()->getLogin()], 'cards');
+            $content .= " <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">" . $translator->trans('general.site_name', [], 'cards') . "</a>.\n\n";
+            $content .= $translator->trans('contact.the_message', [], 'cards');
+            $content .= "\n<pre>" . $this->cleanEntry($data['message']) . "</pre>\n\n";
+            $content .= $translator->trans('contact.write_to', [], 'cards');
+            $content .= " <a href=\"mailto:".$security->getUser()->getEmail()."\">".$security->getUser()->getEmail()."</a>.\n\n";
+            $content .= $translator->trans('contact.signature', [], 'cards');
+            $content .= " <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">" . $translator->trans('general.site_name', [], 'cards') . "</a>";
+            dd($content);
 
             $headers = array(
                 'From'         => $from,
@@ -150,16 +156,16 @@ class UserController extends AbstractController
         ]));
     }
 
-    public function exportOwnedCards(ApplicationUser $user): Response
+    public function exportOwnedCards(ApplicationUser $user, UserOwnedCardRepository $repository, TranslatorInterface $translator): Response
     {
         $filename = 'cartes_'.$this->cleanEntry($user->getLogin(), true).'.csv';
 
         $head = [
-            'Nom',
-            'Code',
-            'Nombre d\'exemplaire',
-            'Version / langue',
-            'A l\'échange'
+            $translator->trans('card.name', [], 'cards'),
+            $translator->trans('card.code', [], 'cards'),
+            $translator->trans('fellowship.number', [], 'cards'),
+            $translator->trans('fellowship.version', [], 'cards'),
+            $translator->trans('fellowship.for_trade', [], 'cards')
         ];
 
         $cards = [];
@@ -169,22 +175,22 @@ class UserController extends AbstractController
                 $card->getCard()->getCode(),
                 $card->getNumber(),
                 $card->getLanguage(),
-                $card->getIsForTrade() ? 'oui' : 'non'
+                $card->getIsForTrade() ? $translator->trans('card.options.yes', [], 'cards') : $translator->trans('card.options.no', [], 'cards')
             ];
         }
 
         return $this->exportFile($filename, $head, $cards);
     }
 
-    public function exportWantedCards(ApplicationUser $user): Response
+    public function exportWantedCards(ApplicationUser $user, UserWantedCardRepository $repository, TranslatorInterface $translator): Response
     {
         $filename = 'recherches_'.$this->cleanEntry($user->getLogin(), true).'.csv';
 
         $head = [
-            'Nom',
-            'Code',
-            'Nombre d\'exemplaire',
-            'Version / langue'
+            $translator->trans('card.name', [], 'cards'),
+            $translator->trans('card.code', [], 'cards'),
+            $translator->trans('fellowship.number', [], 'cards'),
+            $translator->trans('fellowship.version', [], 'cards')
         ];
 
         $cards = [];

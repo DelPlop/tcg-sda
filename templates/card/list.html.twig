@@ -28,17 +28,17 @@
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <td>
                                     {% if app.user.ownedCards.contains(card) %}
-                                        {{ ('fellowship.i_own'|trans) }}
+                                        {{ ('fellowship.i_own_it'|trans) }}
                                     {% else %}
-                                        <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own'|trans) }}</a>
+                                        <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own_it'|trans) }}</a>
                                     {% endif %}
                                 </td>
 
                                 <td>
                                     {% if app.user.wantedCards.contains(card) %}
-                                        {{ ('fellowship.i_want'|trans) }}
+                                        {{ ('fellowship.i_want_it'|trans) }}
                                     {% else %}
-                                        <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want'|trans) }}</a>
+                                        <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want_it'|trans) }}</a>
                                     {% endif %}
                                 </td>
                             {% endif %}

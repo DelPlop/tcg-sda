@@ -7,8 +7,8 @@
         <div class="w3-twothird w3-container">
             <h2 class="w3-text-amber">{{ ('user.login'|trans) }}</h2>
             <p>
-                Bonjour !<br />
-                Veuillez vous connecter pour accéder aux fonctionnalités de listes personnalisées.
+                {{ ('general.hello'|trans({}, 'cards')) }}<br />
+                {{ ('general.please_login'|trans({}, 'cards')) }}
 
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
