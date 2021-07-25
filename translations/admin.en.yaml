@@ -1,0 +1,64 @@
+dashboard:
+    home: Dashboard
+    rarities: Rarities
+    editions: Editions
+    cultures: Cultures
+    phases: Phases
+    types: Types
+    subtypes: Subtypes
+    signets: Signets
+    tags: Keywords
+    cards: Cards
+    users: Members
+    global: General configuration
+    utiles: Usefull
+
+Rarity: Rarity
+Culture: Culture
+Edition: Edition
+Type: Type
+Subtype: Subtype
+Phase: Phase
+Card: Card
+Signet: Signet
+ApplicationUser: Member
+Tag: Keyword
+ID: ID
+Name: Name
+Position: Position
+Edition Number: Edition number
+Local Name: Name (French)
+Original Name: Name (English)
+Is Special: Is special?
+Is Displayable: Is displayable?
+Is Unique: Is unique?
+Is Authorized: Is authorized?
+Is Ring Bearer: Is Ring Bearer?
+Is Tengwar: Exists in Tengwar?
+Is Rf: Exists in Rare Foil?
+Is Rfa: Exists Alternative in Rare Foil?
+Has Local Image: Image exists in French?
+Character Name: Character
+Code: Code
+Cost: Cost
+Strength: Strength
+Strength Modifier: Strength modifier
+Vitality: Vitality
+Vitality Modifier: Vitality modifier
+Resistance: Resistance
+Resistance Modifier: Resistance modifier
+Site Number: Site number
+Shadow Number: Shadow number
+Login: Login
+Email: E-mail
+Created At: Registered at
+Updated At: Updated at
+Anonymized At: Anonymized at
+Phases: Phases
+Local Text: Text (French)
+Local Quote: Quote (French)
+Original Text: Text (English)
+Original Quote: Quote (English)
+Keywords: Keywords
+Tags: Keywords
+Multi Cards: Others versions

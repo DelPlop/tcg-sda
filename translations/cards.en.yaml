@@ -1,0 +1,152 @@
+general:
+    hello: Hello!
+    hello_user: Hello <em>%username%</em>!
+    please_login: Please login to see and manage your lists.
+    rules: Rules
+    the_rules: The rules
+    faq: F.A.Q.
+    qa: Frequently asked questions
+    thanks: Thanks
+    site_name: The Lord of the Ring TCG
+    search: Search
+    advanced_search: Advanced search
+    cards_list: Cards list
+    fellowship: Fellowship
+    my_account: My account
+    my_owned_cards: My cards
+    my_searched_cards: My searches
+    join_fellowship: Join fellowship
+    welcome_user: Welcome <em>%username%</em>!
+    menu: Menu
+    menu_open: Open menu
+    menu_close: Close menu
+    my_informations: My informations
+    see_my_owned_cards: See my cards
+    see_my_searched_cards: See my searches
+    made_by: Made by
+    cards: Cards
+    searches: Searches
+    cards_lower: cards
+    searches_lower: searches
+    see: See
+    my: my
+    his_her: his/her
+    contact: Contact
+    message_sent: Your message has been sent.
+    self_contact: You want to contact yourself?<br />It seems the one ring corrupted you ;)
+    contact_username: You want to contact <label for="message">%username%</label>?<br />This member will receive your message by e-mail with your own e-mail provided.
+    enter_your_message: "Please provide your message below:"
+
+fellowship:
+    join: Join
+    members: Fellowship members
+    contact_member: Contact %username%
+    contact: Contact a fellowship member
+    member_cards: "%username%'s cards"
+    member_searches: "%username%'s searches"
+    lists: Lists
+    i_own_that_card: I own that card
+    i_want_that_card: I want that card
+    i_own_it: I own it
+    i_want_it: I want it
+    export: Export
+    delete: Delete
+    number: Number
+    version: Version / language
+    for_trade: For trade
+    remove_from_owned: Remove from my cards
+    remove_from_wanted: Remove from my searches
+    are_your_sure:
+        remove_from_owned: Are you sure you want to remove this card from your list ?
+        remove_from_wanted: Are you sure you want to remove this card from your searches ?
+
+form:
+    pseudo: Login
+    password: Password
+    login: Login
+    ok: OK
+    send: Send
+    edit: Edit
+    search: Search
+    errors:
+        not_blank:
+            login: Please provide your login
+            password: Please provide your password
+            email: Please provide your e-mail
+            message: Please provide your message
+
+card_search:
+    errors:
+        not_blank: Please provide your search
+
+edition:
+    list: Editions list
+    cards_by_edition: Cards list by edition
+    special: special
+    how_to_navigate: Cards are listed by edition. Once in an edition, click a card name to see its details.
+    edition_cards: Cards from edition "%edition%"
+    first_card: First card in edition
+    previous_card: Previous card in edition
+    next_card: Next card in edition
+    last_card: Last card in edition
+
+card:
+    welcome_card_list: Welcome to cards list!
+    welcome_advanced_search: Welcome to cards advanced search!
+    how_to_search: "Here you can select criteria to search cards by:"
+    looking_for: You're looking for a precise card?
+    editions_list: Editions
+    name: Card name
+    details: Details for card "%cardName%"
+    from_edition: from edition "%editionName%"
+    local_name: Name (French)
+    original_name: Name (English)
+    code: Code
+    rarity: Rarity
+    culture: Culture
+    edition: Edition
+    type: Type
+    subtype: Subtype
+    phase: Phase
+    signet: Signet
+    cost: Cost
+    strength: Strength
+    vitality: Vitality
+    resistance: Resistance
+    site_number: Site number
+    shadow_number: Shadow number
+    text: Card text
+    quote: Card quote
+    local_image: Image exists in French?
+    tag: Keyword
+    unique: Is unique?
+    ring_bearer: Is Ring Bearer?
+    tengwar: Exists in Tengwar?
+    rf: Exists in Rare Foil?
+    rfa: Exists Alternative in Rare Foil?
+    options:
+        yes: yes
+        no: no
+    search:
+        enter_name_or_code: "Enter its name (or a part) or its code:"
+        explanation: "Code is on cards' right bottom (ie: 4R19)"
+    phases: Phase(s)
+    tags: Keyword(s)
+    in_english: Card in English
+    in_french: Card in French
+    in_tengwar: Card in Tengwar
+    in_rfa: Alternative Rare Foil card
+    search_result: Search results
+
+text:
+    show_your_friends: "To show your lists to your friends, don't hesitate to give them those direct links:"
+    edit_your_infos: "You can edit your informations below:"
+
+contact:
+    object: Someone contacts you from
+    user_sent_you_from: "%username% sent you a message from"
+    the_message: "Here's the message:"
+    write_to: To answer, you can write to
+    signature: Have a nice day and see you soon on
+
+None: unspecified
