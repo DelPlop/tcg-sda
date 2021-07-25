@@ -48,6 +48,7 @@ class CardSearchFormType extends AbstractType
                 'class' => Edition::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('e')
+                        ->where('e.isDisplayable = 1')
                         ->orderBy('e.editionNumber', 'ASC');
                 },
                 'required' => false,
