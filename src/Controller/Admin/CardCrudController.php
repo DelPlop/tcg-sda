@@ -42,8 +42,10 @@ class CardCrudController extends AbstractCrudController
             yield AssociationField::new('subtype');
         }
         if (Crud::PAGE_DETAIL === $pageName) {
+            yield ArrayField::new('tags');
             yield ArrayField::new('phases');
         } elseif (Crud::PAGE_EDIT === $pageName) {
+            yield AssociationField::new('tags');
             yield AssociationField::new('phases');
         }
         if (Crud::PAGE_DETAIL === $pageName || Crud::PAGE_EDIT === $pageName) {
@@ -61,13 +63,6 @@ class CardCrudController extends AbstractCrudController
             yield TextField::new('originalQuote');
             yield TextField::new('localText');
             yield TextField::new('localQuote');
-        }
-        if (Crud::PAGE_DETAIL === $pageName) {
-            yield ArrayField::new('tags');
-        } elseif (Crud::PAGE_EDIT === $pageName) {
-            yield AssociationField::new('tags');
-        }
-        if (Crud::PAGE_DETAIL === $pageName || Crud::PAGE_EDIT === $pageName) {
             yield BooleanField::new('isUnique');
             yield BooleanField::new('isRingBearer');
             yield BooleanField::new('isTengwar');
