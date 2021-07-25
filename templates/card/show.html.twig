@@ -28,9 +28,9 @@
             {% endif %}
 
             <p>
-                <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" alt="{{ card.localName ?: card.originalName }}" />
+                <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="Carte en Anglais" alt="{{ card.localName ?: card.originalName }}" />
                 {% if card.hasLocalImage %}
-                    <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" alt="{{ card.localName ?: card.originalName }}" />
+                    <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="Carte en Français" alt="{{ card.localName ?: card.originalName }}" />
                 {% endif %}
                 <br /><br />
 
@@ -115,32 +115,32 @@
                 {% endif %}
 
                 {% if card.localQuote is not same as(null) or card.originalQuote is not same as(null) %}
-                    <strong>Citation de la carte :</strong> <em>{{ (card.localQuote ?: card.originalQuote)|nl2br }}</em><br />
+                    <strong>Citation de la carte :</strong> <em>"{{ (card.localQuote ?: card.originalQuote)|nl2br }}"</em><br />
                 {% endif %}
                 {% if card.localText is not same as(null) or card.originalText is not same as(null)
                 or card.localQuote is not same as(null) or card.originalQuote is not same as(null) %}
                     <br />
                 {% endif %}
 
-                {% if card.isTengwar %}
-                    <a href="{{ imgRoot }}tengwar/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" onclick="window.open(this.href, 'Carte en Tengwar', 'toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=no, status=no, width={{ largeur }}, height={{ hauteur }}'); return false;">Cette carte existe en version Tengwar</a><br />
+                {% if card.isRf %}
+                    Cette carte existe en version Rare Foil<br /><br />
                 {% endif %}
 
-                {% if card.isRf %}
-                    Cette carte existe en version Rare Foil<br />
+                {% if card.isTengwar %}
+                    <img src="{{ imgRoot }}tengwar/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="Carte en Tengwar" alt="Carte en Tengwar" />
                 {% endif %}
 
                 {% if card.isRfa %}
-                    <a href="{{ imgRoot }}rfa/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" onclick="window.open(this.href, 'Carte Rare Foil alternative', 'toolbar=no, menubar=no, location=no, resizable=yes, scrollbars=no, status=no, width={{ largeur }}, height={{ hauteur }}'); return false;">Cette carte existe en version Rare Foil alternative</a><br />
+                    <img class="local-image" src="{{ imgRoot }}rfa/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="Carte Rare Foil alternative" alt="Carte Rare Foil alternative" />
+                {% endif %}
+                {% if card.isTengwar or card.isRfa %}
+                    <br /><br />
                 {% endif %}
 
                 {% if card.getAlternativeCards()|length > 0 %}
                     Cette carte existe aussi dans {% if card.getAlternativeCards()|length == 1 %}une autre édition{% else %}d'autres éditions{% endif %} :
                     {% for otherCard in card.getAlternativeCards() %}{% if not(loop.first) %}, {% endif %}<a href="{{ path('card_show', { card: otherCard.id }) }}">{{ otherCard.code }}</a>{% endfor %}
-                    <br />
-                {% endif %}
-                {% if card.isTengwar or card.isRf or card.isRfa or card.getAlternativeCards()|length > 0 %}
-                    <br />
+                    <br /><br />
                 {% endif %}
 
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
