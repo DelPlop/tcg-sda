@@ -32,9 +32,12 @@
                 <label class="inline w3-right-align">{{ ('card.tengwar')|trans }}</label> {{ form_widget(form.isTengwar) }}<br />
                 <label class="inline w3-right-align">{{ ('card.rf')|trans }}</label> {{ form_widget(form.isRf) }}<br />
                 <label class="inline w3-right-align">{{ ('card.rfa')|trans }}</label> {{ form_widget(form.isRfa) }}<br />
+                <label class="inline w3-right-align">{{ ('card.local_image')|trans }}</label> {{ form_widget(form.hasLocalImage) }}<br />
                 <label class="inline w3-right-align" for="card_search_form_text">{{ ('card.text')|trans }}</label> {{ form_widget(form.text) }}<br />
                 <label class="inline w3-right-align" for="card_search_form_quote">{{ ('card.quote')|trans }}</label> {{ form_widget(form.quote) }}<br />
-                <label class="inline w3-right-align" for="card_search_form_tag">{{ ('card.tag')|trans }}</label> {{ form_widget(form.tag) }}<br />
+                <label class="inline w3-right-align">{{ ('card.tag')|trans }}</label> {{ form_widget(form.tag) }}<br />
+                <br />
+
                 {{ form_row(form.valid_search) }}
                 {{ form_end(form) }}
             </p>

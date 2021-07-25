@@ -107,4 +107,123 @@ class CardRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function searchCards(array $criteria): array
+    {
+        $qb = $this
+            ->createQueryBuilder('c');
+
+        // int
+        if (isset($criteria['cost'])) {
+            $qb->andWhere('c.cost = :cost')
+                ->setParameter('cost', $criteria['cost']);
+        }
+        if (!empty($criteria['strength'])) {
+            $qb->andWhere('c.strength = :strength')
+                ->setParameter('strength', $criteria['strength']);
+        }
+        if (!empty($criteria['vitality'])) {
+            $qb->andWhere('c.vitality = :vitality')
+                ->setParameter('vitality', $criteria['vitality']);
+        }
+        if (!empty($criteria['resistance'])) {
+            $qb->andWhere('c.resistance = :resistance')
+                ->setParameter('resistance', $criteria['resistance']);
+        }
+        if (!empty($criteria['site_number'])) {
+            $qb->andWhere('c.siteNumber = :site_number')
+                ->setParameter('site_number', $criteria['site_number']);
+        }
+        if (!empty($criteria['shadow_number'])) {
+            $qb->andWhere('c.shadowNumber = :shadow_number')
+                ->setParameter('shadow_number', $criteria['shadow_number']);
+        }
+
+        // bool
+        if (!empty($criteria['isUnique'])) {
+            $qb->andWhere('c.isUnique = :unique')
+                ->setParameter('unique', $criteria['isUnique'] == 'yes' ? true : false);
+        }
+        if (!empty($criteria['isRingBearer'])) {
+            $qb->andWhere('c.isRingBearer = :ring_bearer')
+                ->setParameter('ring_bearer', $criteria['isRingBearer'] == 'yes' ? true : false);
+        }
+        if (!empty($criteria['isTengwar'])) {
+            $qb->andWhere('c.isTengwar = :tengwar')
+                ->setParameter('tengwar', $criteria['isTengwar'] == 'yes' ? true : false);
+        }
+        if (!empty($criteria['isRf'])) {
+            $qb->andWhere('c.isRf = :rf')
+                ->setParameter('rf', $criteria['isRf'] == 'yes' ? true : false);
+        }
+        if (!empty($criteria['isRfa'])) {
+            $qb->andWhere('c.isRfa = :rfa')
+                ->setParameter('rfa', $criteria['isRfa'] == 'yes' ? true : false);
+        }
+        if (!empty($criteria['hasLocalImage'])) {
+            $qb->andWhere('c.hasLocalImage = :local_image')
+                ->setParameter('local_image', $criteria['hasLocalImage'] == 'yes' ? true : false);
+        }
+
+        // relations
+        if ($criteria['rarity']->count() > 0) {
+            $qb->andWhere('c.rarity IN (:rarity)')
+                ->setParameter('rarity', $criteria['rarity']->toArray());
+        }
+        if ($criteria['edition']->count() > 0) {
+            $qb->andWhere('c.edition IN (:edition)')
+                ->setParameter('edition', $criteria['edition']->toArray());
+        }
+        if ($criteria['culture']->count() > 0) {
+            $qb->andWhere('c.culture IN (:culture)')
+                ->setParameter('culture', $criteria['culture']->toArray());
+        }
+        if ($criteria['type']->count() > 0) {
+            $qb->andWhere('c.type IN (:type)')
+                ->setParameter('type', $criteria['type']->toArray());
+        }
+        if ($criteria['subtype']->count() > 0) {
+            $qb->andWhere('c.subtype IN (:subtype)')
+                ->setParameter('subtype', $criteria['subtype']->toArray());
+        }
+        if ($criteria['signet']->count() > 0) {
+            $qb->andWhere('c.signet IN (:signet)')
+                ->setParameter('signet', $criteria['signet']->toArray());
+        }
+        if ($criteria['phases']->count() > 0) {
+            $qb->leftJoin('c.phases', 'p')
+                ->andWhere('p IN (:phase)')
+                ->setParameter('phase', $criteria['phases']->toArray());
+        }
+        if ($criteria['tag']->count() > 0) {
+            $qb->leftJoin('c.tags', 't')
+                ->andWhere('t IN (:tag)')
+                ->setParameter('tag', $criteria['tag']->toArray());
+        }
+
+        // string
+        if (!empty($criteria['code'])) {
+            $qb->andWhere('c.code like :code')
+                ->setParameter('code', '%'.$criteria['code'].'%');
+        }
+        if (!empty($criteria['name'])) {
+            $qb->andWhere('c.localName like :name OR c.originalName like :name')
+                ->setParameter('name', '%'.$criteria['name'].'%');
+        }
+        if (!empty($criteria['text'])) {
+            $qb->andWhere('c.localText like :text OR c.originalText like :text')
+                ->setParameter('text', '%'.$criteria['text'].'%');
+        }
+        if (!empty($criteria['quote'])) {
+            $qb->andWhere('c.localQuote like :quote OR c.originalQuote like :quote')
+                ->setParameter('quote', '%'.$criteria['quote'].'%');
+        }
+
+        // order
+        $qb
+            ->addOrderBy('c.edition', 'ASC')
+            ->addOrderBy('c.position', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

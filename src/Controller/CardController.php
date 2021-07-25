@@ -120,10 +120,9 @@ class CardController extends AbstractController
         }
     }
 
-    public function advancedSearch(Request $request): Response
+    public function advancedSearch(Request $request, CardRepository $cardRepository): Response
     {
-        $card = new Card();
-        $form = $this->createForm(CardSearchFormType::class, $card, [
+        $form = $this->createForm(CardSearchFormType::class, [], [
             'action' => $this->generateUrl('cards_advanced_search'),
             'attr' => [
                 'id' => 'cards_advanced_search'
@@ -133,6 +132,16 @@ class CardController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
+            $cards = $cardRepository->searchCards($data);
+
+            if (count($cards) == 1) {
+                return $this->redirectToRoute('card_show', ['card' => $cards[0]->getId()]);
+            } else {
+                return $this->render('card/list.html.twig', [
+                    'activePage' => 'search',
+                    'cards' => $cards
+                ]);
+            }
         }
 
         return $this->render('card/advanced-search.html.twig', [

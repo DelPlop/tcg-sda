@@ -107,7 +107,7 @@ input{margin:0.3vh}
 /** search form fields */
 #card_search_form_edition, #card_search_form_rarity, #card_search_form_culture, #card_search_form_type, #card_search_form_subtype,
 #card_search_form_phases, #card_search_form_signet, #card_search_form_isUnique, #card_search_form_isRingBearer, #card_search_form_isTengwar,
-#card_search_form_isRf, #card_search_form_isRfa {display: inline}
+#card_search_form_isRf, #card_search_form_isRfa, #card_search_form_hasLocalImage, #card_search_form_tag {display: inline}
 form > div > label, form > div > div > label {font-weight: normal; margin-right: 10px}
 
 .local-image {margin-left: 100px}

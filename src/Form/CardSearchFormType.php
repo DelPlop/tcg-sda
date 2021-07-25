@@ -2,13 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Card;
 use App\Entity\Culture;
 use App\Entity\Edition;
 use App\Entity\Phase;
 use App\Entity\Rarity;
 use App\Entity\Signet;
 use App\Entity\Subtype;
+use App\Entity\Tag;
 use App\Entity\Type;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,7 +32,6 @@ class CardSearchFormType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'card.name',
                 'required' => false,
-                'mapped' => false,
                 'attr' => [
                     'class' => 'medium-input',
                 ]
@@ -102,6 +101,10 @@ class CardSearchFormType extends AbstractType
             ->add('phases', EntityType::class, [
                 'label' => 'card.phase',
                 'class' => Phase::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                        ->orderBy('p.localName', 'ASC');
+                },
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
@@ -189,10 +192,15 @@ class CardSearchFormType extends AbstractType
                 'required' => false,
                 'expanded' => true,
             ])
+            ->add('hasLocalImage', ChoiceType::class, [
+                'label' => 'card.local_image',
+                'choices' => \array_flip($choices),
+                'required' => false,
+                'expanded' => true,
+            ])
             ->add('text', TextType::class, [
                 'label' => 'card.text',
                 'required' => false,
-                'mapped' => false,
                 'attr' => [
                     'class' => 'big-input',
                 ]
@@ -200,18 +208,20 @@ class CardSearchFormType extends AbstractType
             ->add('quote', TextType::class, [
                 'label' => 'card.quote',
                 'required' => false,
-                'mapped' => false,
                 'attr' => [
                     'class' => 'big-input',
                 ]
             ])
-            ->add('tag', TextType::class, [
+            ->add('tag', EntityType::class, [
                 'label' => 'card.tag',
+                'class' => Tag::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('t')
+                        ->orderBy('t.originalName', 'ASC');
+                },
                 'required' => false,
-                'mapped' => false,
-                'attr' => [
-                    'class' => 'big-input',
-                ]
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('valid_search', SubmitType::class, [
                 'label' => 'form.search',
@@ -222,7 +232,7 @@ class CardSearchFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Card::class,
+            'data_class' => null,
             'translation_domain' => 'cards'
         ]);
     }
