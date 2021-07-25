@@ -105,7 +105,7 @@ class CardController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $cards = $cardRepository->searchCards($data['search']);
+            $cards = $cardRepository->quickSearchCards($data['search']);
 
             if (count($cards) == 1) {
                 return $this->redirectToRoute('card_show', ['card' => $cards[0]->getId()]);

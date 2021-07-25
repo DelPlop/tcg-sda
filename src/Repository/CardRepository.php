@@ -85,7 +85,7 @@ class CardRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function searchCards(string $searchTerm): array
+    public function quickSearchCards(string $searchTerm): array
     {
         $terms = explode(' ', $searchTerm);
         $qb = $this
