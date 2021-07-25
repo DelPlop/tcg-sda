@@ -1,20 +1,21 @@
+{% trans_default_domain 'cards' %}
 <div class="w3-third w3-container w3-hide-small w3-hide-medium {{ withMargin ? 'margin-top' : '' }}">
     <div class="w3-border w3-padding-large w3-padding-16 w3-center">
-        <h5>Communauté</h5>
+        <h5>{{ ('general.fellowship'|trans) }}</h5>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            Bienvenue <em>{{ app.user.login}}</em> !<br /><br />
-            <a href="{{ path('user_show', {user: app.user.id}) }}">Ma fiche</a><br />
-            <a href="{{ path('user_owned_cards', {user: app.user.id}) }}">Mes cartes</a><br />
-            <a href="{{ path('user_wanted_cards', {user: app.user.id}) }}">Mes recherches</a><br />
-            <br /><a href="{{ path('logout') }}">Déconnexion</a>
+            {{ ('general.welcome_user'|trans({'%username%': app.user.login}))|raw }}<br /><br />
+            <a href="{{ path('user_show', {user: app.user.id}) }}" title="{{ ('general.my_account'|trans) }}">{{ ('general.my_account'|trans) }}</a><br />
+            <a href="{{ path('user_owned_cards', {user: app.user.id}) }}" title="{{ ('general.see_my_owned_cards'|trans) }}">{{ ('general.my_owned_cards'|trans) }}</a><br />
+            <a href="{{ path('user_wanted_cards', {user: app.user.id}) }}" title="{{ ('general.see_my_searched_cards'|trans) }}">{{ ('general.my_searched_cards'|trans) }}</a><br />
+            <br /><a href="{{ path('logout') }}" title="{{ ('user.logout'|trans({}, 'messages')) }}">{{ ('user.logout'|trans({}, 'messages')) }}</a>
         {% else %}
             {{ render(controller(
                 'App\\Controller\\UserController::quickLoginForm'
             )) }}
             <br /><br />
 
-            <a href="{{ path('register') }}">Rejoindre</a>
+            <a href="{{ path('register') }}" title="{{ ('general.join_fellowship'|trans) }}">{{ ('fellowship.join'|trans) }}</a>
         {% endif %}
     </div>
 </div>

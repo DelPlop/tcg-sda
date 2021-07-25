@@ -1,0 +1,6 @@
+card:
+    num_of_editions: >-
+        {editions, plural,
+            one   {Cette carte existe aussi dans une autre édition :}
+            other {Cette carte existe aussi dans d'autres éditions :}
+        }

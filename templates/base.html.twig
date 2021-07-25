@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}Welcome!{% endblock %} - Le TCG du Seigneur des Anneaux</title>
+        <title>{% block title %}Welcome!{% endblock %} - {{ ('general.site_name'|trans) }}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
@@ -25,23 +25,23 @@
         <!-- Navbar -->
         <div class="w3-top">
             <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-                <a class="w3-bar-item w3-button w3-right w3-hide-large w3-large w3-theme-l1" href="javascript:void(0)" onclick="menu_open()"><img src="/img/bars.svg" alt="Menu" width="20" /></a>
-                <a class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white {% if activePage == 'home' or activePage == 'register' or activePage == 'login' %}w3-theme-l1{% endif %}" href="{{ path('index') }}">Accueil</a>
-                <a class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white {% if activePage == 'editions' %}w3-theme-l1{% endif %}" href="{{ path('editions_list') }}">Liste des cartes</a>
-                <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'search' %}w3-theme-l1{% endif %}" href="{{ path('cards_advanced_search') }}" title="Recherche avancée">Recherche</a>
-                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'rules' %}w3-theme-l1{% endif %}" href="{{ path('rules') }}">Règles</a>
-                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'qa' %}w3-theme-l1{% endif %}" href="{{ path('qa') }}" title="Questions fréquentes">F.A.Q.</a>
+                <a class="w3-bar-item w3-button w3-right w3-hide-large w3-large w3-theme-l1" href="javascript:void(0)" onclick="menu_open()" title="{{ ('general.menu_open'|trans) }}"><img src="/img/bars.svg" alt="{{ ('general.menu'|trans) }}" width="20" /></a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white {% if activePage == 'home' or activePage == 'register' or activePage == 'login' %}w3-theme-l1{% endif %}" href="{{ path('index') }}" title="{{ ('general.home'|trans({}, 'messages')) }}">{{ ('general.home'|trans({}, 'messages')) }}</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white {% if activePage == 'editions' %}w3-theme-l1{% endif %}" href="{{ path('editions_list') }}" title="{{ ('general.cards_list'|trans) }}">{{ ('general.cards_list'|trans) }}</a>
+                <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'search' %}w3-theme-l1{% endif %}" href="{{ path('cards_advanced_search') }}" title="{{ ('general.advanced_search'|trans) }}">{{ ('general.search'|trans) }}</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'rules' %}w3-theme-l1{% endif %}" href="{{ path('rules') }}" title="{{ ('general.rules'|trans) }}">{{ ('general.rules'|trans) }}</a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'qa' %}w3-theme-l1{% endif %}" href="{{ path('qa') }}" title="{{ ('general.qa'|trans) }}">{{ ('general.faq'|trans) }}</a>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'users' %}w3-theme-l1{% endif %}" href="{{ path('users_list') }}">Communauté</a>
-                    <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'lists' %}w3-theme-l1{% endif %}" href="{{ path('user_show', {user: app.user.id}) }}">Ma fiche</a>
+                    <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'users' %}w3-theme-l1{% endif %}" href="{{ path('users_list') }}" title="{{ ('general.fellowship'|trans) }}">{{ ('general.fellowship'|trans) }}</a>
+                    <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'lists' %}w3-theme-l1{% endif %}" href="{{ path('user_show', {user: app.user.id}) }}" title="{{ ('general.my_account'|trans) }}">{{ ('general.my_account'|trans) }}</a>
                 {% endif %}
             </div>
         </div>
 
         <!-- Sidebar -->
         <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
-            <a href="javascript:void(0)" onclick="menu_close()" class="w3-right w3-xlarge w3-padding-large w3-hide-large" title="Fermer le Menu">
-                <img src="/img/close.svg" alt="Fermer" width="20" />
+            <a href="javascript:void(0)" onclick="menu_close()" class="w3-right w3-xlarge w3-padding-large w3-hide-large" title="{{ ('general.menu_close'|trans) }}">
+                <img src="/img/close.svg" alt="X" width="20" />
             </a>
 
             {{ render(controller(
@@ -50,7 +50,7 @@
         </nav>
 
         <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large" onclick="menu_close()" style="cursor:pointer" title="Fermer le menu" id="myOverlay"></div>
+        <div class="w3-overlay w3-hide-large" onclick="menu_close()" style="cursor:pointer" title="{{ ('general.menu_close'|trans) }}" id="myOverlay"></div>
 
         <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
         <div class="w3-main" style="margin-left:250px">
@@ -59,14 +59,14 @@
             <footer id="myFooter">
                 <div class="w3-container w3-theme-l2 w3-padding-32">
                     <h4>
-                        <img src="/img/logo_tolkien.png" alt="" /> &copy; Le TCG du Seigneur des Anneaux <span class="w3-hide-small w3-hide-medium">v7 (2004-{{ date()|date('Y') }})</span>
+                        <img src="/img/logo_tolkien.png" alt="" /> &copy; {{ ('general.site_name'|trans) }} <span class="w3-hide-small w3-hide-medium">v7 (2004-{{ date()|date('Y') }})</span>
                     </h4>
                 </div>
 
                 <div class="w3-container w3-theme-l1">
                     <p>
-                        Réalisation par <a href="{{ path('user_contact', {user: constant('App\\Entity\\ApplicationUser::DEFAULT_USER_ID')}) }}">Elianora la blanche</a><br />
-                        <a href="{{ path('thanks') }}" class="w3-hide-small w3-hide-medium">Remerciements</a>
+                        {{ ('general.made_by'|trans) }} <a title="{{ ('fellowship.contact_member'|trans({'%username%': 'Elianora la blanche'})) }}" href="{{ path('user_contact', {user: constant('App\\Entity\\ApplicationUser::DEFAULT_USER_ID')}) }}">Elianora la blanche</a><br />
+                        <a href="{{ path('thanks') }}" class="w3-hide-small w3-hide-medium" title="{{ ('general.thanks'|trans) }}">{{ ('general.thanks'|trans) }}</a>
                     </p>
                 </div>
             </footer>

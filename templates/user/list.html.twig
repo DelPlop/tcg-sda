@@ -1,38 +1,38 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'cards' %}
 
-{% block title %}Les membres de la communauté{% endblock %}
+{% block title %}{{ ('fellowship.members'|trans) }}{% endblock %}
 
 {% block body %}
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">Les membres de la communauté ({{ users|length }})</h2>
+            <h2 class="w3-text-amber">{{ ('fellowship.members'|trans) }} ({{ users|length }})</h2>
             <p>
-                <table width="100%" border="1" class="gauche">
+                <table width="100%" border="1" class="w3-left-align">
                     <tr>
-                        <th>Pseudonyme</th>
-                        <th>Cartes</th>
-                        <th>Recherches</th>
+                        <th>{{ ('form.pseudo'|trans) }}</th>
+                        <th width="20%">{{ ('general.cards'|trans) }}</th>
+                        <th width="20%">{{ ('general.searches'|trans) }}</th>
                     </tr>
 
                     {% for user in users %}
-                        {% set text = 'mes' %}
+                        {% set text = ('general.my'|trans) %}
                         <tr>
                             <td>
                                 {% if user.id is not same as(app.user.id) %}
-                                    <a href="{{ path('user_contact', {user: user.id}) }}" title="Contacter {{ user.login }}">
+                                    <a href="{{ path('user_contact', {user: user.id}) }}" title="{{ ('fellowship.contact_member'|trans({'%username%': user.login})) }}">
                                 {% endif %}
                                 {{ user.login }}
                                 {% if user.id is not same as(app.user.id) %}
                                     </a>
-                                    {% set text = 'ses' %}
+                                    {% set text = ('general.his_her'|trans) %}
                                 {% endif %}
                             </td>
                             <td>
-                                <a href="{{ path('user_owned_cards', {user: user.id}) }}" title="Cartes de {{ user.login }}">Voir {{ text }} cartes</a>
+                                <a href="{{ path('user_owned_cards', {user: user.id}) }}" title="{{ ('fellowship.member_cards'|trans({'%username%': user.login})) }}">{{ ('general.see'|trans) }} {{ text }} {{ ('general.cards_lower'|trans) }}</a>
                             </td>
                             <td>
-                                <a href="{{ path('user_wanted_cards', {user: user.id}) }}" title="Recherches de {{ user.login }}">Voir {{ text }} recherches</a>
+                                <a href="{{ path('user_wanted_cards', {user: user.id}) }}" title="{{ ('fellowship.member_searches'|trans({'%username%': user.login})) }}">{{ ('general.see'|trans) }} {{ text }} {{ ('general.searches_lower'|trans) }}</a>
                             </td>
                         </tr>
                     {% endfor %}

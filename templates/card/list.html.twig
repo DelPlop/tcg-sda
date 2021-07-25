@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'cards' %}
 
-{% block title %}Résultats de la recherche{% endblock %}
+{% block title %}{{ ('card.search_result'|trans) }}{% endblock %}
 
 {% block body %}
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">Résultats de la recherche ({{ cards|length }})</h2>
+            <h2 class="w3-text-amber">{{ ('card.search_result'|trans) }} ({{ cards|length }})</h2>
             <p>
                 <table width="100%" border="1">
                     <tr>
-                        <th>Code-carte</th>
-                        <th>Nom français</th>
-                        <th>Nom anglais</th>
+                        <th>{{ ('card.code'|trans) }}</th>
+                        <th>{{ ('card.local_name'|trans) }}</th>
+                        <th>{{ ('card.original_name'|trans) }}</th>
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <th colspan="2">Listes</th>
+                            <th colspan="2">{{ ('fellowship.lists'|trans) }}</th>
                         {% endif %}
                     </tr>
 
@@ -42,17 +42,17 @@
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <td>
                                     {% if app.user.ownedCards.contains(card) %}
-                                        J'ai
+                                        {{ ('fellowship.i_own'|trans) }}
                                     {% else %}
-                                        <a href="{{ path('user_owns_card', {card: card.id}) }}">J'ai</a>
+                                        <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own'|trans) }}</a>
                                     {% endif %}
                                 </td>
 
                                 <td>
                                     {% if app.user.wantedCards.contains(card) %}
-                                        Je veux
+                                        {{ ('fellowship.i_want'|trans) }}
                                     {% else %}
-                                        <a href="{{ path('user_wants_card', {card: card.id}) }}">Je veux</a>
+                                        <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want'|trans) }}</a>
                                     {% endif %}
                                 </td>
                             {% endif %}

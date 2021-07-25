@@ -1,24 +1,23 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'cards' %}
 
-{% block title %}Liste des éditions{% endblock %}
+{% block title %}{{ ('edition.list'|trans) }}{% endblock %}
 
 {% block body %}
     <div class="w3-row w3-padding-64">
         <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">Liste des cartes par édition</h2>
+            <h2 class="w3-text-amber">{{ ('edition.cards_by_edition'|trans) }}</h2>
             <p>
-                Bienvenue dans la liste des cartes !<br /><br />
+                {{ ('card.welcome_card_list'|trans) }}<br /><br />
 
-                Ici la classification se fait par édition. Une fois dans la liste de l'édition, vous pourrez visualiser chaque carte en cliquant sur son nom.
-                <br /><br /><br />
+                {{ ('edition.how_to_navigate'|trans) }}<br /><br /><br />
 
-                <em>Les éditions :</em><br />
+                <em>{{ ('card.editions_list'|trans) }} :</em><br />
 
                 {% for edition in editions %}
                     <li>
                         {{ edition.editionNumber }} - <a href="{{ path('edition_cards', {edition: edition.id}) }}">{{ edition.localName ?: edition.originalName }}</a>
-                        {{ edition.isSpecial ? ' (spéciale)' : '' }}
+                        {{ edition.isSpecial ? ' (' ~ ('edition.special'|trans) ~ ')' : '' }}
                     </li>
                 {% endfor %}
             </p>

@@ -1,10 +1,60 @@
 general:
     rules: Règles
+    the_rules: Les règles
+    faq: F.A.Q.
     qa: Questions fréquentes
     thanks: Remerciements
+    site_name: Le TCG du Seigneur des Anneaux
+    search: Recherche
+    advanced_search: Recherche avancée
+    cards_list: Liste des cartes
+    fellowship: Communauté
+    my_account: Ma fiche
+    my_owned_cards: Mes cartes
+    my_searched_cards: Mes recherches
+    join_fellowship: Rejoindre la communauté
+    welcome_user: Bienvenue <em>%username%</em> !
+    menu: Menu
+    menu_open: Ouvrir le menu
+    menu_close: Fermer le menu
+    my_informations: Mes informations
+    see_my_owned_cards: Voir mes cartes
+    see_my_searched_cards: Voir mes recherches
+    made_by: Réalisation par
+    cards: Cartes
+    searches: Recherches
+    cards_lower: cartes
+    searches_lower: recherches
+    see: Voir
+    my: mes
+    his_her: ses
+
+fellowship:
+    join: Rejoindre
+    members: Les membres de la communauté
+    contact_member: Contacter %username%
+    member_cards: Cartes de %username%
+    member_searches: Recherches de %username%
+    lists: Listes
+    i_own: J'ai
+    i_own_that_card: Je possède cette carte
+    i_want: Je veux
+    i_want_that_card: Je recherche cette carte
+    i_own_it: Je l'ai
+    i_want_it: Je la cherche
+    export: Exporter
+    delete: Supprimer
+    number: Nombre d'exemplaire
+    version: Version / langue
+    exchange: A l'échange
+    remove_from_owned: Retirer de mes cartes
+    remove_from_wanted: Retirer de mes recherches
+    are_your_sure:
+        remove_from_owned: Etes-vous sûr de vouloir retirer cette carte de votre liste ?
+        remove_from_wanted: Etes-vous sûr de vouloir retirer cette carte de vos recherches ?
 
 form:
-    pseudo: Pseudo
+    pseudo: Pseudonyme
     password: Mot de passe
     login: Connexion
     ok: OK
@@ -22,8 +72,28 @@ card_search:
     errors:
         not_blank: Veuillez indiquer votre recherche
 
+edition:
+    list: Liste des éditions
+    cards_by_edition: Liste des cartes par édition
+    special: spéciale
+    how_to_navigate: Ici la classification se fait par édition. Une fois dans la liste de l'édition, vous pourrez visualiser chaque carte en cliquant sur son nom.
+    edition_cards: Cartes de l'édition "%edition%"
+    first_card: Première carte de l'édition
+    previous_card: Carte précédente de l'édition
+    next_card: Carte suivante de l'édition
+    last_card: Dernière carte de l'édition
+
 card:
+    welcome_card_list: Bienvenue dans la liste des cartes !
+    welcome_advanced_search: Bienvenue dans la recherche avancée de cartes !
+    how_to_search: "Vous pouvez sélectionner ici les différents critères selon lesquels vous souhaitez chercher vos cartes :"
+    looking_for: Vous cherchez une carte précise ?
+    editions_list: Les éditions
     name: Nom de la carte
+    details: Détails de la carte "%cardName%"
+    from_edition: de l'édition "%editionName%"
+    local_name: Nom (Français)
+    original_name: Nom (Anglais)
     code: Code-carte
     rarity: Rareté
     culture: Culture
@@ -50,5 +120,19 @@ card:
     options:
         yes: oui
         no: non
+    search:
+        enter_name_or_code: "Entrez son nom (ou une partie) ou son code-carte :"
+        explanation: "Le code-carte se trouve en bas &agrave; droite des cartes (Ex : 4R19)"
+    phases: Phase(s)
+    tags: Mot(s)-clé
+    in_english: Carte en Anglais
+    in_french: Carte en Français
+    in_tengwar: Carte en Tengwar
+    in_rfa: Carte Rare Foil alternative
+    search_result: Résultats de la recherche
+
+text:
+    show_your_friends: "Pour montrer vos listes à vos amis, n'hésitez pas à leur donner directement les liens suivants :"
+    edit_your_infos: "Vous pouvez modifier vos informations ci-dessous :"
 
 None: indifférent
