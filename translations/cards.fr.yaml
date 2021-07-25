@@ -1,4 +1,7 @@
 general:
+    hello: Bonjour !
+    hello_user: Bonjour <em>%username%</em> !
+    please_login: Veuillez vous connecter pour voir et gérer vos listes.
     rules: Règles
     the_rules: Les règles
     faq: F.A.Q.
@@ -28,17 +31,21 @@ general:
     see: Voir
     my: mes
     his_her: ses
+    contact: Contact
+    message_sent: Votre message a bien été envoyé.
+    self_contact: Vous souhaitez vous contacter vous-même ?<br />L'anneau unique semble vous avoir corrompu ;)
+    contact_username: Vous souhaitez contacter <label for="message">%username%</label> ?<br />Ce membre recevra votre message par e-mail et votre propre e-mail lui sera communiqué.
+    enter_your_message: "Saisissez votre message ci-dessous :"
 
 fellowship:
     join: Rejoindre
     members: Les membres de la communauté
     contact_member: Contacter %username%
+    contact: Contacter un membre de la communauté
     member_cards: Cartes de %username%
     member_searches: Recherches de %username%
     lists: Listes
-    i_own: J'ai
     i_own_that_card: Je possède cette carte
-    i_want: Je veux
     i_want_that_card: Je recherche cette carte
     i_own_it: Je l'ai
     i_want_it: Je la cherche
@@ -46,7 +53,7 @@ fellowship:
     delete: Supprimer
     number: Nombre d'exemplaire
     version: Version / langue
-    exchange: A l'échange
+    for_trade: A l'échange
     remove_from_owned: Retirer de mes cartes
     remove_from_wanted: Retirer de mes recherches
     are_your_sure:
@@ -134,5 +141,12 @@ card:
 text:
     show_your_friends: "Pour montrer vos listes à vos amis, n'hésitez pas à leur donner directement les liens suivants :"
     edit_your_infos: "Vous pouvez modifier vos informations ci-dessous :"
+
+contact:
+    object: Quelqu'un vous contacte depuis
+    user_sent_you_from: "%username% vous a envoyé un message depuis"
+    the_message: "Voici son message :"
+    write_to: Pour lui répondre, vous pouvez écrire à
+    signature: Bonne journée et à bientôt sur
 
 None: indifférent
