@@ -40,7 +40,7 @@ card:
     shadow_number: N° d'ombre
     text: Texte de la carte
     quote: Citation de la carte
-    local_image: L'image en français existe ?
+    local_image: L'image en Français existe ?
     tag: Mot-clé
     unique: Unique ?
     ring_bearer: Peut porter l'anneau ?
