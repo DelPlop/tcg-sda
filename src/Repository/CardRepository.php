@@ -16,7 +16,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class CardRepository extends ServiceEntityRepository
 {
-    public const ITEM_PER_PAGE = 50;
+    public const ITEM_PER_PAGE = 100;
 
     public function __construct(ManagerRegistry $registry)
     {
