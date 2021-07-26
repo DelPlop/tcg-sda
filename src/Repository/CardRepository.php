@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Card;
+use App\Entity\Edition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method Card|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +16,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CardRepository extends ServiceEntityRepository
 {
+    public const ITEM_PER_PAGE = 50;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Card::class);
+    }
+
+    public function getPaginator(Edition $edition, int $offset): Paginator
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.edition = :crit')
+            ->setParameter('crit', $edition)
+            ->orderBy('c.position', 'ASC')
+            ->setMaxResults(self::ITEM_PER_PAGE)
+            ->setFirstResult($offset);
+
+        return new Paginator($qb->getQuery());
     }
 
     public function findFirstCard(Card $card): ?Card

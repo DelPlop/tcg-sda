@@ -138,6 +138,8 @@ card:
     in_tengwar: Card in Tengwar
     in_rfa: Alternative Rare Foil card
     search_result: Search results
+    previous_page: Previous page
+    next_page: Next page
 
 text:
     show_your_friends: "To show your lists to your friends, don't hesitate to give them those direct links:"
