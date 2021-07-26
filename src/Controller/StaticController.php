@@ -35,10 +35,11 @@ class StaticController extends AbstractController
         ]);
     }
 
-    public function bottomRight(bool $withMargin = true): Response
+    public function bottomRight(bool $withMargin = true, bool $display = true): Response
     {
         return $this->render('static/bottomRight.html.twig', [
-            'withMargin' => $withMargin
+            'withMargin' => $withMargin,
+            'display' => $display
         ]);
     }
 }
