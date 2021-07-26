@@ -11,63 +11,93 @@
         </h2>
         <p>
             {% if cards|length > 0 %}
-            <table width="100%" border="1" class="w3-left-align">
-                <tr>
-                    <th width="40%">{{ ('card.name'|trans) }}</th>
-                    <th width="10%">{{ ('card.code'|trans) }}</th>
-                    <th width="10%">{{ ('fellowship.number'|trans) }}</th>
-                    <th>{{ ('fellowship.version'|trans) }}</th>
-                    <th>{{ ('fellowship.for_trade'|trans) }}</th>
-                    {% if user is same as(app.user) %}
-                        <th width="10%">{{ ('fellowship.delete'|trans) }}</th>
+                <div class="w3-center">
+                    {% if previous >= 0 %}
+                        <a title="{{ ('card.previous_page'|trans) }}" href="{{ path('user_owned_cards', { user: user.id, offset: previous }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_precedente.gif" alt="&laquo;" />
+                        </a>
                     {% endif %}
-                </tr>
 
-                {% for card in cards %}
-                <tr>
-                    <td>
-                        <a href="{{ path('card_show', {card: card.card.id}) }}">{{ card.card.name }}</a>
-                    </td>
+                    {% if next < cards|length %}
+                        <a title="{{ ('card.next_page'|trans) }}" href="{{ path('user_owned_cards', { user: user.id, offset: next }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_suivante.gif" alt="&raquo;" />
+                        </a>
+                    {% endif %}
+                </div>
 
-                    <td>
-                        {{ card.card.code }}
-                    </td>
-
-                    <td class="w3-center">
+                <br />
+                <table width="100%" border="1" class="w3-left-align">
+                    <tr>
+                        <th width="40%">{{ ('card.name'|trans) }}</th>
+                        <th width="10%">{{ ('card.code'|trans) }}</th>
+                        <th width="10%">{{ ('fellowship.number'|trans) }}</th>
+                        <th>{{ ('fellowship.version'|trans) }}</th>
+                        <th>{{ ('fellowship.for_trade'|trans) }}</th>
                         {% if user is same as(app.user) %}
-                            <input type="text" size="10" class="card-count" name="number_input_{{ card.id }}" id="number_input_{{ card.id }}" value="{{ card.number }}" />
-                        {% else %}
-                            {{ card.number }}
+                            <th width="10%">{{ ('fellowship.delete'|trans) }}</th>
                         {% endif %}
-                    </td>
+                    </tr>
 
-                    <td>
-                        {% if user is same as(app.user) %}
-                            <input type="text" class="card-language" name="language_input_{{ card.id }}" id="language_input_{{ card.id }}" value="{{ card.language }}" />
-                        {% else %}
-                            {{ card.language }}
-                        {% endif %}
-                    </td>
-
-                    <td class="w3-center">
-                        {% if user is same as(app.user) %}
-                            <input type="checkbox" class="UsersOwnCard-for_trade" name="UsersOwnCard.{{ card.id }}.for_trade" id="UsersOwnCard.{{ card.id }}.for_trade" {{ card.isForTrade ? 'checked="checked"' : '' }} value="{{ card.id }}" />
-                        {% else %}
-                            <img src="/img/{{ card.isForTrade|number_format }}.gif" alt="{{ card.isForTrade ? ('card.options.yes'|trans) : ('card.options.no'|trans) }}" title="{{ card.isForTrade ? ('card.options.yes'|trans) : ('card.options.no'|trans) }}" style="vertical-align: middle" />
-                        {% endif %}
-                    </td>
-
-                    {% if user is same as(app.user) %}
-                        <td class="w3-center">
-                            <a href="{{ path('user_stops_owning_card', {card: card.card.id}) }}" title="{{ ('fellowship.remove_from_owned'|trans) }}" onclick="return confirm('{{ ('fellowship.are_your_sure.remove_from_owned'|trans) }}');">
-                                <img src="/img/trash.svg" alt="{{ ('fellowship.delete'|trans) }}" width="20" />
-                            </a>
+                    {% for card in cards %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('card_show', {card: card.card.id}) }}">{{ card.card.name }}</a>
                         </td>
+
+                        <td>
+                            {{ card.card.code }}
+                        </td>
+
+                        <td class="w3-center">
+                            {% if user is same as(app.user) %}
+                                <input type="text" size="10" class="card-count" name="number_input_{{ card.id }}" id="number_input_{{ card.id }}" value="{{ card.number }}" />
+                            {% else %}
+                                {{ card.number }}
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if user is same as(app.user) %}
+                                <input type="text" class="card-language" name="language_input_{{ card.id }}" id="language_input_{{ card.id }}" value="{{ card.language }}" />
+                            {% else %}
+                                {{ card.language }}
+                            {% endif %}
+                        </td>
+
+                        <td class="w3-center">
+                            {% if user is same as(app.user) %}
+                                <input type="checkbox" class="UsersOwnCard-for_trade" name="UsersOwnCard.{{ card.id }}.for_trade" id="UsersOwnCard.{{ card.id }}.for_trade" {{ card.isForTrade ? 'checked="checked"' : '' }} value="{{ card.id }}" />
+                            {% else %}
+                                <img src="/img/{{ card.isForTrade|number_format }}.gif" alt="{{ card.isForTrade ? ('card.options.yes'|trans) : ('card.options.no'|trans) }}" title="{{ card.isForTrade ? ('card.options.yes'|trans) : ('card.options.no'|trans) }}" style="vertical-align: middle" />
+                            {% endif %}
+                        </td>
+
+                        {% if user is same as(app.user) %}
+                            <td class="w3-center">
+                                <a href="{{ path('user_stops_owning_card', {card: card.card.id}) }}" title="{{ ('fellowship.remove_from_owned'|trans) }}" onclick="return confirm('{{ ('fellowship.are_your_sure.remove_from_owned'|trans) }}');">
+                                    <img src="/img/trash.svg" alt="{{ ('fellowship.delete'|trans) }}" width="20" />
+                                </a>
+                            </td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br />
+
+                <div class="w3-center">
+                    {% if previous >= 0 %}
+                        <a title="{{ ('card.previous_page'|trans) }}" href="{{ path('user_owned_cards', { user: user.id, offset: previous }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_precedente.gif" alt="&laquo;" />
+                        </a>
                     {% endif %}
-                    {% endfor %}
-                </tr>
-            </table>
-        {% endif %}
+
+                    {% if next < cards|length %}
+                        <a title="{{ ('card.next_page'|trans) }}" href="{{ path('user_owned_cards', { user: user.id, offset: next }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_suivante.gif" alt="&raquo;" />
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
         </p>
     </div>
 {% endblock %}

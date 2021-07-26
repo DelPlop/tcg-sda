@@ -11,6 +11,21 @@
         </h2>
         <p>
             {% if cards|length > 0 %}
+                <div class="w3-center">
+                    {% if previous >= 0 %}
+                        <a title="{{ ('card.previous_page'|trans) }}" href="{{ path('user_wanted_cards', { user: user.id, offset: previous }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_precedente.gif" alt="&laquo;" />
+                        </a>
+                    {% endif %}
+
+                    {% if next < cards|length %}
+                        <a title="{{ ('card.next_page'|trans) }}" href="{{ path('user_wanted_cards', { user: user.id, offset: next }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_suivante.gif" alt="&raquo;" />
+                        </a>
+                    {% endif %}
+                </div>
+
+                <br />
                 <table width="100%" border="1" class="w3-left-align">
                     <tr>
                         <th width="40%">{{ ('card.name'|trans) }}</th>
@@ -58,6 +73,21 @@
                         {% endfor %}
                     </tr>
                 </table>
+                <br />
+
+                <div class="w3-center">
+                    {% if previous >= 0 %}
+                        <a title="{{ ('card.previous_page'|trans) }}" href="{{ path('user_wanted_cards', { user: user.id, offset: previous }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_precedente.gif" alt="&laquo;" />
+                        </a>
+                    {% endif %}
+
+                    {% if next < cards|length %}
+                        <a title="{{ ('card.next_page'|trans) }}" href="{{ path('user_wanted_cards', { user: user.id, offset: next }) }}" class="w3-button w3-hover-black">
+                            <img src="/img/fleche_suivante.gif" alt="&raquo;" />
+                        </a>
+                    {% endif %}
+                </div>
             {% endif %}
         </p>
     </div>

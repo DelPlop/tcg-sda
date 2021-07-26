@@ -78,21 +78,31 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_show', ['user' => $user->getId()]);
     }
 
-    public function ownedCards(ApplicationUser $user, UserOwnedCardRepository $repository): Response
+    public function ownedCards(ApplicationUser $user, Request $request, UserOwnedCardRepository $userOwnedCardRepository): Response
     {
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $userOwnedCardRepository->findCards($user, $offset);
+
         return $this->render('card/owned.html.twig', [
             'activePage' => 'lists',
             'user' => $user,
-            'cards' => $repository->findCards($user)
+            'cards' => $paginator,
+            'previous' => $offset - UserOwnedCardRepository::ITEM_PER_PAGE,
+            'next' => min(count($paginator), $offset + UserOwnedCardRepository::ITEM_PER_PAGE)
         ]);
     }
 
-    public function wantedCards(ApplicationUser $user, UserWantedCardRepository $repository): Response
+    public function wantedCards(ApplicationUser $user, Request $request, UserWantedCardRepository $userWantedCardRepository): Response
     {
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $userWantedCardRepository->findCards($user, $offset);
+
         return $this->render('card/wanted.html.twig', [
             'activePage' => 'lists',
             'user' => $user,
-            'cards' => $repository->findCards($user)
+            'cards' => $paginator,
+            'previous' => $offset - UserWantedCardRepository::ITEM_PER_PAGE,
+            'next' => min(count($paginator), $offset + UserWantedCardRepository::ITEM_PER_PAGE)
         ]);
     }
 
