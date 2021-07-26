@@ -1,6 +1,6 @@
 {% trans_default_domain 'cards' %}
-<div class="w3-third w3-container w3-hide-small w3-hide-medium {{ withMargin ? 'margin-top' : '' }}">
-    <div class="w3-border w3-padding-large w3-padding-16 w3-center">
+{% if display %}
+    <div class="w3-border w3-padding-large w3-padding-16 w3-center {{ withMargin ? 'margin-top' : '' }}">
         <h5>{{ ('general.fellowship'|trans) }}</h5>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -18,4 +18,4 @@
             <a href="{{ path('register') }}" title="{{ ('general.join_fellowship'|trans) }}">{{ ('fellowship.join'|trans) }}</a>
         {% endif %}
     </div>
-</div>
+{% endif %}

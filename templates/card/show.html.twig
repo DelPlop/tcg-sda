@@ -7,171 +7,161 @@
 {% block title %}{{ ('card.details'|trans({'%cardName%': card.name})) }} {{ ('card.from_edition'|trans({'%editionName%': card.edition.name})) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('card.details'|trans({'%cardName%': card.name})) }}</h2>
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('card.details'|trans({'%cardName%': card.name})) }}</h2>
 
-            {% if first is not same as(null) %}
-                <a href="{{ path('card_show', {card: first.id}) }}" title="{{ ('edition.first_card'|trans) }}" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
+        {% if first is not same as(null) %}
+            <a href="{{ path('card_show', {card: first.id}) }}" title="{{ ('edition.first_card'|trans) }}" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
+        {% endif %}
+
+        {% if prev is not same as(null) %}
+            <a href="{{ path('card_show', {card: prev.id}) }}" title="{{ ('edition.previous_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_precedente.gif" alt="&lt;" /></a>
+        {% endif %}
+
+        {% if next is not same as(null) %}
+            <a href="{{ path('card_show', {card: next.id}) }}" title="{{ ('edition.next_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_suivante.gif" alt="&gt;" /></a>
+        {% endif %}
+
+        {% if last is not same as(null) %}
+            <a href="{{ path('card_show', {card: last.id}) }}" title="{{ ('edition.last_card'|trans) }}" class="w3-button w3-hover-black {% if last is same as(card) %}w3-black{% endif %}">&raquo;</a>
+        {% endif %}
+
+        <p>
+            <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_english'|trans) }}" alt="{{ card.name }}" />
+            {% if card.hasLocalImage and locale is same as ('fr') %}
+                <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_french'|trans) }}" alt="{{ card.name }}" />
+            {% endif %}
+            <br /><br />
+
+            <strong>{{ ('card.code'|trans) }} :</strong> {{ card.code }}<br />
+
+            <strong>{{ ('card.name'|trans) }} :</strong> {{ card.name }}<br />
+
+            <strong>{{ ('card.edition'|trans) }} :</strong> <a href="{{ path('edition_cards', {edition: card.edition.id}) }}">{{ card.edition.name }}</a><br />
+
+            <strong>{{ ('card.rarity'|trans) }} :</strong> {{ card.rarity.name }}<br />
+
+            {% if card.culture is not same as(null) %}
+                <strong>{{ ('card.culture'|trans) }} :</strong> {{ card.culture.name }}<br />
             {% endif %}
 
-            {% if prev is not same as(null) %}
-                <a href="{{ path('card_show', {card: prev.id}) }}" title="{{ ('edition.previous_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_precedente.gif" alt="&lt;" /></a>
+            <strong>{{ ('card.type'|trans) }} :</strong> {{ card.type.name }}<br />
+
+            {% if card.subtype is not same as(null) %}
+                <strong>{{ ('card.subtype'|trans) }} :</strong> {{ card.subtype.name }}<br />
             {% endif %}
 
-            {% if next is not same as(null) %}
-                <a href="{{ path('card_show', {card: next.id}) }}" title="{{ ('edition.next_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_suivante.gif" alt="&gt;" /></a>
+            {% if card.phases|length > 0 %}
+                <strong>{{ ('card.phases'|trans) }} :</strong> {% for phase in card.phases %}{% if not(loop.first) %}, {% endif %}{{ phase.name }}{% endfor %}<br />
             {% endif %}
 
-            {% if last is not same as(null) %}
-                <a href="{{ path('card_show', {card: last.id}) }}" title="{{ ('edition.last_card'|trans) }}" class="w3-button w3-hover-black {% if last is same as(card) %}w3-black{% endif %}">&raquo;</a>
+            {% if card.tags|length > 0 %}
+                <strong>{{ ('card.tags'|trans) }} :</strong> {% for tag in card.tags %}{% if not(loop.first) %}, {% endif %}{{ tag.name }}{% endfor %}<br />
             {% endif %}
 
-            <p>
-                <img src="{{ imgRoot ~ edNumber }}/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_english'|trans) }}" alt="{{ card.name }}" />
-                {% if card.hasLocalImage and locale is same as ('fr') %}
-                    <img class="local-image" src="{{ imgRoot ~ edNumber }}_fr/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_french'|trans) }}" alt="{{ card.name }}" />
-                {% endif %}
+            <br />
+            <strong>{{ ('card.unique'|trans) }}</strong> {{ card.isUnique ? ('card.options.yes'|trans) : ('card.options.no'|trans) }}<br />
+
+            {% if card.isRingBearer %}
+                <strong>{{ ('card.ring_bearer'|trans) }}</strong> {{ ('card.options.yes'|trans) }}<br />
+            {% endif %}
+
+            {% if card.cost is not same as(null) %}
+                <strong>{{ ('card.cost'|trans) }} :</strong> {{ card.cost }}<br />
+            {% endif %}
+
+            {% if card.strength is not same as(null) %}
+                <strong>{{ ('card.strength'|trans) }} :</strong> {{ card.strength }}<br />
+            {% elseif card.strengthModifier is not same as(null) %}
+                <strong>{{ ('card.strength'|trans) }} :</strong> {{ card.strengthModifier }}<br />
+            {% endif %}
+
+            {% if card.vitality is not same as(null) %}
+                <strong>{{ ('card.vitality'|trans) }} :</strong> {{ card.vitality }}<br />
+            {% elseif card.vitalityModifier is not same as(null) %}
+                <strong>{{ ('card.vitality'|trans) }} :</strong> {{ card.vitalityModifier }}<br />
+            {% endif %}
+
+            {% if card.resistance is not same as(null) %}
+                <strong>{{ ('card.resistance'|trans) }} :</strong> {{ card.resistance }}<br />
+            {% elseif card.resistanceModifier is not same as(null) %}
+                <strong>{{ ('card.resistance'|trans) }} :</strong> {{ card.resistanceModifier }}<br />
+            {% endif %}
+
+            {% if card.signet is not same as(null) %}
+                <strong>{{ ('card.signet'|trans) }} :</strong> {{ card.signet }}<br />
+            {% endif %}
+
+            {% if card.siteNumber is not same as(null) %}
+                <strong>{{ ('card.site_number'|trans) }} :</strong> {{ card.siteNumber }}<br />
+            {% endif %}
+
+            {% if card.shadowNumber is not same as(null) %}
+                <strong>{{ ('card.shadow_number'|trans) }} :</strong> {{ card.shadowNumber }}<br />
+            {% endif %}
+            <br />
+
+            {% if card.text is not same as(null) %}
+                <strong>{{ ('card.text'|trans) }} :</strong> {{ (card.text)|nl2br }}<br />
+            {% endif %}
+
+            {% if card.quote is not same as(null) %}
+                <strong>{{ ('card.quote'|trans) }} :</strong> <em>"{{ (card.quote)|nl2br }}"</em><br />
+            {% endif %}
+            {% if card.text is not same as(null) or card.quote is not same as(null) %}
+                <br />
+            {% endif %}
+
+            {% if card.isRf %}
+                <strong>{{ ('card.rf'|trans) }}</strong> {{ ('card.options.yes'|trans) }}<br /><br />
+            {% endif %}
+
+            {% if card.isTengwar %}
+                <img src="{{ imgRoot }}tengwar/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_tengwar'|trans) }}" alt="" />
+            {% endif %}
+
+            {% if card.isRfa %}
+                <img class="local-image" src="{{ imgRoot }}rfa/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_rfa'|trans) }}" alt="" />
+            {% endif %}
+            {% if card.isTengwar or card.isRfa %}
                 <br /><br />
-
-                <strong>{{ ('card.code'|trans) }} :</strong> {{ card.code }}<br />
-
-                <strong>{{ ('card.name'|trans) }} :</strong> {{ card.name }}<br />
-
-                <strong>{{ ('card.edition'|trans) }} :</strong> <a href="{{ path('edition_cards', {edition: card.edition.id}) }}">{{ card.edition.name }}</a><br />
-
-                <strong>{{ ('card.rarity'|trans) }} :</strong> {{ card.rarity.name }}<br />
-
-                {% if card.culture is not same as(null) %}
-                    <strong>{{ ('card.culture'|trans) }} :</strong> {{ card.culture.name }}<br />
-                {% endif %}
-
-                <strong>{{ ('card.type'|trans) }} :</strong> {{ card.type.name }}<br />
-
-                {% if card.subtype is not same as(null) %}
-                    <strong>{{ ('card.subtype'|trans) }} :</strong> {{ card.subtype.name }}<br />
-                {% endif %}
-
-                {% if card.phases|length > 0 %}
-                    <strong>{{ ('card.phases'|trans) }} :</strong> {% for phase in card.phases %}{% if not(loop.first) %}, {% endif %}{{ phase.name }}{% endfor %}<br />
-                {% endif %}
-
-                {% if card.tags|length > 0 %}
-                    <strong>{{ ('card.tags'|trans) }} :</strong> {% for tag in card.tags %}{% if not(loop.first) %}, {% endif %}{{ tag.name }}{% endfor %}<br />
-                {% endif %}
-
-                <br />
-                <strong>{{ ('card.unique'|trans) }}</strong> {{ card.isUnique ? ('card.options.yes'|trans) : ('card.options.no'|trans) }}<br />
-
-                {% if card.isRingBearer %}
-                    <strong>{{ ('card.ring_bearer'|trans) }}</strong> {{ ('card.options.yes'|trans) }}<br />
-                {% endif %}
-
-                {% if card.cost is not same as(null) %}
-                    <strong>{{ ('card.cost'|trans) }} :</strong> {{ card.cost }}<br />
-                {% endif %}
-
-                {% if card.strength is not same as(null) %}
-                    <strong>{{ ('card.strength'|trans) }} :</strong> {{ card.strength }}<br />
-                {% elseif card.strengthModifier is not same as(null) %}
-                    <strong>{{ ('card.strength'|trans) }} :</strong> {{ card.strengthModifier }}<br />
-                {% endif %}
-
-                {% if card.vitality is not same as(null) %}
-                    <strong>{{ ('card.vitality'|trans) }} :</strong> {{ card.vitality }}<br />
-                {% elseif card.vitalityModifier is not same as(null) %}
-                    <strong>{{ ('card.vitality'|trans) }} :</strong> {{ card.vitalityModifier }}<br />
-                {% endif %}
-
-                {% if card.resistance is not same as(null) %}
-                    <strong>{{ ('card.resistance'|trans) }} :</strong> {{ card.resistance }}<br />
-                {% elseif card.resistanceModifier is not same as(null) %}
-                    <strong>{{ ('card.resistance'|trans) }} :</strong> {{ card.resistanceModifier }}<br />
-                {% endif %}
-
-                {% if card.signet is not same as(null) %}
-                    <strong>{{ ('card.signet'|trans) }} :</strong> {{ card.signet }}<br />
-                {% endif %}
-
-                {% if card.siteNumber is not same as(null) %}
-                    <strong>{{ ('card.site_number'|trans) }} :</strong> {{ card.siteNumber }}<br />
-                {% endif %}
-
-                {% if card.shadowNumber is not same as(null) %}
-                    <strong>{{ ('card.shadow_number'|trans) }} :</strong> {{ card.shadowNumber }}<br />
-                {% endif %}
-                <br />
-
-                {% if card.text is not same as(null) %}
-                    <strong>{{ ('card.text'|trans) }} :</strong> {{ (card.text)|nl2br }}<br />
-                {% endif %}
-
-                {% if card.quote is not same as(null) %}
-                    <strong>{{ ('card.quote'|trans) }} :</strong> <em>"{{ (card.quote)|nl2br }}"</em><br />
-                {% endif %}
-                {% if card.text is not same as(null) or card.quote is not same as(null) %}
-                    <br />
-                {% endif %}
-
-                {% if card.isRf %}
-                    <strong>{{ ('card.rf'|trans) }}</strong> {{ ('card.options.yes'|trans) }}<br /><br />
-                {% endif %}
-
-                {% if card.isTengwar %}
-                    <img src="{{ imgRoot }}tengwar/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_tengwar'|trans) }}" alt="" />
-                {% endif %}
-
-                {% if card.isRfa %}
-                    <img class="local-image" src="{{ imgRoot }}rfa/{{ edNumber ~ "%'03.3s"|format(card.position) }}.jpg" title="{{ ('card.in_rfa'|trans) }}" alt="" />
-                {% endif %}
-                {% if card.isTengwar or card.isRfa %}
-                    <br /><br />
-                {% endif %}
-
-                {% if card.getAlternativeCards()|length > 0 %}
-                    {{ ('card.num_of_editions'|trans({editions: card.getAlternativeCards()|length})) }}
-                    {% for otherCard in card.getAlternativeCards() %}{% if not(loop.first) %}, {% endif %}<a href="{{ path('card_show', { card: otherCard.id }) }}">{{ otherCard.code }}</a>{% endfor %}
-                    <br /><br />
-                {% endif %}
-
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    {% if app.user.ownedCards.contains(card) %}
-                        {{ ('fellowship.i_own_it'|trans) }} -
-                    {% else %}
-                        <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own_it'|trans) }}</a> -
-                    {% endif %}
-
-                    {% if app.user.wantedCards.contains(card) %}
-                        {{ ('fellowship.i_want_it'|trans) }}
-                    {% else %}
-                        <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want_it'|trans) }}</a>
-                    {% endif %}
-                {% endif %}
-            </p>
-
-            {% if first is not same as(null) %}
-                <a href="{{ path('card_show', {card: first.id}) }}" title="{{ ('edition.first_card'|trans) }}" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
             {% endif %}
 
-            {% if prev is not same as(null) %}
-                <a href="{{ path('card_show', {card: prev.id}) }}" title="{{ ('edition.previous_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_precedente.gif" alt="&lt;" /></a>
+            {% if card.getAlternativeCards()|length > 0 %}
+                {{ ('card.num_of_editions'|trans({editions: card.getAlternativeCards()|length})) }}
+                {% for otherCard in card.getAlternativeCards() %}{% if not(loop.first) %}, {% endif %}<a href="{{ path('card_show', { card: otherCard.id }) }}">{{ otherCard.code }}</a>{% endfor %}
+                <br /><br />
             {% endif %}
 
-            {% if next is not same as(null) %}
-                <a href="{{ path('card_show', {card: next.id}) }}" title="{{ ('edition.next_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_suivante.gif" alt="&gt;" /></a>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if app.user.ownedCards.contains(card) %}
+                    {{ ('fellowship.i_own_it'|trans) }} -
+                {% else %}
+                    <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own_it'|trans) }}</a> -
+                {% endif %}
+
+                {% if app.user.wantedCards.contains(card) %}
+                    {{ ('fellowship.i_want_it'|trans) }}
+                {% else %}
+                    <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want_it'|trans) }}</a>
+                {% endif %}
             {% endif %}
+        </p>
 
-            {% if last is not same as(null) %}
-                <a href="{{ path('card_show', {card: last.id}) }}" title="{{ ('edition.last_card'|trans) }}" class="w3-button w3-hover-black {% if last is same as(card) %}w3-black{% endif %}">&raquo;</a>
-            {% endif %}
-        </div>
+        {% if first is not same as(null) %}
+            <a href="{{ path('card_show', {card: first.id}) }}" title="{{ ('edition.first_card'|trans) }}" class="w3-button w3-hover-black {% if first is same as(card) %}w3-black{% endif %}">&laquo;</a>
+        {% endif %}
 
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
+        {% if prev is not same as(null) %}
+            <a href="{{ path('card_show', {card: prev.id}) }}" title="{{ ('edition.previous_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_precedente.gif" alt="&lt;" /></a>
+        {% endif %}
 
-        {{ render(controller(
-            'App\\Controller\\StaticController::bottomRight'
-        )) }}
+        {% if next is not same as(null) %}
+            <a href="{{ path('card_show', {card: next.id}) }}" title="{{ ('edition.next_card'|trans) }}" class="w3-button w3-hover-black"><img src="/img/fleche_suivante.gif" alt="&gt;" /></a>
+        {% endif %}
+
+        {% if last is not same as(null) %}
+            <a href="{{ path('card_show', {card: last.id}) }}" title="{{ ('edition.last_card'|trans) }}" class="w3-button w3-hover-black {% if last is same as(card) %}w3-black{% endif %}">&raquo;</a>
+        {% endif %}
     </div>
 {% endblock %}

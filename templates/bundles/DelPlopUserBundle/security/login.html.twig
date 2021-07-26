@@ -3,53 +3,47 @@
 {% block title %}{{ ('user.login'|trans) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('user.login'|trans) }}</h2>
-            <p>
-                {{ ('general.hello'|trans({}, 'cards')) }}<br />
-                {{ ('general.please_login'|trans({}, 'cards')) }}
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('user.login'|trans) }}</h2>
+        <p>
+            {{ ('general.hello'|trans({}, 'cards')) }}<br />
+            {{ ('general.please_login'|trans({}, 'cards')) }}
 
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-                {% if app.user %}
-                    <div>
-                        {{ ('user.logged_as'|trans) }} {{ app.user.username }}, <a href="{{ path('app_logout') }}">{{ ('user.logout'|trans) }}</a>
-                    </div>
-                {% endif %}
+            {% if app.user %}
+                <div>
+                    {{ ('user.logged_as'|trans) }} {{ app.user.username }}, <a href="{{ path('app_logout') }}">{{ ('user.logout'|trans) }}</a>
+                </div>
+            {% endif %}
 
-                <form name="login_form" method="post">
-                    <div>
-                        <label class="required inline" for="inputLogin">{{ ('form.pseudo'|trans({}, 'cards')) }}</label>
-                        <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="big-input" required autofocus />
-                    </div>
+            <form name="login_form" method="post">
+                <div>
+                    <label class="required inline" for="inputLogin">{{ ('form.pseudo'|trans({}, 'cards')) }}</label>
+                    <input type="text" value="{{ last_username }}" name="login" id="inputLogin" class="big-input" required autofocus />
+                </div>
 
-                    <div>
-                        <label class="required inline" for="inputPassword">{{ ('form.login.password'|trans) }}</label>
-                        <input type="password" name="password" id="inputPassword" class="big-input" required />
-                    </div>
+                <div>
+                    <label class="required inline" for="inputPassword">{{ ('form.login.password'|trans) }}</label>
+                    <input type="password" name="password" id="inputPassword" class="big-input" required />
+                </div>
 
-                    <input type="hidden" name="_csrf_token"
-                           value="{{ csrf_token('authenticate') }}"
-                    />
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                />
 
-                    <div>
-                        <label class="no-label">
-                            <input type="checkbox" name="_remember_me"> {{ ('form.login.remember'|trans) }}
-                        </label>
-                    </div>
+                <div>
+                    <label class="no-label">
+                        <input type="checkbox" name="_remember_me"> {{ ('form.login.remember'|trans) }}
+                    </label>
+                </div>
 
-                    <button type="submit">
-                        {{ ('user.login'|trans) }}
-                    </button>
-                </form>
-            </p>
-        </div>
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
+                <button type="submit">
+                    {{ ('user.login'|trans) }}
+                </button>
+            </form>
+        </p>
     </div>
 {% endblock %}

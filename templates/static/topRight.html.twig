@@ -1,16 +1,14 @@
 {% trans_default_domain 'cards' %}
-<div class="w3-third w3-container w3-hide-small w3-hide-medium">
-    <div class="w3-border w3-padding-large w3-padding-16 w3-center">
-        <h5>{{ ('card.looking_for'|trans) }}</h5>
+<div class="w3-border w3-padding-large w3-padding-16 w3-center">
+    <h5>{{ ('card.looking_for'|trans) }}</h5>
 
-        {{ ('card.search.enter_name_or_code'|trans) }}
-        {{ render(controller(
-            'App\\Controller\\CardController::quickSearchForm'
-        )) }}
+    {{ ('card.search.enter_name_or_code'|trans) }}
+    {{ render(controller(
+        'App\\Controller\\CardController::quickSearchForm'
+    )) }}
 
-        <em class="w3-small">{{ ('card.search.explanation'|trans)|raw }}</em>
-        {% if withSearch %}
-            <br /><br /><a href="{{ path('cards_advanced_search') }}" title="{{ ('general.advanced_search'|trans) }}">{{ ('general.advanced_search'|trans) }}</a>
-        {% endif %}
-    </div>
+    <em class="w3-small">{{ ('card.search.explanation'|trans)|raw }}</em>
+    {% if withSearch %}
+        <br /><br /><a href="{{ path('cards_advanced_search') }}" title="{{ ('general.advanced_search'|trans) }}">{{ ('general.advanced_search'|trans) }}</a>
+    {% endif %}
 </div>

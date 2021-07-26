@@ -4,56 +4,46 @@
 {% block title %}{{ ('edition.edition_cards'|trans({'%edition%': edition.name})) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('edition.edition_cards'|trans({'%edition%': edition.name})) }} ({{ cards|length }})</h2>
-            <p>
-                <table width="100%" border="1">
-                    <tr>
-                        <th>{{ ('card.code'|trans) }}</th>
-                        <th>{{ ('card.name'|trans) }}</th>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <th colspan="2">{{ ('fellowship.lists'|trans) }}</th>
-                        {% endif %}
-                    </tr>
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('edition.edition_cards'|trans({'%edition%': edition.name})) }} ({{ cards|length }})</h2>
+        <p>
+            <table width="100%" border="1">
+                <tr>
+                    <th>{{ ('card.code'|trans) }}</th>
+                    <th>{{ ('card.name'|trans) }}</th>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <th colspan="2">{{ ('fellowship.lists'|trans) }}</th>
+                    {% endif %}
+                </tr>
 
-                    {% for card in cards %}
-                    <tr>
-                        <td>{{ card.code }}</td>
+                {% for card in cards %}
+                <tr>
+                    <td>{{ card.code }}</td>
+                    <td>
+                        <a href="{{ path('card_show', {card: card.id}) }}">
+                            {{ card.name }}
+                        </a>
+                    </td>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <td>
-                            <a href="{{ path('card_show', {card: card.id}) }}">
-                                {{ card.name }}
-                            </a>
+                            {% if app.user.ownedCards.contains(card) %}
+                                {{ ('fellowship.i_own_it'|trans) }}
+                            {% else %}
+                                <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own_it'|trans) }}</a>
+                            {% endif %}
                         </td>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <td>
-                                {% if app.user.ownedCards.contains(card) %}
-                                    {{ ('fellowship.i_own_it'|trans) }}
-                                {% else %}
-                                    <a href="{{ path('user_owns_card', {card: card.id}) }}" title="{{ ('fellowship.i_own_that_card'|trans) }}">{{ ('fellowship.i_own_it'|trans) }}</a>
-                                {% endif %}
-                            </td>
 
-                            <td>
-                                {% if app.user.wantedCards.contains(card) %}
-                                    {{ ('fellowship.i_want_it'|trans) }}
-                                {% else %}
-                                    <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want_it'|trans) }}</a>
-                                {% endif %}
-                            </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </table>
-            </p>
-        </div>
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::bottomRight'
-        )) }}
+                        <td>
+                            {% if app.user.wantedCards.contains(card) %}
+                                {{ ('fellowship.i_want_it'|trans) }}
+                            {% else %}
+                                <a href="{{ path('user_wants_card', {card: card.id}) }}" title="{{ ('fellowship.i_want_that_card'|trans) }}">{{ ('fellowship.i_want_it'|trans) }}</a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </p>
     </div>
 {% endblock %}

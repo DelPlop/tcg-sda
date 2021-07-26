@@ -4,36 +4,24 @@
 {% block title %}{{ ('general.my_account'|trans) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('general.my_account'|trans) }}</h2>
-            <p>
-                {{ ('text.show_your_friends'|trans) }}
-                <br /><br />
-                <a href="{{ path('user_owned_cards', {user: user.id}) }}" title="{{ ('general.see_my_owned_cards'|trans) }}">{{ ('general.my_owned_cards'|trans) }}</a><br />
-                <a href="{{ path('user_wanted_cards', {user: user.id}) }}" title="{{ ('general.see_my_searched_cards'|trans) }}">{{ ('general.my_searched_cards'|trans) }}</a><br />
-            </p>
-        </div>
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('general.my_account'|trans) }}</h2>
+        <p>
+            {{ ('text.show_your_friends'|trans) }}
+            <br /><br />
+            <a href="{{ path('user_owned_cards', {user: user.id}) }}" title="{{ ('general.see_my_owned_cards'|trans) }}">{{ ('general.my_owned_cards'|trans) }}</a><br />
+            <a href="{{ path('user_wanted_cards', {user: user.id}) }}" title="{{ ('general.see_my_searched_cards'|trans) }}">{{ ('general.my_searched_cards'|trans) }}</a><br />
+        </p>
 
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
-
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('general.my_informations'|trans) }}</h2>
-            <p>
-                {{ ('text.edit_your_infos'|trans) }}
-                <br />
-                {{ form_start(form) }}
-                    <label class="inline" for="user_edit_form_plainPassword">{{ ('form.login.password'|trans({}, 'messages')) }}</label> {{ form_widget(form.plainPassword) }}<br />
-                    <label class="inline" for="user_edit_form_email">{{ ('form.login.email'|trans({}, 'messages')) }}</label> {{ form_widget(form.email) }}<br />
-                    {{ form_widget(form.valid_form) }}
-                {{ form_end(form) }}
-            </p>
-        </div>
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::bottomRight'
-        )) }}
+        <h2 class="w3-text-amber h2-bottom">{{ ('general.my_informations'|trans) }}</h2>
+        <p>
+            {{ ('text.edit_your_infos'|trans) }}
+            <br />
+            {{ form_start(form) }}
+                <label class="inline" for="user_edit_form_plainPassword">{{ ('form.login.password'|trans({}, 'messages')) }}</label> {{ form_widget(form.plainPassword) }}<br />
+                <label class="inline" for="user_edit_form_email">{{ ('form.login.email'|trans({}, 'messages')) }}</label> {{ form_widget(form.email) }}<br />
+                {{ form_widget(form.valid_form) }}
+            {{ form_end(form) }}
+        </p>
     </div>
 {% endblock %}

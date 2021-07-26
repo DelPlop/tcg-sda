@@ -4,36 +4,26 @@
 {% block title %}{{ ('general.rules'|trans) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('general.the_rules'|trans) }}</h2>
-            <p>
-                Grâce à un visiteur du site, j'ai pu récupérer plusieurs fichiers de règles du jeu au format PDF. Ces fichiers sont en anglais, et ne sont pas forcément très à jour, mais c'est tout ce que j'ai pu trouver et j'espère que ça pourra vous servir.
-                <br /><br />
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('general.the_rules'|trans) }}</h2>
+        <p>
+            Grâce à un visiteur du site, j'ai pu récupérer plusieurs fichiers de règles du jeu au format PDF. Ces fichiers sont en anglais, et ne sont pas forcément très à jour, mais c'est tout ce que j'ai pu trouver et j'espère que ça pourra vous servir.
+            <br /><br />
 
-                Voici les différents fichiers :
-            <ul>
-                <li><a href="/files/fellowship_rules.pdf">Livret de règles du bloc Communauté</a></li>
-                <li><a href="/files/hunters_rules.pdf">Livret de règles du bloc Chasseurs</a></li>
-                <li><a href="/files/complete_rules.pdf">Règles complètes</a></li>
-                <li><a href="/files/short_rules.pdf">Règles allégées</a></li>
-            </ul>
-            <br />
+            Voici les différents fichiers :
+        <ul>
+            <li><a href="/files/fellowship_rules.pdf">Livret de règles du bloc Communauté</a></li>
+            <li><a href="/files/hunters_rules.pdf">Livret de règles du bloc Chasseurs</a></li>
+            <li><a href="/files/complete_rules.pdf">Règles complètes</a></li>
+            <li><a href="/files/short_rules.pdf">Règles allégées</a></li>
+        </ul>
+        <br />
 
-            Un autre visiteur a mis à disposition ce lien Google Drive vers une
-            <a href="https://drive.google.com/file/d/1c7TIBzoqs1Wmbbo-qJ7JZU7K8BOWhDp0/view">application pour apprendre les règles</a>
-            (qui se trouvait sur un CD, à l'époque ^^).<br />
-            Attention, je ne suis pas à l'origine du fichier et ce n'est pas mon Google Drive
-            donc je ne suis pas responsable si le fichier disparaît, est corrompu ou autre ;)
-            </p>
-        </div>
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::bottomRight'
-        )) }}
+        Un autre visiteur a mis à disposition ce lien Google Drive vers une
+        <a href="https://drive.google.com/file/d/1c7TIBzoqs1Wmbbo-qJ7JZU7K8BOWhDp0/view">application pour apprendre les règles</a>
+        (qui se trouvait sur un CD, à l'époque ^^).<br />
+        Attention, je ne suis pas à l'origine du fichier et ce n'est pas mon Google Drive
+        donc je ne suis pas responsable si le fichier disparaît, est corrompu ou autre ;)
+        </p>
     </div>
 {% endblock %}

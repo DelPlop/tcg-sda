@@ -3,66 +3,51 @@
 {% block title %}{{ ('general.home'|trans) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">Site Français sur le TCG du Seigneur des Anneaux</h2>
-            <p>
-                <img src="/img/main.jpg" alt="" style="float: left;margin: 0 1em 0.8em 0" />
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">Site Français sur le TCG du Seigneur des Anneaux</h2>
+        <p>
+            <img src="/img/main.jpg" alt="" style="float: left;margin: 0 1em 0.8em 0" />
 
-                Tout d'abord pourquoi ce site ?<br />
-                Voilà une bonne question...<br /><br />
+            Tout d'abord pourquoi ce site ?<br />
+            Voilà une bonne question...<br /><br />
 
-                J'ai commencé à jouer au jeu de cartes à collectionner (JCC en français ou TCG en anglais) du Seigneur des Anneaux de Decipher en janvier 2004 et je me suis rendu compte, en cherchant des informations sur internet, qu'il n'existait pas de site français ayant une base de données des cartes.<br /><br />
+            J'ai commencé à jouer au jeu de cartes à collectionner (JCC en français ou TCG en anglais) du Seigneur des Anneaux de Decipher en janvier 2004 et je me suis rendu compte, en cherchant des informations sur internet, qu'il n'existait pas de site français ayant une base de données des cartes.<br /><br />
 
-                J'ai donc décidé de développer mon propre site et je vous y souhaite la bienvenue !<br /><br />
+            J'ai donc décidé de développer mon propre site et je vous y souhaite la bienvenue !<br /><br />
 
-                Le site se présente sous la forme d'une base de données des cartes du jeu, classées par <a href="{{ path('editions_list') }}">éditions</a> et avec les images.<br />
-                Vous pouvez rechercher rapidement des cartes par mots-clé.<br />
-                Un module de <a href="{{ path('cards_advanced_search') }}">recherche avancée</a> est également disponible.
-            </p>
-        </div>
+            Le site se présente sous la forme d'une base de données des cartes du jeu, classées par <a href="{{ path('editions_list') }}">éditions</a> et avec les images.<br />
+            Vous pouvez rechercher rapidement des cartes par mots-clé.<br />
+            Un module de <a href="{{ path('cards_advanced_search') }}">recherche avancée</a> est également disponible.
+        </p>
 
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
+        <h2 class="w3-text-amber h2-bottom">Mise à jour du site</h2>
+        <p>
+            Comme vous pouvez le constater, la grosse mise à jour, tant attendue (et surtout tant reportée...) est terminée !<br />
+            Au programme : refonte graphique (il était temps) et du socle technique (ça, c'est moins visible, mais il était temps aussi ^^)<br /><br />
 
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">Mise à jour du site</h2>
-            <p>
-                Comme vous pouvez le constater, la grosse mise à jour, tant attendue (et surtout tant reportée...) est terminée !<br />
-                Au programme : refonte graphique (il était temps) et du socle technique (ça, c'est moins visible, mais il était temps aussi ^^)<br /><br />
+            Cette version est désormais (pleinement) compatible mobile, pour emporter vos listes partout :)<br />
+            Les dernières fontionnalités, notamment la gestion et l'export de liste, sont désormais prêtes.<br /><br />
 
-                Cette version est désormais (pleinement) compatible mobile, pour emporter vos listes partout :)<br />
-                Les dernières fontionnalités, notamment la gestion et l'export de liste, sont désormais prêtes.<br /><br />
+            D'autre part, si vous vous étiez connecté récemment (depuis le 01/01/{{ date('-2 years')|date('Y') }}),
+            tout est conservé et vous retrouverez toutes vos listes !<br />
+            Dans le cas contraire, vos données ont été anonymisées pour respecter la fameuse RGPD :(<br /><br />
 
-                D'autre part, si vous vous étiez connecté récemment (depuis le 01/01/{{ date('-2 years')|date('Y') }}),
-                tout est conservé et vous retrouverez toutes vos listes !<br />
-                Dans le cas contraire, vos données ont été anonymisées pour respecter la fameuse RGPD :(<br /><br />
+            J'ai définitivement supprimé certaines pages , mais je doute qu'elles manquent à grand monde ;)
+        </p>
 
-                J'ai définitivement supprimé certaines pages , mais je doute qu'elles manquent à grand monde ;)
-            </p>
-        </div>
+        <h2 class="w3-text-amber h2-bottom">Vie du site / du jeu</h2>
+        <p>
+            <h3>Fonctionnement de la communauté</h3>
+            En vous inscrivant au site, vous bénéficierez de fonctionnalités avancées de gestion de listes.<br />
+            Vous pourrez ainsi créer vos listes de cartes possédées et/ou recherchées, les présenter à vos amis.
+            Vous pourrez même les exporter en CSV pour les emporter avec vous !
 
-        {{ render(controller(
-            'App\\Controller\\StaticController::bottomRight',
-            {'withMargin': false}
-        )) }}
+            <h3>Le jeu</h3>
+            Comme vous avez pu le constater, le jeu n'est plus supporté par l'éditeur (Decipher).<br />
+            Il en résulte une pénurie de ressources au niveau national mais aussi international : impossible de trouver les règles ou une côte par exemple.<br /><br />
 
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">Vie du site / du jeu</h2>
-            <p>
-                <h3>Fonctionnement de la communauté</h3>
-                En vous inscrivant au site, vous bénéficierez de fonctionnalités avancées de gestion de listes.<br />
-                Vous pourrez ainsi créer vos listes de cartes possédées et/ou recherchées, les présenter à vos amis.
-                Vous pourrez même les exporter en CSV pour les emporter avec vous !
-
-                <h3>Le jeu</h3>
-                Comme vous avez pu le constater, le jeu n'est plus supporté par l'éditeur (Decipher).<br />
-                Il en résulte une pénurie de ressources au niveau national mais aussi international : impossible de trouver les règles ou une côte par exemple.<br /><br />
-
-                J'ai mis à disposition sur le site tout ce que j'ai en ma possession, malheureusement, ce n'est pas grand chose.<br />
-                Je suis désolée de ne pas pouvoir aider plus la communauté, je trouve dommage qu'Hexagonal n'ait pas (en partie au moins) pris le relais de l'éditeur lorsque celui-ci a arrêté son activité.
-            </p>
-        </div>
+            J'ai mis à disposition sur le site tout ce que j'ai en ma possession, malheureusement, ce n'est pas grand chose.<br />
+            Je suis désolée de ne pas pouvoir aider plus la communauté, je trouve dommage qu'Hexagonal n'ait pas (en partie au moins) pris le relais de l'éditeur lorsque celui-ci a arrêté son activité.
+        </p>
     </div>
 {% endblock %}

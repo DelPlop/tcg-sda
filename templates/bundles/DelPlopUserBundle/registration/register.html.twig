@@ -4,48 +4,38 @@
 {% block title %}{{ ('general.join_fellowship'|trans({}, 'cards')) }}{% endblock %}
 
 {% block body %}
-    <div class="w3-row w3-padding-64">
-        <div class="w3-twothird w3-container">
-            <h2 class="w3-text-amber">{{ ('general.join_fellowship'|trans({}, 'cards')) }}</h2>
-            <p>
-                {{ ('fellowship.join_explanation'|trans({}, 'cards'))|raw }}
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('general.join_fellowship'|trans({}, 'cards')) }}</h2>
+        <p>
+            {{ ('fellowship.join_explanation'|trans({}, 'cards'))|raw }}
 
-                {% for flashError in app.flashes('verify_email_error') %}
-                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-                {% endfor %}
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
 
-                {{ form_start(registrationForm, {
-                    attr: {class: 'user-form'}
-                }) }}
-                {{ form_row(registrationForm.login, {
-                    label: ('form.pseudo'|trans({}, 'cards')),
-                    row_attr: {class: ''},
-                    attr: {class: 'big-input'}
-                }) }}
-                {{ form_row(registrationForm.plainPassword, {
-                    label: ('form.login.password'|trans),
-                    row_attr: {class: ''},
-                    attr: {class: 'big-input'}
-                }) }}
-                {{ form_row(registrationForm.email, {
-                    label: ('form.login.email'|trans),
-                    row_attr: {class: ''},
-                    attr: {class: 'big-input'}
-                }) }}
+            {{ form_start(registrationForm, {
+                attr: {class: 'user-form'}
+            }) }}
+            {{ form_row(registrationForm.login, {
+                label: ('form.pseudo'|trans({}, 'cards')),
+                row_attr: {class: ''},
+                attr: {class: 'big-input'}
+            }) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: ('form.login.password'|trans),
+                row_attr: {class: ''},
+                attr: {class: 'big-input'}
+            }) }}
+            {{ form_row(registrationForm.email, {
+                label: ('form.login.email'|trans),
+                row_attr: {class: ''},
+                attr: {class: 'big-input'}
+            }) }}
 
-                <button type="submit">
-                    {{ ('user.register'|trans) }}
-                </button>
-                {{ form_end(registrationForm) }}
-            </p>
-        </div>
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::topRight'
-        )) }}
-
-        {{ render(controller(
-            'App\\Controller\\StaticController::bottomRight'
-        )) }}
+            <button type="submit">
+                {{ ('user.register'|trans) }}
+            </button>
+            {{ form_end(registrationForm) }}
+        </p>
     </div>
 {% endblock %}
