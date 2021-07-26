@@ -22,11 +22,16 @@ use Twig\Environment;
 
 class UserController extends AbstractController
 {
-    public function list(UserRepository $userRepository): Response
+    public function list(Request $request, UserRepository $userRepository): Response
     {
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $userRepository->getPaginator($offset, ['anonymizedAt' => null]);
+
         return $this->render('user/list.html.twig', [
             'activePage' => 'users',
-            'users' => $userRepository->findBy(['anonymizedAt' => null])
+            'users' => $paginator,
+            'previous' => $offset - UserRepository::ITEM_PER_PAGE,
+            'next' => min(count($paginator), $offset + UserRepository::ITEM_PER_PAGE)
         ]);
     }
 

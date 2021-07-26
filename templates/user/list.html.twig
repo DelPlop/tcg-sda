@@ -7,6 +7,21 @@
     <div class="w3-twothird w3-container">
         <h2 class="w3-text-amber">{{ ('fellowship.members'|trans) }} ({{ users|length }})</h2>
         <p>
+            <div class="w3-center">
+                {% if previous >= 0 %}
+                    <a title="{{ ('card.previous_page'|trans) }}" href="{{ path('users_list', { offset: previous }) }}" class="w3-button w3-hover-black">
+                        <img src="/img/fleche_precedente.gif" alt="&laquo;" />
+                    </a>
+                {% endif %}
+
+                {% if next < users|length %}
+                    <a title="{{ ('card.next_page'|trans) }}" href="{{ path('users_list', { offset: next }) }}" class="w3-button w3-hover-black">
+                        <img src="/img/fleche_suivante.gif" alt="&raquo;" />
+                    </a>
+                {% endif %}
+            </div>
+
+            <br />
             <table width="100%" border="1" class="w3-left-align">
                 <tr>
                     <th>{{ ('form.pseudo'|trans) }}</th>
@@ -36,6 +51,21 @@
                     </tr>
                 {% endfor %}
             </table>
+            <br />
+
+            <div class="w3-center">
+                {% if previous >= 0 %}
+                    <a title="{{ ('card.previous_page'|trans) }}" href="{{ path('users_list', { offset: previous }) }}" class="w3-button w3-hover-black">
+                        <img src="/img/fleche_precedente.gif" alt="&laquo;" />
+                    </a>
+                {% endif %}
+
+                {% if next < users|length %}
+                    <a title="{{ ('card.next_page'|trans) }}" href="{{ path('users_list', { offset: next }) }}" class="w3-button w3-hover-black">
+                        <img src="/img/fleche_suivante.gif" alt="&raquo;" />
+                    </a>
+                {% endif %}
+            </div>
         </p>
     </div>
 {% endblock %}

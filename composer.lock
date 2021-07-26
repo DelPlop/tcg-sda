@@ -175,15 +175,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DelPlop/sf-user-bundle.git",
-                "reference": "043540bb8d4b29ee53868c5de9e64bbb782b56f1"
+                "reference": "2606455931924d3f1d0e2bd2c5290e3b837e8dea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/043540bb8d4b29ee53868c5de9e64bbb782b56f1",
-                "reference": "043540bb8d4b29ee53868c5de9e64bbb782b56f1",
+                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/2606455931924d3f1d0e2bd2c5290e3b837e8dea",
+                "reference": "2606455931924d3f1d0e2bd2c5290e3b837e8dea",
                 "shasum": ""
             },
             "require": {
+                "doctrine/doctrine-bundle": "^2.4",
+                "doctrine/orm": "^2.9",
                 "php": ">=8.0",
                 "symfony/rate-limiter": "5.3.*",
                 "symfony/security-bundle": "5.3.*",
@@ -211,7 +213,7 @@
             "support": {
                 "source": "https://github.com/DelPlop/sf-user-bundle/tree/master"
             },
-            "time": "2021-07-25T17:01:04+00:00"
+            "time": "2021-07-26T16:55:13+00:00"
         },
         {
             "name": "doctrine/annotations",
