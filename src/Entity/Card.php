@@ -229,18 +229,6 @@ class Card implements Translatable
         return $this;
     }
 
-    public function getLocalName(): ?string
-    {
-        return $this->localName;
-    }
-
-    public function setLocalName(?string $localName): self
-    {
-        $this->localName = $localName;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -393,30 +381,6 @@ class Card implements Translatable
     public function setIsAuthorized(bool $isAuthorized): self
     {
         $this->isAuthorized = $isAuthorized;
-
-        return $this;
-    }
-
-    public function getLocalText(): ?string
-    {
-        return $this->localText;
-    }
-
-    public function setLocalText(?string $localText): self
-    {
-        $this->localText = $localText;
-
-        return $this;
-    }
-
-    public function getLocalQuote(): ?string
-    {
-        return $this->localQuote;
-    }
-
-    public function setLocalQuote(?string $localQuote): self
-    {
-        $this->localQuote = $localQuote;
 
         return $this;
     }
