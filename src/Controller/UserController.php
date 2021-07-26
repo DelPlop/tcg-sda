@@ -132,7 +132,6 @@ class UserController extends AbstractController
             $content .= " <a href=\"mailto:".$security->getUser()->getEmail()."\">".$security->getUser()->getEmail()."</a>.\n\n";
             $content .= $translator->trans('contact.signature', [], 'cards');
             $content .= " <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">" . $translator->trans('general.site_name', [], 'cards') . "</a>";
-            dd($content);
 
             $headers = array(
                 'From'         => $from,
