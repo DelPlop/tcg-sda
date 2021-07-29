@@ -13,6 +13,12 @@
            value="{{ csrf_token('authenticate') }}"
     />
 
+    <div>
+        <label class="no-label">
+            <input type="checkbox" name="_remember_me"> {{ ('form.login.remember'|trans) }}
+        </label>
+    </div>
+
     <button type="submit">
         {{ ('user.login'|trans) }}
     </button>
