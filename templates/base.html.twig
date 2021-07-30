@@ -31,7 +31,7 @@
                 <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'search' %}w3-theme-l1{% endif %}" href="{{ path('cards_advanced_search') }}" title="{{ ('general.advanced_search'|trans) }}">{{ ('general.search'|trans) }}</a>
                 <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'rules' %}w3-theme-l1{% endif %}" href="{{ path('rules') }}" title="{{ ('general.rules'|trans) }}">{{ ('general.rules'|trans) }}</a>
                 <a class="w3-bar-item w3-button w3-hide-small w3-hover-white {% if activePage == 'qa' %}w3-theme-l1{% endif %}" href="{{ path('qa') }}" title="{{ ('general.qa'|trans) }}">{{ ('general.faq'|trans) }}</a>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'users' %}w3-theme-l1{% endif %}" href="{{ path('users_list') }}" title="{{ ('general.fellowship'|trans) }}">{{ ('general.fellowship'|trans) }}</a>
                     <a class="w3-bar-item w3-button w3-hover-white {% if activePage == 'lists' %}w3-theme-l1{% endif %}" href="{{ path('user_show', {user: app.user.id}) }}" title="{{ ('general.my_account'|trans) }}">{{ ('general.my_account'|trans) }}</a>
                 {% endif %}

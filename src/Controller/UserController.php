@@ -58,7 +58,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            if ($security->isGranted('IS_AUTHENTICATED_FULLY')
+            if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')
                 && $security->getUser() instanceof UserInterface
                 && $security->getUser() === $user
             ) {

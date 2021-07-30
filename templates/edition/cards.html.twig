@@ -26,7 +26,7 @@
                 <tr>
                     <th>{{ ('card.code'|trans) }}</th>
                     <th>{{ ('card.name'|trans) }}</th>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <th colspan="2">{{ ('fellowship.lists'|trans) }}</th>
                     {% endif %}
                 </tr>
@@ -39,7 +39,7 @@
                             {{ card.name }}
                         </a>
                     </td>
-                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <td>
                             {% if app.user.ownedCards.contains(card) %}
                                 {{ ('fellowship.i_own_it'|trans) }}

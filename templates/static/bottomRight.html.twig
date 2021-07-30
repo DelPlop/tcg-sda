@@ -3,7 +3,7 @@
     <div class="w3-border w3-padding-large w3-padding-16 w3-center {{ withMargin ? 'margin-top' : '' }}">
         <h5>{{ ('general.fellowship'|trans) }}</h5>
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             {{ ('general.welcome_user'|trans({'%username%': app.user.login}))|raw }}<br /><br />
             <a href="{{ path('user_show', {user: app.user.id}) }}" title="{{ ('general.my_account'|trans) }}">{{ ('general.my_account'|trans) }}</a><br />
             <a href="{{ path('user_owned_cards', {user: app.user.id}) }}" title="{{ ('general.see_my_owned_cards'|trans) }}">{{ ('general.my_owned_cards'|trans) }}</a><br />
