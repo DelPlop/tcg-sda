@@ -4,6 +4,7 @@ user_bundle_routes:
 login:
     path: /communaute/connexion
     controller: DelPlop\UserBundle\Controller\SecurityController::login
+    methods: [GET, POST]
 
 logout:
     path: /communaute/deconnexion
@@ -13,6 +14,7 @@ logout:
 register:
     path: /communaute/rejoindre
     controller: DelPlop\UserBundle\Controller\RegistrationController::register
+    methods: [GET, POST]
 
 admin:
     path: /admin
@@ -112,10 +114,12 @@ user_stops_wanting_card:
 wanted_card_edit_ajax:
     path: /carte-recherchee/{id}/sauver
     controller: App\Controller\CardController::saveWanted
+    methods: POST
 
 owned_card_edit_ajax:
     path: /carte-possedee/{id}/sauver
     controller: App\Controller\CardController::saveOwned
+    methods: POST
 
 export_owned_cards:
     path: /communaute/compagnon/export-cartes-possedees/{id}
