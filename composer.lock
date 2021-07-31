@@ -175,18 +175,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DelPlop/sf-user-bundle.git",
-                "reference": "a2aaa99f9bcf3dbc688c7a6af4b109beb7857d77"
+                "reference": "84cf5d990651553b3be6894d45cbca50fc51606d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/a2aaa99f9bcf3dbc688c7a6af4b109beb7857d77",
-                "reference": "a2aaa99f9bcf3dbc688c7a6af4b109beb7857d77",
+                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/84cf5d990651553b3be6894d45cbca50fc51606d",
+                "reference": "84cf5d990651553b3be6894d45cbca50fc51606d",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "^2.4",
                 "doctrine/orm": "^2.9",
                 "php": ">=8.0",
+                "symfony/mailjet-mailer": "^5.3",
                 "symfony/rate-limiter": "5.3.*",
                 "symfony/security-bundle": "5.3.*",
                 "symfony/twig-bundle": "^5.3",
@@ -214,7 +215,7 @@
             "support": {
                 "source": "https://github.com/DelPlop/sf-user-bundle/tree/master"
             },
-            "time": "2021-07-31T06:24:51+00:00"
+            "time": "2021-07-31T12:14:41+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -4632,6 +4633,71 @@
                 }
             ],
             "time": "2021-07-23T15:55:36+00:00"
+        },
+        {
+            "name": "symfony/mailjet-mailer",
+            "version": "v5.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mailjet-mailer.git",
+                "reference": "98d2ddedd99e68b46542a40f8d8dab928b349a00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mailjet-mailer/zipball/98d2ddedd99e68b46542a40f8d8dab928b349a00",
+                "reference": "98d2ddedd99e68b46542a40f8d8dab928b349a00",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/mailer": "^4.4|^5.0"
+            },
+            "require-dev": {
+                "symfony/http-client": "^4.4|^5.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\Bridge\\Mailjet\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Mailjet Mailer Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/mailjet-mailer/tree/v5.3.4"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-07-22T07:44:37+00:00"
         },
         {
             "name": "symfony/mime",
@@ -9134,16 +9200,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.7",
+            "version": "9.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5"
+                "reference": "191768ccd5c85513b4068bdbe99bb6390c7d54fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d0dc8b6999c937616df4fb046792004b33fd31c5",
-                "reference": "d0dc8b6999c937616df4fb046792004b33fd31c5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/191768ccd5c85513b4068bdbe99bb6390c7d54fb",
+                "reference": "191768ccd5c85513b4068bdbe99bb6390c7d54fb",
                 "shasum": ""
             },
             "require": {
@@ -9155,7 +9221,7 @@
                 "ext-xml": "*",
                 "ext-xmlwriter": "*",
                 "myclabs/deep-copy": "^1.10.1",
-                "phar-io/manifest": "^2.0.1",
+                "phar-io/manifest": "^2.0.3",
                 "phar-io/version": "^3.0.2",
                 "php": ">=7.3",
                 "phpspec/prophecy": "^1.12.1",
@@ -9221,7 +9287,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.8"
             },
             "funding": [
                 {
@@ -9233,7 +9299,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-07-19T06:14:47+00:00"
+            "time": "2021-07-31T15:17:34+00:00"
         },
         {
             "name": "sebastian/cli-parser",
