@@ -44,6 +44,9 @@
                     {{ ('user.login'|trans) }}
                 </button>
             </form>
+            <br />
+
+            <a href="{{ path('app_forgot_password_request') }}">{{ ('form.login.password_lost'|trans) }}</a>
         </p>
     </div>
 {% endblock %}

@@ -16,6 +16,21 @@ register:
     controller: DelPlop\UserBundle\Controller\RegistrationController::register
     methods: [GET, POST]
 
+app_forgot_password_request:
+    path: /communaute/mot-de-passe-oublie
+    controller: DelPlop\UserBundle\Controller\ResetPasswordController::request
+    methods: [GET, POST]
+
+app_check_email:
+    path: /communaute/rappel-mot-de-passe
+    controller: DelPlop\UserBundle\Controller\ResetPasswordController::checkEmail
+    methods: GET
+
+app_reset_password:
+    path: /communaute/change-mot-de-passe/{token}
+    controller: DelPlop\UserBundle\Controller\ResetPasswordController::reset
+    methods: [GET, POST]
+
 admin:
     path: /admin
     controller: App\Controller\Admin\DashboardController::index

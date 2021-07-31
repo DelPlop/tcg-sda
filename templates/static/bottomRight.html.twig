@@ -15,7 +15,8 @@
             )) }}
             <br /><br />
 
-            <a href="{{ path('register') }}" title="{{ ('general.join_fellowship'|trans) }}">{{ ('fellowship.join'|trans) }}</a>
+            <a href="{{ path('register') }}" title="{{ ('general.join_fellowship'|trans) }}">{{ ('fellowship.join'|trans) }}</a> -
+            <a href="{{ path('app_forgot_password_request') }}">{{ ('form.login.password_lost'|trans({}, 'messages')) }}</a>
         {% endif %}
     </div>
 {% endif %}

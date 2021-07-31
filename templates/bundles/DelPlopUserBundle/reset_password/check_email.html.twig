@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ('password_reset.confirm_title'|trans) }}{% endblock %}
+
+{% block body %}
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('password_reset.confirm_title'|trans) }}</h2>
+
+        <p>
+            {{ ('password_reset.confirm_text'|trans) }} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            <br /><br />
+            {{ ('password_reset.try_again'|trans) }}
+        </p>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ('user.reinit_password'|trans) }}{% endblock %}
+
+{% block body %}
+    <div class="w3-twothird w3-container">
+        <h2 class="w3-text-amber">{{ ('user.reinit_password'|trans) }}</h2>
+        <p>
+            {{ form_start(resetForm, {
+                attr: {class: ''}
+            }) }}
+                {{ form_row(resetForm.plainPassword) }}
+                <button type="submit">
+                    {{ ('user.reinit'|trans) }}
+                </button>
+            {{ form_end(resetForm) }}
+        </p>
+    </div>
+{% endblock %}

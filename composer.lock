@@ -175,12 +175,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DelPlop/sf-user-bundle.git",
-                "reference": "2606455931924d3f1d0e2bd2c5290e3b837e8dea"
+                "reference": "a2aaa99f9bcf3dbc688c7a6af4b109beb7857d77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/2606455931924d3f1d0e2bd2c5290e3b837e8dea",
-                "reference": "2606455931924d3f1d0e2bd2c5290e3b837e8dea",
+                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/a2aaa99f9bcf3dbc688c7a6af4b109beb7857d77",
+                "reference": "a2aaa99f9bcf3dbc688c7a6af4b109beb7857d77",
                 "shasum": ""
             },
             "require": {
@@ -190,7 +190,8 @@
                 "symfony/rate-limiter": "5.3.*",
                 "symfony/security-bundle": "5.3.*",
                 "symfony/twig-bundle": "^5.3",
-                "symfony/yaml": "5.3.*"
+                "symfony/yaml": "5.3.*",
+                "symfonycasts/reset-password-bundle": "^1.9"
             },
             "default-branch": true,
             "type": "symfony-bundle",
@@ -213,7 +214,7 @@
             "support": {
                 "source": "https://github.com/DelPlop/sf-user-bundle/tree/master"
             },
-            "time": "2021-07-26T16:55:13+00:00"
+            "time": "2021-07-31T06:24:51+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -7963,6 +7964,57 @@
                 }
             ],
             "time": "2021-07-29T06:20:01+00:00"
+        },
+        {
+            "name": "symfonycasts/reset-password-bundle",
+            "version": "v1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SymfonyCasts/reset-password-bundle.git",
+                "reference": "775e847613737f55cf06c6a7457f4bcf8ce258e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SymfonyCasts/reset-password-bundle/zipball/775e847613737f55cf06c6a7457f4bcf8ce258e5",
+                "reference": "775e847613737f55cf06c6a7457f4bcf8ce258e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/config": "^4.4 | ^5.0",
+                "symfony/dependency-injection": "^4.4 | ^5.0",
+                "symfony/deprecation-contracts": "^2.2",
+                "symfony/http-kernel": "^4.4 | ^5.0"
+            },
+            "conflict": {
+                "doctrine/orm": "<2.7",
+                "symfony/framework-bundle": "<4.4",
+                "symfony/http-foundation": "<4.4"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^2.0.3",
+                "doctrine/orm": "^2.7",
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "symfony/framework-bundle": "^4.4 | ^5.0",
+                "symfony/phpunit-bridge": "^5.0",
+                "vimeo/psalm": "^4.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "SymfonyCasts\\Bundle\\ResetPassword\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony bundle that adds password reset functionality.",
+            "support": {
+                "issues": "https://github.com/SymfonyCasts/reset-password-bundle/issues",
+                "source": "https://github.com/SymfonyCasts/reset-password-bundle/tree/v1.9.1"
+            },
+            "time": "2021-07-12T18:59:28+00:00"
         },
         {
             "name": "twig/extra-bundle",
