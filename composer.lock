@@ -175,12 +175,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DelPlop/sf-user-bundle.git",
-                "reference": "84cf5d990651553b3be6894d45cbca50fc51606d"
+                "reference": "2f690673f1949de41493698e488cc81e412f04dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/84cf5d990651553b3be6894d45cbca50fc51606d",
-                "reference": "84cf5d990651553b3be6894d45cbca50fc51606d",
+                "url": "https://api.github.com/repos/DelPlop/sf-user-bundle/zipball/2f690673f1949de41493698e488cc81e412f04dd",
+                "reference": "2f690673f1949de41493698e488cc81e412f04dd",
                 "shasum": ""
             },
             "require": {
@@ -215,7 +215,7 @@
             "support": {
                 "source": "https://github.com/DelPlop/sf-user-bundle/tree/master"
             },
-            "time": "2021-07-31T12:14:41+00:00"
+            "time": "2021-07-31T16:37:42+00:00"
         },
         {
             "name": "doctrine/annotations",
