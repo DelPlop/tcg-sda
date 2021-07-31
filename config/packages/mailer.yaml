@@ -1,3 +1,3 @@
 framework:
     mailer:
-        dsn: native://default
+        dsn: '%env(MAILER_DSN)%'

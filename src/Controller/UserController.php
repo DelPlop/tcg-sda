@@ -121,7 +121,13 @@ class UserController extends AbstractController
         ]));
     }
 
-    public function contact(ApplicationUser $user, Environment $twig, Request $request, Security $security, TranslatorInterface $translator): Response
+    public function contact(
+        ApplicationUser $user,
+        Environment $twig,
+        Request $request,
+        Security $security,
+        TranslatorInterface $translator
+    ): Response
     {
         $form = $this->createForm(UserContactFormType::class, [], [
             'action' => $this->generateUrl('user_contact', ['user' => $user->getId()]),
@@ -137,6 +143,11 @@ class UserController extends AbstractController
             $subject = $translator->trans('contact.object', [], 'cards') . ' ' . $translator->trans('general.site_name', [], 'cards');
             $dest = $user->getLogin().' <'.$user->getEmail().'>';
             $from = $security->getUser()->getLogin().' <'.$security->getUser()->getEmail().'>';
+            $headers = array(
+                'From'         => $from,
+                'Reply-To'     => $from,
+                'Content-type' => 'text/html; charset=utf-8'
+            );
 
             $content = $translator->trans('general.hello_user', ['%username%' => $user->getLogin()], 'cards') . "\n";
             $content .= $translator->trans('contact.user_sent_you_from', ['%username%' => $security->getUser()->getLogin()], 'cards');
@@ -147,13 +158,6 @@ class UserController extends AbstractController
             $content .= " <a href=\"mailto:".$security->getUser()->getEmail()."\">".$security->getUser()->getEmail()."</a>.\n\n";
             $content .= $translator->trans('contact.signature', [], 'cards');
             $content .= " <a href=\"https://www.tcg-seigneur-des-anneaux.fr\">" . $translator->trans('general.site_name', [], 'cards') . "</a>";
-
-            $headers = array(
-                'From'         => $from,
-                'Reply-To'     => $from,
-                'Content-type' => 'text/html; charset=utf-8'
-            );
-
             mail($dest, $subject, nl2br($content), $headers);
 
             return new Response($twig->render('user/contact.html.twig', [
