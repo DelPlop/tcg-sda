@@ -35,24 +35,9 @@ class UserController extends AbstractController
         ]);
     }
 
-    public function show(ApplicationUser $user): Response
+    public function show(ApplicationUser $user, Request $request, Security $security, UserPasswordHasherInterface $passwordEncoder): Response
     {
-        $form = $this->createForm(UserEditFormType::class, $user, [
-            'action' => $this->generateUrl('user_edit', ['user' => $user->getId()])
-        ]);
-
-        return $this->render('user/show.html.twig', [
-            'activePage' => 'lists',
-            'form' => $form->createView(),
-            'user' => $user
-        ]);
-    }
-
-    public function edit(ApplicationUser $user, Request $request, Security $security, UserPasswordHasherInterface $passwordEncoder): Response
-    {
-        $form = $this->createForm(UserEditFormType::class, $user, [
-            'action' => $this->generateUrl('user_edit', ['user' => $user->getId()])
-        ]);
+        $form = $this->createForm(UserEditFormType::class, $user, []);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,7 +60,11 @@ class UserController extends AbstractController
             }
         }
 
-        return $this->redirectToRoute('user_show', ['user' => $user->getId()]);
+        return $this->render('user/show.html.twig', [
+            'activePage' => 'lists',
+            'form' => $form->createView(),
+            'user' => $user
+        ]);
     }
 
     public function ownedCards(ApplicationUser $user, Request $request, UserOwnedCardRepository $userOwnedCardRepository): Response

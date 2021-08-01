@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\ApplicationUser;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,35 +19,70 @@ class UserEditFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'required' => false,
+                'first_options' => [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'form.errors.password_not_blank',
+                        ]),
+                        new Length([
+                            'min' => 8,
+                            'minMessage' => 'form.errors.password_min_length',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                    'label' => 'form.password',
+                    'attr' => [
+                        'class' => 'big-input'
+                    ],
+                    'label_attr' => [
+                        'class' => 'inline'
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'form.confirm',
+                    'attr' => [
+                        'class' => 'big-input'
+                    ],
+                    'label_attr' => [
+                        'class' => 'inline'
+                    ]
+                ],
+                'invalid_message' => 'form.errors.passwords_must_match',
+                // Instead of being set onto the object directly,
+                // this is read and encoded in the controller
                 'mapped' => false,
-                'required' => true,
-                'attr' => [
-                    'class' => 'big-input'
-                ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'form.errors.not_blank.password'
-                    ]),
-                    new Length([
-                        'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
             ])
-            ->add('email', TextType::class, [
-                'label' => 'form.email',
-                'required' => true,
-                'attr' => [
-                    'class' => 'big-input'
+            ->add('email', RepeatedType::class, [
+                'type' => EmailType::class,
+                'required' => false,
+                'first_options' => [
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'form.errors.email_not_blank',
+                        ]),
+                    ],
+                    'attr' => [
+                        'class' => 'big-input'
+                    ],
+                    'label_attr' => [
+                        'class' => 'inline'
+                    ],
+                    'label' => 'form.email'
                 ],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'form.errors.not_blank.email'
-                    ])
-                ]
+                'second_options' => [
+                    'label' => 'form.confirm',
+                    'attr' => [
+                        'class' => 'big-input'
+                    ],
+                    'label_attr' => [
+                        'class' => 'inline'
+                    ]
+                ],
+                'invalid_message' => 'form.errors.emails_must_match',
             ])
             ->add('valid_form', SubmitType::class, [
                 'label' => 'form.edit',

@@ -65,6 +65,8 @@ form:
     pseudo: Login
     password: Password
     login: Login
+    email: E-mail
+    confirm: Confirmation
     ok: OK
     send: Send
     edit: Edit

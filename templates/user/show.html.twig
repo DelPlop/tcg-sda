@@ -18,8 +18,8 @@
             {{ ('text.edit_your_infos'|trans) }}
             <br />
             {{ form_start(form) }}
-                <label class="inline" for="user_edit_form_plainPassword">{{ ('form.login.password'|trans({}, 'messages')) }}</label> {{ form_widget(form.plainPassword) }}<br />
-                <label class="inline" for="user_edit_form_email">{{ ('form.login.email'|trans({}, 'messages')) }}</label> {{ form_widget(form.email) }}<br />
+                {{ form_widget(form.plainPassword) }}<br />
+                {{ form_widget(form.email) }}<br />
                 {{ form_widget(form.valid_form) }}
             {{ form_end(form) }}
         </p>

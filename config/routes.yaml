@@ -84,16 +84,11 @@ users_list:
 user_show:
     path: /communaute/consulter/compagnon/{user}
     controller: App\Controller\UserController::show
-    methods: GET
+    methods: [GET, POST]
 
 user_contact:
     path: /communaute/contacter/compagnon/{user}
     controller: App\Controller\UserController::contact
-    methods: [GET, POST]
-
-user_edit:
-    path: /communaute/modifier/compagnon/{user}
-    controller: App\Controller\UserController::edit
     methods: [GET, POST]
 
 user_owned_cards:
