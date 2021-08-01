@@ -13,8 +13,3 @@
 ###> ide ###
 .idea
 ###< ide ###
-
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###

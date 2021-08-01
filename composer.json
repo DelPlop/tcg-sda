@@ -61,13 +61,11 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
-        "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.3",
         "symfony/console": "5.3.*",
         "symfony/css-selector": "^5.3",
         "symfony/debug-bundle": "^5.3",
         "symfony/maker-bundle": "^1.0",
-        "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "^5.3",
         "symfony/var-dumper": "^5.3",
         "symfony/web-profiler-bundle": "^5.3"
