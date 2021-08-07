@@ -26,13 +26,6 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
     public const DEFAULT_USER_ID = 1;
 
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @var \DateTime
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
@@ -72,11 +65,6 @@ class ApplicationUser implements UserInterface, PasswordAuthenticatedUserInterfa
         $this->wantedCards = new ArrayCollection();
         $this->userOwnedCards = new ArrayCollection();
         $this->userWantedCards = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getAnonymizedAt(): ?\DateTimeImmutable
