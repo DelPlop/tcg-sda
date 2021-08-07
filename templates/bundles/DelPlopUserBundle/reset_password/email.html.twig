@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://www.tcg-seigneur-des-anneaux.fr/css/styles.css" />
+
+<div class="w3-main">
+    <div class="w3-row w3-padding-64 w3-container w3-padding-top-0">
+        <h2 class="w3-text-amber">{{ ('password_reset.hello_user'|trans) }}</h2>
+
+        <p>{{ ('password_reset.visit_link'|trans) }}</p>
+
+        <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ ('user.reinit_password'|trans) }}</a>
+
+        <p>{{ ('password_reset.link_will_expire'|trans) }} {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+        <p>{{ ('password_reset.signature'|trans({'%site_url%': siteUrl, '%site_name%': siteName}))|raw }}</p>
+    </div>
+
+    <footer id="myFooter">
+        <div class="w3-container w3-theme-l2 w3-padding-32">
+            <h4>
+                <img src="https://www.tcg-seigneur-des-anneaux.fr/img/logo_tolkien.png" alt="" /> &copy;
+                <a href="{{ siteUrl }}" title="{{ siteName }}">{{ siteName }}</a>
+            </h4>
+        </div>
+    </footer>
+</div>
+
