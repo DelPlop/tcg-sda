@@ -15,7 +15,7 @@ use App\Entity\Culture;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -25,10 +25,9 @@ class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
-        $url = $routeBuilder->setController(CardCrudController::class)->generateUrl();
+        $routeBuilder = $this->get(AdminUrlGenerator::class);
 
-        return $this->redirect($url);
+        return $this->redirect($routeBuilder->setController(CardCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
