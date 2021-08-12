@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class StaticController extends AbstractController
 {
@@ -28,8 +30,16 @@ class StaticController extends AbstractController
         ]);
     }
 
-    public function topRight(bool $withSearch = true): Response
+    public function topRight(Security $security, bool $withSearch = true): Response
     {
+        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED') && $security->getUser() instanceof UserInterface) {
+            $security->getUser()->setUpdatedAt(new \DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($security->getUser());
+            $entityManager->flush();
+        }
+
         return $this->render('static/topRight.html.twig', [
             'withSearch' => $withSearch
         ]);
