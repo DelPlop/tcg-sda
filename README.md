@@ -7,4 +7,4 @@ Les sources du site https://www.tcg-seigneur-des-anneaux.fr en v7 sont ouvertes 
 
 Les images sont disponibles sur demande, ainsi qu'un export de la base de données.
 
-Je peux également laisser la gestion du nom de domaine (tant qu'il n'a pas expiré, avant décembre 2021 donc).
+J'ai également laissé expirer le nom de domaine.
